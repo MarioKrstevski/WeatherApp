@@ -10,13 +10,15 @@ import { GoToTopComponent } from './go-to-top/go-to-top.component';
 
 import { UiModule } from './ui/ui.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     WelcomeComponent,
     FooterComponent,
-    GoToTopComponent
+    GoToTopComponent,
+
   ],
   imports: [
     BrowserModule,

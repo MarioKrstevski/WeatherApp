@@ -1,0 +1,13 @@
+#goToTop{
+    width:65px;
+    height: 65px;
+    text-align: center;
+    font-size:2.4em;
+    position: fixed;
+    right:0;
+    bottom:80px;
+    color:white;
+    background-color: rgb(38,43,47);
+    cursor: pointer;
+
+}

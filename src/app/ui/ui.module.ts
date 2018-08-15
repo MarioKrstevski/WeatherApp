@@ -5,6 +5,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { CityWeatherInfoComponent } from './city-weather-info/city-weather-info.component';
 import { BrowseCitiesComponent } from './browse-cities/browse-cities.component';
 import { InteractiveMapComponent } from './interactive-map/interactive-map.component';
+import { SearchBarComponent } from '../search-bar/search-bar.component';
 
 
 
@@ -17,8 +18,10 @@ import { InteractiveMapComponent } from './interactive-map/interactive-map.compo
     CityWeatherInfoComponent,
     BrowseCitiesComponent,
     InteractiveMapComponent,
+    SearchBarComponent
   ],
   exports: [
+    SearchBarComponent,
     LayoutComponent
   ]
 })
