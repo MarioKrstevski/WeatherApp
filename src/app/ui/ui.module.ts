@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { LayoutComponent } from './layout/layout.component';
-import { WelcomeComponent } from './welcome/welcome.component';
 import { CityWeatherInfoComponent } from './city-weather-info/city-weather-info.component';
 import { BrowseCitiesComponent } from './browse-cities/browse-cities.component';
 import { InteractiveMapComponent } from './interactive-map/interactive-map.component';
@@ -15,7 +14,6 @@ import { InteractiveMapComponent } from './interactive-map/interactive-map.compo
   ],
   declarations: [
     LayoutComponent, 
-    WelcomeComponent,
     CityWeatherInfoComponent,
     BrowseCitiesComponent,
     InteractiveMapComponent,

@@ -10,6 +10,17 @@ export class HeaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 
+  displaySideMenu(el){
+    let prop=el.style.height;
+    
+    if(prop === '250px'){
+      el.style.height='0px';
+    } 
+    else{
+      el.style.height='250px';
+    }
+  }
 }

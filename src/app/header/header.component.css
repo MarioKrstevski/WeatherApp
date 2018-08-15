@@ -1,0 +1,70 @@
+header{
+    padding: 30px 10.5%;
+    background-color:rgba(31, 33, 36, .7);
+    height: 100px;
+    width:100%;
+    top:0;
+    left:0;
+    display: flex;
+    align-items: center;
+    position: fixed;
+}
+.navbarStandard{
+    display:inline-block;
+    margin-left: auto;
+    order: 2;
+}
+.navbarStandard a{
+    padding:5px;
+    margin-right:25px;
+}
+.navbarHamburger{
+    display:none;
+}
+a:active, a:visited{
+    color:white;
+}
+a:hover{
+    text-decoration: none;
+}
+#brandName{
+ font-size:2em;
+}
+#contactLink{
+    color:lightblue;
+}
+.hamburger{
+    display:none;
+    color:white;
+}
+@media only screen and (max-width: 720px){
+    .hamburger{
+        font-size: 2em;
+        display:inline;
+    }
+    .hamburger:hover{
+       color:rgb(252, 252, 215);
+    }
+    .menuItems{
+        display:none;
+    }
+    .navbarHamburger {
+        overflow: hidden;
+        display: block;
+        position:fixed;
+        height: 0;
+        top:100px;
+        right:0;
+        transition:1s;
+    }
+    .navbarHamburger a{
+        text-align: center;
+        width:280px;
+        display:block;
+        padding:10px 15px;
+        background-color:rgba(31, 33, 36, .7);
+    }
+    .navbarHamburger a:hover{
+        text-decoration: underline;
+    }
+}

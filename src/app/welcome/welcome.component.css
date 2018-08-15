@@ -1,0 +1,13 @@
+.backgroundImage{
+    width:100%;
+    height: 500px;
+    
+    background: url(../../assets/Images/background_seciton1.jpg)center no-repeat;
+    background-size:cover;
+}
+
+@media only screen and (max-width: 500px){
+    .backgroundImage{
+        background: url(../../assets/Images/background_seciton1_moile.jpg)center no-repeat;
+    }
+}
