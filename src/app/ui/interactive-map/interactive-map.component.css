@@ -2,3 +2,13 @@
     height: 520px;
     background-color: #384347;
 }
+
+.smallHeading{
+    color:white;
+    text-align: center;
+    padding:20px ;
+}
+.mapPlaceHolder{
+    height: 400px;
+    background: #4c7f92;
+}

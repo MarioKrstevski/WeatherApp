@@ -2,3 +2,32 @@
     height: 550px;
     color:rgb(243,243,243);
 }
+
+.smallHeading{
+    color:black;
+    text-align: center;
+    padding:20px ;
+}
+
+.differentCities{
+    
+    height: 370px;
+}
+
+.cityQuickInfo{
+    color:black;
+    margin:2px 6px;
+    border:1px solid black;
+}
+.cityQuickInfo p{
+    margin:0;
+    padding:0;
+}
+
+.blackborder{
+    border:2px solid blue;
+}
+
+.paggination{
+    margin:0 auto;
+}

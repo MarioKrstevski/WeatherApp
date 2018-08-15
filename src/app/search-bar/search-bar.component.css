@@ -1,96 +1,70 @@
-
-  
-  input,
-  button,
-  .SearchBox:before {
-    padding: .35em .75em;
-    border: none;
-    font-size: 16px;
-    text-decoration: none;
+@-webkit-keyframes autofill {
+  to {
+      color: rgb(168,168,168);
+      background:rgb(27,30,33);
   }
-
-  
-  .Field {
-    display: flex;
-  }
-  
-  .SearchBox-query {
-     flex: 1 0 8em;
-     
-;     
-  }
-  .SearchBox-submitBtn {
-   
-    flex: 0 0 auto;
-  }
-  
-  .Field--is-search:before {
-    flex: 0 0 2.75em;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  /* VISUAL DESIGN DETAILS */
-  .SearchBox {
-      
-    margin: 2rem auto 0;
-    max-width: 100%;
-  }
-  
-  
-  
-  .SearchBox-query {
-    height: 50px;
-    background-color: rgb(27,30,33);
-    color:rgb(168,168,168);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    padding-left: 25px;
-    outline: none;
-  }
-  
- 
-  
-  .SearchBox-submitBtn {
-    border-radius: 0 2px 2px 0;
-    background: #9792E3;
-    font-weight: 300;
-    text-transform: uppercase;
-    color: #EDFFEC;
-  }
-
-
-
-
-
-
-
-/* #searchBarContainer{
-    height: 50px;
-    display: flex;
-    max-height: 50px;
-    width: 500px;
-    box-sizing: border-box;
-    padding:0 !important;
-    overflow: hidden;
-    flex: 0 0 2.75em;
-
 }
 
-#searchInput{
-    outline:none;
-    width:100%;
-    background-color:rgb(27,30,33);
-    color:rgb(27,30,33);
-    border:none;
+input:-webkit-autofill{
+    -webkit-animation-name: autofill;
+    background-clip: content-box;
+    -webkit-animation-fill-mode: both;
+} 
+
+
+input,
+button,
+.SearchBox:before {
+  padding: .35em .75em;
+  border: none;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+
+.searchField {
+  display: flex;
+}
+
+.searchText {
     flex: 1 0 8em;
-    
-
+;     
 }
-.searchCitybtn{
-   
-    flex: 0 0 auto;
-} */
+.searchButton {
+  flex: 0 0 auto;
+}
+
+.searchField:before {
+  flex: 0 0 2.75em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* VISUAL DESIGN DETAILS */
+.SearchBox {
+  margin: 2rem auto 0;
+  max-width: 100%;
+}
+  
+.searchText {
+  height: 50px;
+  background-color: rgb(27,30,33);
+  color:rgb(168,168,168);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 25px;
+  outline: none;
+}
+
+
+  
+.searchButton {
+  height: 50px;
+  width: 100px;
+  border-radius: 0 2px 2px 0;
+  background: #4ca2d0;
+  font-weight: 400;
+  color: #cfe6f3;
+}

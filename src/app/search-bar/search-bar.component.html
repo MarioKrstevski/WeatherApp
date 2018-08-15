@@ -1,14 +1,15 @@
 
- <form action="" method="GET" class="SearchBox">
-  <div class="Field Field--is-search">
+ <form action="prevent" method="GET"
+ submit="disabled" onsubmit="prevDefault()" class="SearchBox">
+  <div class="searchField">
     <input 
       type="search"
       name="search"
-      placeholder="Search your city here"
-      class="SearchBox-query"/>
+      placeholder="City..."
+      class="searchText"/>
 
     <button
       type="submit"
-      class="Btn SearchBox-submitBtn">Search</button>
+      class="searchButton">Search</button>
   </div>
 </form>
