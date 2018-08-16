@@ -9,6 +9,10 @@
     padding:20px ;
 }
 .mapPlaceHolder{
-    height: 400px;
+    height: 400px !important;
     background: #4c7f92;
+}
+
+.mapPlaceHolder iframe{
+    height: 400px;
 }

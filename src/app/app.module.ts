@@ -18,13 +18,14 @@ import { UiModule } from './ui/ui.module';
     WelcomeComponent,
     FooterComponent,
     GoToTopComponent,
-
   ],
   imports: [
     BrowserModule,
     UiModule
   ],
-  providers: [],
+  providers: [
+    
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,6 @@
 .browseCities{
     height: 550px;
-    color:rgb(243,243,243);
+    background-color:rgb(243,243,243);
 }
 
 .smallHeading{
@@ -11,23 +11,66 @@
 
 .differentCities{
     
-    height: 370px;
+    height: 395px;
 }
 
 .cityQuickInfo{
+    display:inline-block;
+    height: 179px;
+    width: 179px ;
     color:black;
-    margin:2px 6px;
-    border:1px solid black;
+    background-color:white;
+
+    
+    /* border:1px solid black; */
 }
+
+.differentCities .row:first-child .cityQuickInfo{
+    margin-bottom:30px;
+    /* background-color: red; */
+}
+
+.row .cityQuickInfo:not(:last-child){
+    margin-right:20px;
+    /* background-color: blue; */
+}
+
+
+.wi{
+    padding-top:20px;
+    margin-left:50px;
+    font-size: 3.5em;
+    font-weight: 100;
+    height: 80px;
+    width: 80px;
+    /* border:1px solid pink; */
+}
+
+.cityQuickInfo .cityTitle{
+    font-size: 1.7em;
+    font-weight: 300;
+}
+
+.cityQuickInfo .cityDetails{
+    font-size:0.75em;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif  
+
+}
+
 .cityQuickInfo p{
+    text-align: center;
     margin:0;
     padding:0;
 }
 
 .blackborder{
-    border:2px solid blue;
+    /* border:2px solid peru; */
+}
+
+.blackborder2{
+    /* border: 2px solid blue; */
 }
 
 .paggination{
-    margin:0 auto;
+    margin:20px  auto 20px;
 }
