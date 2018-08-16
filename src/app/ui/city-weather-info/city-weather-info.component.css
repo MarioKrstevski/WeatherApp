@@ -20,12 +20,16 @@
     height: 335px;
     background-color: aquamarine;
     margin-top:30px;
+
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .mystyle{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display:inline-block;
-    height: 335px;
+    /* Height is set to 370px but is actually 325px */
+    height: 370px; 
+    
 }
 .weeklyPeak{
     overflow: scroll;
@@ -81,14 +85,112 @@
 }
 
 .today{
+    position: relative;
     background-color:transparent;
+    padding:0;
+    color: white;
+
+}
+
+.city{
+    position: absolute;
+    top:15px;
+    right: 20px;
+}
+
+.city p{
+    margin:-5px;
+    font-size: 28px;
+    text-align: right;
+    color:white;
+
+}
+.city .allcaps{
+    font-size: 16px;
+    text-transform: uppercase !important;
+}
+.dateTime{
+    position: absolute;
+    bottom:10px;
+    left:20px;
+}
+.dateTime p{
+    margin:0;
+
+}
+.Time{
+    font-size: 2em;
+}
+.temperature{
+    position: absolute;
+    bottom:10px;
+    right:20px;
+    font-size: 3.5em;
 }
 
 .colRow{
-    height: 33%;
-    background-color: aqua;
+    /* background-color: aqua; */
 }
 
 .blackborder{
     border:1px solid black;
 }
+
+.everyTwoHours{
+    color:white;
+    padding: 20px 25px;   
+    overflow: hidden;
+    background-color: rgba(54, 50, 49, 0.5);
+}
+.iconWeather{
+    margin:0 auto;
+    /* width:180px; */
+    height: 140px;
+    /* background-color:purple; */
+    text-align: center;
+}
+.iconWeather:after{
+    content: ""; 
+    display: block;     
+    width: 100%; 
+    padding-top: 0px; 
+    border-bottom: 3px solid white;
+}
+.iconWeather .wi{
+    color:white;
+    font-size:6em;
+}
+.iconWeather p{
+    font-size:25px;
+}
+.timesPerDay{
+    height: 180px;
+   
+    margin:0 auto;
+    margin-top:22px;
+    overflow: scroll;
+    /* background-color:pink; */
+}
+.timesPerDay::-webkit-scrollbar{
+    display: none;
+}
+.alignText:after{
+    content: ""; 
+    display: block;     
+    width: 100%; 
+    padding-top: 30px; 
+    border-bottom: 1px solid white;
+}
+.alignText p{
+    padding:5px 10px;
+}
+.alignLeft{
+    padding-left: 15px;
+    float:left;
+}
+
+.alignRight{
+    padding-right: 15px;
+    float:right;
+}
+
