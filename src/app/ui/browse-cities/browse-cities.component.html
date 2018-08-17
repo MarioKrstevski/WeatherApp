@@ -5,78 +5,14 @@
 
         <div class="container blackborder2 ">
             <div class="row justify-content-center" >
-              <div class="cityQuickInfo ">
+              <div class="cityQuickInfo " *ngFor="let city of cities">
                 <i class="wi wi-day-sunny-overcast"></i>
-                <p class="cityTitle">Berlin</p>
-                <p class="cityDetails"> 21 &#0176;C</p>
-                <p class="cityDetails">humidity 65%</p>
-                <p class="cityDetails">wind 6km/h</p>
+                <p class="cityTitle">{{city.name}}</p>
+                <p class="cityDetails"> {{city.temp}} &#0176;C</p>
+                <p class="cityDetails">{{city.humidity}}%</p>
+                <p class="cityDetails">{{city.wind}} km/h</p>
                 </div>
-                <div class="cityQuickInfo ">
-                <i class="wi wi-day-sunny-overcast"></i>
-                <p class="cityTitle">Berlin</p>
-                <p class="cityDetails"> 21 &#0176;C</p>
-                <p class="cityDetails">humidity 65%</p>
-                <p class="cityDetails">wind 6km/h</p>
-                </div>
-                <div class="cityQuickInfo ">
-                <i class="wi wi-day-sunny-overcast"></i>
-                <p class="cityTitle">Berlin</p>
-                <p class="cityDetails"> 21 &#0176;C</p>
-                <p class="cityDetails">humidity 65%</p>
-                <p class="cityDetails">wind 6km/h</p>
-                </div>
-                <div class="cityQuickInfo ">
-                <i class="wi wi-day-sunny-overcast"></i>
-                <p class="cityTitle">Berlin</p>
-                <p class="cityDetails"> 21 &#0176;C</p>
-                <p class="cityDetails">humidity 65%</p>
-                <p class="cityDetails">wind 6km/h</p>
-                </div>
-                <div class="cityQuickInfo ">
-                <i class="wi wi-day-sunny-overcast"></i>
-                <p class="cityTitle">Berlin</p>
-                <p class="cityDetails"> 21 &#0176;C</p>
-                <p class="cityDetails">humidity 65%</p>
-                <p class="cityDetails">wind 6km/h</p>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="cityQuickInfo ">
-                <i class="wi wi-day-sunny-overcast"></i>
-                <p class="cityTitle">Berlin</p>
-                <p class="cityDetails"> 21 &#0176;C</p>
-                <p class="cityDetails">humidity 65%</p>
-                <p class="cityDetails">wind 6km/h</p>
-                </div>
-                <div class="cityQuickInfo ">
-                <i class="wi wi-day-sunny-overcast"></i>
-                <p class="cityTitle">Berlin</p>
-                <p class="cityDetails"> 21 &#0176;C</p>
-                <p class="cityDetails">humidity 65%</p>
-                <p class="cityDetails">wind 6km/h</p>
-                </div>
-                <div class="cityQuickInfo ">
-                <i class="wi wi-day-sunny-overcast"></i>
-                <p class="cityTitle">Berlin</p>
-                <p class="cityDetails"> 21 &#0176;C</p>
-                <p class="cityDetails">humidity 65%</p>
-                <p class="cityDetails">wind 6km/h</p>
-                </div>
-                <div class="cityQuickInfo ">
-                <i class="wi wi-day-sunny-overcast"></i>
-                <p class="cityTitle">Berlin</p>
-                <p class="cityDetails"> 21 &#0176;C</p>
-                <p class="cityDetails">humidity 65%</p>
-                <p class="cityDetails">wind 6km/h</p>
-                </div>
-                <div class="cityQuickInfo ">
-                <i class="wi wi-day-sunny-overcast"></i>
-                <p class="cityTitle">Berlin</p>
-                <p class="cityDetails"> 21 &#0176;C</p>
-                <p class="cityDetails">humidity 65%</p>
-                <p class="cityDetails">wind 6km/h</p>
-                </div>
+                
             </div>
         </div>
 
