@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Http, Response } from '@angular/http';
+import { map } from 'rxjs/operators';
+
+import { PagerService } from '../services/pager.service';
 
 @Component({
   selector: 'app-browse-cities',
@@ -7,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BrowseCitiesComponent implements OnInit {
 
-  cities = [
+  dummyCities = [
       {
         name:'Berlin',
         temp:'23',
@@ -79,11 +83,41 @@ export class BrowseCitiesComponent implements OnInit {
 
       }
   ];
+  private cities: any[];
 
-  constructor() { }
+  // pager object
+  pager: any = {};
 
+  //paged cities
+
+  pagedCities: any[];
+
+  constructor(private http: Http, private pagerService : PagerService) { }
+
+  
   ngOnInit() {
+  
+    this.http.get("./assets/dummy-data.json")
+    .pipe(map((response: Response) => response.json()))
+    .subscribe(data => {
+        // set items to json response
+        this.cities = data;
+
+        // initialize to page 1
+
+        console.log(this.setPage(1));
+        this.setPage(1);
+        
+    });
     
   }
+
+  setPage(page: number) {
+    // get pager object from service
+    this.pager = this.pagerService.getPager(this.cities.length, page);
+
+    // get current page of items
+    this.pagedCities = this.cities.slice(this.pager.startIndex, this.pager.endIndex + 1);
+}
 
 }

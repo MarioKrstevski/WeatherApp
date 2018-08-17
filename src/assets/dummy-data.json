@@ -1,0 +1,366 @@
+[
+    {
+      "name":"Berlin",
+      "temp":"23",
+      "humidity": "65",
+      "wind":"1"
+
+    },
+    {
+    "name":"Kumanovo",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"2"
+
+    },
+    {
+    "name":"Skopje",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"3"
+
+    },
+    {
+    "name":"Gostivar",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"4"
+
+    },
+    {
+    "name":"Kicevo",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"5"
+
+    },
+    {
+    "name":"Bitola",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"6"
+
+    },
+    {
+    "name":"Prilep",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"7"
+
+    },
+    {
+    "name":"Negotino",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"8"
+
+    },
+    {
+    "name":"Veles",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"9"
+
+    },
+    {
+    "name":"Strumica",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"10"
+
+    },
+    {
+    "name":"Dojran",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"11"
+
+    },
+    {
+    "name":"Berovo",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"12"
+
+    },
+    {
+    "name":"Delchevo",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"13"
+
+    },
+    {
+      "name":"Berlin",
+      "temp":"23",
+      "humidity": "65",
+      "wind":"14"
+
+    },
+    {
+    "name":"Kumanovo",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"15"
+
+    },
+    {
+    "name":"Skopje",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"16"
+
+    },
+    {
+    "name":"Gostivar",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"17"
+
+    },
+    {
+    "name":"Kicevo",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"18"
+
+    },
+    {
+    "name":"Bitola",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"19"
+
+    },
+    {
+    "name":"Prilep",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"20"
+
+    },
+    {
+    "name":"Negotino",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"21"
+
+    },
+    {
+    "name":"Veles",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"22"
+
+    },
+    {
+    "name":"Strumica",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"23"
+
+    },
+    {
+    "name":"Dojran",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"24"
+
+    },
+    {
+    "name":"Berovo",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"25"
+
+    },
+    {
+    "name":"Delchevo",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"26"
+
+    },
+    {
+      "name":"Berlin",
+      "temp":"23",
+      "humidity": "65",
+      "wind":"27"
+
+    },
+    {
+    "name":"Kumanovo",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"28"
+
+    },
+    {
+    "name":"Skopje",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"29"
+
+    },
+    {
+    "name":"Gostivar",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"30"
+
+    },
+    {
+    "name":"Kicevo",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"31"
+
+    },
+    {
+    "name":"Bitola",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"32"
+
+    },
+    {
+    "name":"Prilep",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"33"
+
+    },
+    {
+    "name":"Negotino",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"34"
+
+    },
+    {
+    "name":"Veles",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"35"
+
+    },
+    {
+    "name":"Strumica",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"36"
+
+    },
+    {
+    "name":"Dojran",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"37"
+
+    },
+    {
+    "name":"Berovo",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"38"
+
+    },
+    {
+    "name":"Delchevo",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"39"
+
+    },
+    {
+      "name":"Berlin",
+      "temp":"23",
+      "humidity": "65",
+      "wind":"40"
+
+    },
+    {
+    "name":"Kumanovo",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"41"
+
+    },
+    {
+    "name":"Skopje",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"42"
+
+    },
+    {
+    "name":"Gostivar",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"43"
+
+    },
+    {
+    "name":"Kicevo",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"44"
+
+    },
+    {
+    "name":"Bitola",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"45"
+
+    },
+    {
+    "name":"Prilep",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"46"
+
+    },
+    {
+    "name":"Negotino",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"47"
+
+    },
+    {
+    "name":"Veles",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"48"
+
+    },
+    {
+    "name":"Strumica",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"49"
+
+    },
+    {
+    "name":"Dojran",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"50"
+
+    },
+    {
+    "name":"Berovo",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"50"
+
+    },
+    {
+    "name":"Delchevo",
+    "temp":"23",
+    "humidity": "65",
+    "wind":"51"
+
+    }
+]
