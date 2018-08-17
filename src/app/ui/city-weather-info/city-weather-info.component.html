@@ -9,104 +9,33 @@
     <div class="container-fluid blackborder">
         <div class="row backgroundContainer">
             <div class="col-3 mystyle weeklyPeak">
-                <div class="row perDay">
+                <div class="row perDay" *ngFor="let day of days; index as i" (click)="changeView(i)">
                    
                         <div class="col-6">
-                                <div class="row weatherStatus">Sunny</div>
-                                <div class="row weatherTemp">12&#0176;C </div>
+                                <div class="row weatherStatus">{{day.status}}</div>
+                                <div class="row weatherTemp">{{day.temp}}&#0176;C </div>
                         </div>
                         <div class="col-6  weatherDate">
-                                21.05.2016
+                                {{day.date}}
                         </div>
                     
                 </div>
-                <div class="row perDay">
-                   
-                        <div class="col-6">
-                                <div class="row weatherStatus">Cloudy</div>
-                                <div class="row weatherTemp">9&#0176;C </div>
-                        </div>
-                        <div class="col-6  weatherDate">
-                                23.05.2016
-                        </div>
-                    
-                </div>
-                <div class="row perDay">
-                   
-                                <div class="col-6">
-                                        <div class="row weatherStatus">Rainy</div>
-                                        <div class="row weatherTemp">14&#0176;C </div>
-                                </div>
-                                <div class="col-6  weatherDate">
-                                        31.05.2016
-                                </div>
-                            
-                        </div>
-                        <div class="row perDay">
-                   
-                                        <div class="col-6">
-                                                <div class="row weatherStatus">Rainy</div>
-                                                <div class="row weatherTemp">14&#0176;C </div>
-                                        </div>
-                                        <div class="col-6  weatherDate">
-                                                31.05.2016
-                                        </div>
-                                    
-                                </div>
-                <div class="row perDay">
-                   
-                        <div class="col-6">
-                                <div class="row weatherStatus">Winter</div>
-                                <div class="row weatherTemp">11&#0176;C </div>
-                        </div>
-                        <div class="col-6  weatherDate">
-                                27.05.2016
-                        </div>
-                    
-                </div>
-                <div class="row perDay">
-                   
-                        <div class="col-6">
-                                <div class="row weatherStatus">Sunny</div>
-                                <div class="row weatherTemp">10&#0176;C </div>
-                        </div>
-                        <div class="col-6  weatherDate">
-                                29.05.2016
-                        </div>
-                    
-                </div>
-                <div class="row perDay">
-                   
-                                <div class="col-6">
-                                        <div class="row weatherStatus">Rainy</div>
-                                        <div class="row weatherTemp">14&#0176;C </div>
-                                </div>
-                                <div class="col-6  weatherDate">
-                                        31.05.2016
-                                </div>
-                            
-                        </div>
-                
-                
-                        
-                
             </div>
-
             <div class="col-6 mystyle today">
                 
                     <div class=" colRow city">
-                        <p >New York City</p>
-                        <p class="allcaps">New York</p>
+                        <p >{{defaultCity}} City</p>
+                        <p class="allcaps">{{defaultCity}}</p>
                     </div>
                     <div class=" colRow dateTime" >
                             <p class="Time">
-                                17:05:30
+                                {{currentTime | date:'shortTime'}}
                             </p>
                             <p class="theDate">
-                                Thursday, May, 23, 2016
+                                {{days[currentDayIndex].date}}
                             </p>
                     </div>
-                    <div class=" colRow temperature">9&#0176;C</div>
+                    <div class=" colRow temperature">{{days[currentDayIndex].temp}}&#0176;C</div>
 
                
             </div >
@@ -114,69 +43,16 @@
             <div class="col-3 mystyle everyTwoHours">
                 <div class="iconWeather">
                 <i class="wi wi-cloudy"></i>
-                <p>Cloudy</p>
+                <p>{{days[currentDayIndex].status}}</p>
                 </div>
                 <div class="timesPerDay">
-                  <div class="timeStatus">
-                <p class="alignText">
-                        <span class="alignLeft"> Now  </span>
-                        <span class="alignRight">20&#0176;C</span>
-                </p>
-                  </div>
-                  <div class="timeStatus">
-                <p class="alignText">
-                        <span class="alignLeft"> 09:00 </span>
-                        <span class="alignRight">22&#0176;C</span>
-                </p>
-                </div>
-                <div class="timeStatus">
-                <p class="alignText">
-                        <span class="alignLeft"> 12:00 </span>
-                        <span class="alignRight">24&#0176;C</span>
-                </p>
-                  </div>          
-                <div class="timeStatus">
-                <p class="alignText">
-                        <span class="alignLeft"> 15:00 </span>
-                        <span class="alignRight">23&#0176;C</span>
-                </p>
-                  </div>
-
-                  <div class="timeStatus">
+                  <div class="timeStatus" *ngFor="let info of days[currentDayIndex].allDay" >
                         <p class="alignText">
-                        <span class="alignLeft"> 18:00  </span>
-                        <span class="alignRight">20&#0176;C</span>
-                </p>
-                </div>
-
-                <div class="timeStatus">
-                <p class="alignText">
-                        <span class="alignLeft"> 21:00 </span>
-                        <span class="alignRight">22&#0176;C</span>
-                </p>
-                </div>
-
-                <div class="timeStatus">
-                <p class="alignText">
-                        <span class="alignLeft"> 23:00  </span>
-                        <span class="alignRight">21&#0176;C</span>
-                </p>
-                </div>
-
-                <div class="timeStatus">
-                <p class="alignText">
-                        <span class="alignLeft"> 00:00  </span>
-                        <span class="alignRight">23&#0176;C</span>
-                </p>
-                </div>
-
-                <div class="timeStatus">
-                <p class="alignText">
-                        <span class="alignLeft"> 03:00  </span>
-                        <span class="alignRight">20&#0176;C</span>
-                </p>
-                </div>
-                </div>
+                                <span class="alignLeft"> {{info.time}}  </span>
+                                <span class="alignRight"> {{info.temp}}&#0176;C</span>
+                        </p>
+                  </div>
+                  
         </div>
     </div>
 
