@@ -5,7 +5,6 @@ import { AppRoutingModule, routingComponents } from './app-routing.module'
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { WelcomeComponent } from './welcome/welcome.component';
 import { FooterComponent } from './footer/footer.component';
 import { GoToTopComponent } from './go-to-top/go-to-top.component';
 import { ContactComponent } from './contact/contact.component';
@@ -24,7 +23,6 @@ import { UiModule } from './ui/ui.module';
   declarations: [
     AppComponent,
     HeaderComponent,
-    WelcomeComponent,
     FooterComponent,
     GoToTopComponent,
     ContactComponent

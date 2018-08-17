@@ -2,12 +2,16 @@
         <a href="#" id="brandName">Forecast</a>
     
         <nav class="navbarStandard">
+
+         <!-- If home is active route, show all links, if its not, only show Home -->
+
           <span class="menuItems">
-            <a href="">Home</a>
-            <a href="">Search</a>
-            <a href="">Browse</a>
-            <a href="">Map</a>
-            <a href="" id="contactLink" >Contact</a>
+            <a routerLink="/" routerLinkActive [routerLinkActiveOptions]="{exact:
+              true}" #rla="routerLinkActive">Home </a>
+            <a href="" *ngIf="rla.isActive">Search </a>
+            <a href="" *ngIf="rla.isActive">Browse</a>
+            <a href="" *ngIf="rla.isActive">Map</a>
+            <a routerLink="/contact" id="contactLink" *ngIf="rla.isActive">Contact</a>
           </span>
     
           <span class="icon hamburger" (click)="displaySideMenu(sideMenu)">
