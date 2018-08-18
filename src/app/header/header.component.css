@@ -22,7 +22,7 @@ header{
 .navbarHamburger{
     display:none;
 }
-a:active, a:visited{
+a, a:active, a:visited{
     color:white;
 }
 a:hover{
