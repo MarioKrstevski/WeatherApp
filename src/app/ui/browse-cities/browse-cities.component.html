@@ -1,11 +1,11 @@
-<div class="browseCities dataContainer">
+<div id="browse" class="browseCities dataContainer">
     <h3 class="smallHeading">Browse City</h3>
 
     <div class="differentCities blackborder">
 
         <div class="container blackborder2 ">
             <div class="row justify-content-center" >
-              <div class="cityQuickInfo " *ngFor="let city of pagedCities">
+              <div class="cityQuickInfo col-5 col-md-2" *ngFor="let city of pagedCities">
                 <i class="wi wi-day-sunny-overcast"></i>
                 <p class="cityTitle">{{city.name}}</p>
                 <p class="cityDetails"> {{city.temp}} &#0176;C</p>
@@ -16,39 +16,35 @@
             </div>
         </div>
 
-        <div class="row">
-                
-        </div>
-
     </div>
 
     <div class="container-fluid">
         <div class="row">
-                <nav aria-label="Page navigation example" class="paggination">
-                        <ul class="pagination" *ngIf="pager.pages && pager.pages.length">
-                                <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
-                                    <a  (click)="setPage(1)" class="page-link" href="#"> &#171; </a>
-                                </li>
-                                <!-- <li class="page-item"><a class="page-link" href="#"> 1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li> -->
+            <nav aria-label="Page navigation example" class="paggination">
+                <ul class="pagination" *ngIf="pager.pages && pager.pages.length">
+                    <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
+                        <a  (click)="setPage(1)" class="page-link" href="#"> &#171; </a>
+                    </li>
+                    <!-- <li class="page-item"><a class="page-link" href="#"> 1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li> -->
 
-                                <li 
-                                *ngFor="let page of pager.pages" 
-                                [ngClass]="{active:pager.currentPage === page}" 
-                                class="page-item" >
-                                        <a (click)="setPage(page)" class="page-link">{{page}}</a>
-                                </li>
-                                 
-                                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}"
-                                class="page-item">
-                                        <a (click)="setPage(pager.totalPages)" class="page-link"> &#187;</a>
-                                </li>
+                    <li 
+                    *ngFor="let page of pager.pages" 
+                    [ngClass]="{active:pager.currentPage === page}" 
+                    class="page-item" >
+                            <a (click)="setPage(page)" class="page-link">{{page}}</a>
+                    </li>
+                        
+                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}"
+                    class="page-item">
+                            <a (click)="setPage(pager.totalPages)" class="page-link"> &#187;</a>
+                    </li>
 
-                                <!-- <li class="page-item"><a class="page-link" href="#"> &#187; Last </a></li> -->
-                        </ul>
-                </nav>
+                    <!-- <li class="page-item"><a class="page-link" href="#"> &#187; Last </a></li> -->
+                </ul>
+            </nav>
         </div>        
     </div>
 </div>

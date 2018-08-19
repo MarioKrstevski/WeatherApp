@@ -12,16 +12,20 @@ export class GoToTopComponent implements OnInit {
   ngOnInit() {
   }
 
-  goToTop(){
-    const scrollToTop = () => {
-      const c = document.documentElement.scrollTop || document.body.scrollTop;
-      if (c > 0) {
-        window.requestAnimationFrame(scrollToTop);
-        window.scrollTo(0, c - c / 10);
-      }
-    };
+  /* This function was replaced with ngx-page-scroll */
 
-    scrollToTop();
-    console.log('Scrolled to top');
-    }
+  // goToTop(){
+  //   const scrollToTop = () => {
+  //     const c = document.documentElement.scrollTop || document.body.scrollTop;
+  //     if (c > 0) {
+  //       window.requestAnimationFrame(scrollToTop);
+  //       window.scrollTo(0, c - c / 10);
+  //     }
+  //   };
+
+  //   scrollToTop();
+  //   console.log('Scrolled to top');
+  //   }
+
+
   }

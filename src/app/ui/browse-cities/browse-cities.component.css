@@ -1,6 +1,7 @@
 .browseCities{
     height: 550px;
-    background-color:rgb(243,243,243);
+    background-color:#F3F3F3;
+    
 }
 
 .smallHeading{
@@ -10,7 +11,7 @@
 }
 
 .differentCities{
-    height: 395px;
+    height: 100%;
 }
 
 .cityQuickInfo{
@@ -19,7 +20,7 @@
     width: 179px ;
     color:black;
     background-color:white;
-
+    margin:5px;
     
     /* border:1px solid black; */
 }
@@ -31,6 +32,7 @@
 
 .row .cityQuickInfo:not(:last-child){
     margin-right:20px;
+
     /* background-color: blue; */
 }
 
@@ -48,6 +50,7 @@
 .cityQuickInfo .cityTitle{
     font-size: 1.7em;
     font-weight: 300;
+    color:#404040;
 }
 
 .cityQuickInfo .cityDetails{
@@ -72,4 +75,10 @@
 
 .paggination{
     margin:20px  auto 20px;
+}
+
+@media only screen and (max-width: 720px){
+    .browseCities{
+       height: 700px;
+    }
 }

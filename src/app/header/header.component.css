@@ -27,13 +27,12 @@ a, a:active, a:visited{
 }
 a:hover{
     text-decoration: none;
+    color: #4AA2D1;
 }
 #brandName{
  font-size:2em;
 }
-#contactLink{
-    color:lightblue;
-}
+
 .hamburger{
     display:none;
     color:white;
@@ -56,7 +55,7 @@ a:hover{
         height: 0;
         top:100px;
         right:0;
-        transition:1s;
+        transition:0.4s;
     }
     .navbarHamburger a{
         text-align: center;

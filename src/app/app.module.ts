@@ -9,7 +9,7 @@ import { FooterComponent } from './footer/footer.component';
 import { GoToTopComponent } from './go-to-top/go-to-top.component';
 import { ContactComponent } from './contact/contact.component';
 
-
+import {NgxPageScrollModule} from 'ngx-page-scroll';  
 
 import { UiModule } from './ui/ui.module';
 // import { LayoutComponent } from './ui/layout/layout.component'
@@ -30,7 +30,8 @@ import { UiModule } from './ui/ui.module';
   imports: [
     BrowserModule,
     UiModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxPageScrollModule
   ],
   providers: [
     

@@ -9,5 +9,11 @@
     color:white;
     background-color: rgb(38,43,47);
     cursor: pointer;
+}
 
+@media only screen and (max-width: 720px){
+    #gotoTop{
+        width:35px;
+        height:35px;
+    }
 }

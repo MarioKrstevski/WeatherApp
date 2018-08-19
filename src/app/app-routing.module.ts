@@ -5,7 +5,7 @@ import { ContactComponent } from './contact/contact.component';
 import { LayoutComponent } from './ui/layout/layout.component';
 
 const routes: Routes = [
-    {path:'',component:LayoutComponent},
+    {path:'',component:LayoutComponent },
     {path:'contact',component:ContactComponent}
 ];
 
