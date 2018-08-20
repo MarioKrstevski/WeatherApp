@@ -23,20 +23,20 @@
               </textarea>
           </div>
       </div>
-      <div class="imageUpload col-11 col-md-6 blackBorder ">
+      <div class="imageUpload col-11 col-md-6  ">
 
-      <div class="innerElements blackBorder align-self-end" >
+      <div class="innerElements  align-self-end" >
         
         <!-- Upload Works, but if you select 2 times, and upload, 2 items will be uploaded -->
       <label class="uploadImage">
 
-          <img [src]="imageUrl" >
+          <img [src]="imageUrl" *ngIf="imageUrl" >
             
           <button>Upload</button>
     
             <input 
             required
-            class="blackBorder"
+            class=""
             (change)="onFileSelected($event)"
             (change)="handleFileInput($event.target.files)"
             (click)="uploader.uploadAll()"
@@ -45,13 +45,13 @@
           </label>
 
 
-          <div class="row uploadList" *ngFor="let upload of uploader.queue" >
+          <!-- <div class="row uploadList" *ngFor="let upload of uploader.queue" >
               <span>   {{upload.file.name}}</span>
                 <button
               (click)="upload.remove()"
-              >Remove</button>
+              >X</button>
               </div>  
-    
+     -->
           <div class="progress">
             <div class="progress-bar" 
             [ngStyle]="{width: uploader.progress+'%'}"></div>

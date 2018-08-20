@@ -5,8 +5,10 @@
 }
 
 .personalInfo,.imageUpload{
-    height: 455px;
+    min-height: 455px;
+
 }
+
 .smallHeading{
     text-align: center;
     padding:20px ;
@@ -41,6 +43,7 @@
 textarea, input{
     background: rgb(222, 222, 222);
     border:none;
+    height: 250px;
     outline: none;    
 }
 
@@ -91,8 +94,9 @@ textarea{
 /* Example stylistic flourishes */
 img{
     display: block;
-    height: 200px;
-    width: 250px;
+    top:0;
+    height: 230px;
+    width: 100%;
 }
 .imageUpload{
     position: relative;
@@ -104,11 +108,12 @@ img{
     background-color: rgb(78, 168, 212) ;
     cursor:pointer;
     margin-bottom:30px;
+    outline: none;
 
 }
 .innerElements{
    width:100%;
-   padding-right:50px;
+   padding-right:30px;
   
    position: absolute;
    bottom:0; 
@@ -117,6 +122,9 @@ img{
 .uploadList{
     padding-left: 20px;
 
+}
+.uploadList span, button{
+    display: inline;
 }
 .uploadList > *{
     height: 30px !important;

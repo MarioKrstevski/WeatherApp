@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
     if(prop === '250px'){
      this.closeSideMenu(el);
     } 
-    else{
+    else {
       this.openSideMenu(el);
      
     }

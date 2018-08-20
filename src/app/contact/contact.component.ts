@@ -12,7 +12,8 @@ const URL = 'http://localhost:3000/api/upload';
 })
 export class ContactComponent implements OnInit {
 
-  imageUrl: string = '../../assets/Images/default.png';
+  // imageUrl: string = '../../assets/Images/default.png';
+  imageUrl: string = null;
   fileToUpload: File = null;
 
   selectedFile = null;
