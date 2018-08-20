@@ -2,6 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule, routingComponents } from './app-routing.module'
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { FileSelectDirective } from 'ng2-file-upload';
+
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -25,13 +29,16 @@ import { UiModule } from './ui/ui.module';
     HeaderComponent,
     FooterComponent,
     GoToTopComponent,
-    ContactComponent
+    ContactComponent,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,
     UiModule,
     AppRoutingModule,
-    NgxPageScrollModule
+    NgxPageScrollModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     
