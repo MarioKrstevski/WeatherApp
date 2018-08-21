@@ -27,13 +27,16 @@ export class SearchBarComponent implements OnInit {
   }
 
   updateWeather(city){
-    this.cityInfo=this.weather.getWeather(city);
-    console.log('Updated to new ', this.cityInfo.name, ' City Selected : ', city);
+    // this.cityInfo=this.weather.getWeather(city);
+    // console.log ' City Selected : ', city);
+    this.weather.getWeather(city).subscribe((weather) => {
+      console.log('weather', weather);
+    })
   }
 
   fireEvent(){
     this.childEvent.emit(this.cityInfo);
-    console.log('Event Fired', this.cityInfo.name);
+    // console.log('Event Fired', this.cityInfo.name);
   }
 
 }

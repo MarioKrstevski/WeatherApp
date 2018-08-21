@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
@@ -16,15 +17,7 @@ export class WeatherDataService {
 
   getWeather(city){
 
-    this.http.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${this.myKey}`).subscribe( data => {
-    console.log('Tuka e smeneto',data);
-    this.weatherJson = data;
-    console.log('Tuka Treba Da e isto', this.weatherJson);
-    return this.weatherJson;
-    });
-
-    // console.log('Treto treba da e isto', this.weatherJson);
-    // return this.weatherJson;
+    return this.http.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${this.myKey}`);
     
   }
 
