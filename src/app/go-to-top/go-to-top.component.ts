@@ -7,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GoToTopComponent implements OnInit {
 
+
   constructor() { }
 
   ngOnInit() {
+   
   }
+
+  
+
+  // $(window).scroll(function(){
+	// 	if ($(this).scrollTop() > 300) { // 300px from top
+  //   }
 
   /* This function was replaced with ngx-page-scroll */
 

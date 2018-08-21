@@ -10,6 +10,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 
 import { PagerService } from './services/pager.service';
+import { WeatherDataService } from './services/weather-data.service';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { PagerService } from './services/pager.service';
     SearchBarComponent
   ],
   providers:[
-    PagerService
+    PagerService,
+    WeatherDataService
   ],
   exports: [
     SearchBarComponent,

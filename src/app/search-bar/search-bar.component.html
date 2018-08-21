@@ -3,13 +3,15 @@
  submit="disabled" onsubmit="prevDefault()" class="SearchBox">
   <div class="searchField">
     <input 
+      #newCity
       type="search"
       name="search"
       placeholder="City..."
       class="searchText"/>
 
     <button
-      type="submit"
+      type="button"
+      (click)="updateWeather(newCity.value); fireEvent()"
       class="searchButton">Search</button>
   </div>
 </form>

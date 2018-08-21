@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEventType } from '@angular/common/http';
 import { FileSelectDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
+const CLOUDINARY_URL='cloudinary://295464739934565:E3nd8figX26VtvW1b4PTx6ToAUw@dprdrh0oz';
 
 const URL = 'http://localhost:3000/api/upload';
 
@@ -16,7 +17,7 @@ export class ContactComponent implements OnInit {
   imageUrl: string = null;
   fileToUpload: File = null;
 
-  selectedFile = null;
+  selectedFile: File = null;
   uploader: FileUploader = new FileUploader(
     {
       url: URL,
@@ -35,12 +36,13 @@ export class ContactComponent implements OnInit {
     };
     this.uploader.onCompleteItem = (items:any , response: any, status:any, headers:any ) => {
       console.log('ImageUpload:uploaded', items, status, response);
-      // alert('File uploaded successfully');
+      
       this.attachmentList.push(JSON.parse(response));
     };
 
   }
   handleFileInput(file: FileList){
+    
     this.fileToUpload = file.item(0);
 
     let reader = new FileReader();
@@ -48,25 +50,36 @@ export class ContactComponent implements OnInit {
       this.imageUrl = event.target.result;
     }
     reader.readAsDataURL(this.fileToUpload);
-    this.uploader.uploadAll();
   }
 
   checkStuff(){
     console.log("Data Sent");
-
     return false;
   }
 
-  
-
   onFileSelected(event){
-    console.log(event);
-    this.selectedFile = event.target.files[0];
+
+    // console.log(event);
+    this.selectedFile = <File> event.target.files[0];
+
   }
 
   onUpload(){
 
+  const fd= new FormData();
+  fd.append('image',this.selectedFile, this.selectedFile.name)
 
-    // this.http.post('')
+    this.http.post('https://api.imgur.com/3/image',fd,{
+      reportProgress:true,
+      observe:'events'
+    })
+    .subscribe( event => {
+      if (event.type === HttpEventType.UploadProgress ){
+        console.log('Upload progress: ' + Math.round(event.loaded/event.total * 100 )+ '%');
+      } else if (event.type === HttpEventType.Response){
+        console.log(event);
+      }
+   
+    })
   }
 }

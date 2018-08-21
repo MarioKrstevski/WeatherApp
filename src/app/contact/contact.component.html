@@ -4,7 +4,7 @@
    <div class="conatainer-fluid">
      <div class="row">
         
-      <div class="personInfo col-11 col-md-6 ">
+      <div class="personInfo col-12 col-md-6  ">
 
           <div class="input-container">
               <i class="fa fa-user icon"></i>
@@ -16,33 +16,34 @@
             <input class="input-field" type="email" placeholder="E-mail" name="email" required> 
           </div>
 
-         
+          
           <div class="input-container">
-              <textarea class="input-field" placeholder="Message" name="message" cols="30" rows="10" required>
-  
-              </textarea>
+              <textarea class="input-field" placeholder="Message" name="message" cols="30" rows="10" required></textarea>
           </div>
       </div>
-      <div class="imageUpload col-11 col-md-6  ">
+      <div class="imageUpload col-12 col-md-6  ">
 
-      <div class="innerElements  align-self-end" >
+      <div class="innerElements  align-self-end "  >
+
+        <input type="file" (change)="onFileSelected($event)">
+        <button (click)="onUpload()" >Upload</button>
         
         <!-- Upload Works, but if you select 2 times, and upload, 2 items will be uploaded -->
-      <label class="uploadImage">
+        <!-- <img [src]="imageUrl" *ngIf="imageUrl" >
+     
+        <label class="uploadImage " >
 
-          <img [src]="imageUrl" *ngIf="imageUrl" >
-            
-          <button>Upload</button>
+          <button >Upload</button>
     
             <input 
             required
-            class=""
-            (change)="onFileSelected($event)"
+            style="border:2px solid pink"
+            (change)="onFileSelected($event); "
             (change)="handleFileInput($event.target.files)"
-            (click)="uploader.uploadAll()"
+           
             single ng2FileSelect [uploader]="uploader"
             type="file" name="photo" id="uploadImage" #image>
-          </label>
+          </label> -->
 
 
           <!-- <div class="row uploadList" *ngFor="let upload of uploader.queue" >
@@ -52,16 +53,15 @@
               >X</button>
               </div>  
      -->
-          <div class="progress">
+          <!-- <div class="progress">
             <div class="progress-bar" 
             [ngStyle]="{width: uploader.progress+'%'}"></div>
-            <span class="progressIndicator">{{uploader.progress}}%</span>
-    
-          </div>
+            <span class="progressIndicator ">{{uploader.progress}}%</span>
+            <span *ngIf="uploader.progress==100" class="progressIndicator"> Success</span>
+          </div> -->
           
-          <button type="submit" >SEND</button>
+          <!-- <button  (click)="uploader.uploadAll()" type="submit" >SEND</button> -->
     
-            <!-- [disabled]="image.value == '' || !contactForm.valid" -->
       </div>
       
       </div>

@@ -1,6 +1,5 @@
 header{
-    /* padding: 30px 10.5%; */
-    background-color:rgba(31, 33, 36, .7);
+    background-color:rgba(31, 33, 36,0.7);
     height: 100px;
     width:100%;
     top:0;
@@ -17,7 +16,7 @@ header{
 }
 .navbarStandard a{
     padding:5px;
-    margin-right:25px;
+    margin-left:25px;
 }
 .navbarHamburger{
     display:none;

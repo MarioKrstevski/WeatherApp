@@ -19,9 +19,8 @@ button,
   border: none;
   font-size: 16px;
   text-decoration: none;
+  outline: none;
 }
-
-
 .searchField {
   display: flex;
 }
@@ -33,7 +32,6 @@ button,
 .searchButton {
   flex: 0 0 auto;
 }
-
 .searchField:before {
   flex: 0 0 2.75em;
   display: inline-flex;
@@ -57,9 +55,6 @@ button,
   padding-left: 25px;
   outline: none;
 }
-
-
-  
 .searchButton {
   height: 50px;
   width: 100px;
@@ -67,4 +62,7 @@ button,
   background: #4ca2d0;
   font-weight: 400;
   color: #cfe6f3;
+}
+.searchButton:active{
+  background-color: #408bb3;
 }

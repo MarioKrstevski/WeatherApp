@@ -3,21 +3,20 @@
     color:#616161;
     min-height: 500px ;
 }
-
-.personalInfo,.imageUpload{
-    min-height: 455px;
-
-}
-
 .smallHeading{
     text-align: center;
     padding:20px ;
     font-size: 2.2em;
 }
+.personInfo,.imageUpload{
+    min-height: 455px;
+    padding:0 5px;
+}
+
+
 .blackBorder{
     border:1px solid black;
 }
-
 .input-container{
     display:flex;
     height: 53px;
@@ -38,25 +37,44 @@
     width: 100%;
     padding: 20px;
     outline: none;
-    
 }
+@-webkit-keyframes autofill {
+    to {
+        color: 616161;
+        background:rgb(222, 222, 222);
+    }
+}
+input:-webkit-autofill{
+    -webkit-animation-name: autofill;
+    background-clip: content-box;
+    -webkit-animation-fill-mode: both;
+} 
 textarea, input{
     background: rgb(222, 222, 222);
     border:none;
-    height: 250px;
     outline: none;    
 }
-
 textarea{
-    height: 260px !important;
+    position: relative;
+    min-height: 260px;
+    /* height: 260px !important; */
+    
+}
+.progress{
+    border-radius: 0;
+    margin-bottom: 73px;
 }
 
-.progressIndicator{
+.progressIndicator, .progressSuccess{
    position: absolute;
-   bottom:95px;
-   left:45%;
+   bottom:170px;
+   left:50%;
    color:white;
 }
+.progressSuccess{
+    margin-left:-10px;
+}
+
 .progress{
     height: 50px;
     background-color: rgb(177, 175, 175);
@@ -65,17 +83,11 @@ textarea{
     background-color: rgb(78, 168, 212);
 }
 
-.imaggeFile {
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
-}
 .uploadImage {
     overflow: hidden;
     position: relative;
+    margin:0;
+    margin-bottom:30px;
 }
 
 .uploadImage input[type="file"] {
@@ -89,32 +101,38 @@ textarea{
     right: 0;
     text-align: right;
     top: 0;
+    cursor: pointer;
 }
 
 /* Example stylistic flourishes */
 img{
     display: block;
     top:0;
-    height: 230px;
+    height: 166px;
     width: 100%;
 }
+
 .imageUpload{
     position: relative;
+    width: 100%;
+    padding-bottom: 30px;
 }
 .imageUpload button{
-    width: 100px;
-    height: 50px;
+    width: 100px !important;
+    height: 50px !important;
     color:white;
     background-color: rgb(78, 168, 212) ;
     cursor:pointer;
-    margin-bottom:30px;
+    padding: 0;
+    margin: 0;
     outline: none;
-
+}
+.imageUpload button:last-child{
+    margin-bottom:30px;
 }
 .innerElements{
    width:100%;
-   padding-right:30px;
-  
+   margin-right: 30px;  
    position: absolute;
    bottom:0; 
 }
@@ -129,3 +147,10 @@ img{
 .uploadList > *{
     height: 30px !important;
 }
+
+@media only screen and (max-width: 767px){
+    .innerElements{
+        position: relative;
+    }
+}
+

@@ -105,7 +105,7 @@ export class BrowseCitiesComponent implements OnInit {
 
         // initialize to page 1
 
-        console.log(this.setPage(1));
+        // console.log(this.setPage(1));
         this.setPage(1);
         
     });

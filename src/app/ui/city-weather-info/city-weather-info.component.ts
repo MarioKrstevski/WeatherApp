@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+
+import { WeatherDataService } from '../services/weather-data.service';
 
 import { from } from 'rxjs';
 
@@ -14,8 +16,10 @@ import { from } from 'rxjs';
 export class CityWeatherInfoComponent implements OnInit {
 
   currentTime = new Date();
-  defaultCity: string ='New York';
+  defaultCity='London';
   currentDayIndex = 1;
+  prenesenaData;
+  weatherData;
   days = [
     {
       status:'Sunny',
@@ -139,11 +143,12 @@ export class CityWeatherInfoComponent implements OnInit {
   ];
   
 
-  constructor() { }
+  constructor(private http: HttpClient, private weather: WeatherDataService) { }
 
   ngOnInit() {
+    
+    this.weatherData = this.weather.getWeather(this.defaultCity)
 
-    // this.http.get('http://jsonplaceholder.typicode.com/photos').subscribe( data => console.dir(data));
   }
 
   changeView(index){
@@ -151,6 +156,9 @@ export class CityWeatherInfoComponent implements OnInit {
     this.currentTime = new Date();
     this.currentDayIndex=index;
 
+    console.log('Sega vremeto e: ', this.weatherData);
   }
+
+  
 
 }
