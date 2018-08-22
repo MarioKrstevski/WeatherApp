@@ -1,7 +1,7 @@
 <div id="search" class="weatherInfo dataContainer">
 <h3 class="smallHeading">Search City</h3>
 
-<app-search-bar (childEvent)="prenesenaData=$event" > </app-search-bar> 
+<app-search-bar (childEvent)="setWeatherData($event)" > </app-search-bar> 
 
 
 <div class="infoDisplay">
@@ -24,8 +24,8 @@
             <div class="col-6 mystyle today">
                 
                     <div class=" colRow city">
-                        <p >{{defaultCity}} City</p>
-                        <p class="allcaps">{{defaultCity}}</p>
+                        <p >{{weatherData?.name}} City</p>
+                        <p class="allcaps">{{weatherData?.name}}</p>
                     </div>
                     <div class=" colRow dateTime" >
                             <p class="Time">

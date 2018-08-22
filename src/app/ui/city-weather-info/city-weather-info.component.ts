@@ -3,8 +3,6 @@ import { HttpClient } from '@angular/common/http';
 
 import { WeatherDataService } from '../services/weather-data.service';
 
-import { from } from 'rxjs';
-
 @Component({
   selector: 'app-city-weather-info',
   templateUrl: './city-weather-info.component.html',
@@ -16,10 +14,10 @@ import { from } from 'rxjs';
 export class CityWeatherInfoComponent implements OnInit {
 
   currentTime = new Date();
-  defaultCity='London';
+  defaultCity='New York';
   currentDayIndex = 1;
-  prenesenaData;
-  weatherData;
+  weatherData: IWeatherData;
+  cityName: string;
   days = [
     {
       status:'Sunny',
@@ -146,19 +144,40 @@ export class CityWeatherInfoComponent implements OnInit {
   constructor(private http: HttpClient, private weather: WeatherDataService) { }
 
   ngOnInit() {
-    
-    this.weatherData = this.weather.getWeather(this.defaultCity)
-
+    this.weather.getWeather(this.defaultCity).subscribe(weatherInfo => {this.weatherData=weatherInfo; console.dir(weatherInfo)});
   }
 
   changeView(index){
     console.log('View should change');
     this.currentTime = new Date();
     this.currentDayIndex=index;
-
-    console.log('Sega vremeto e: ', this.weatherData);
+    console.log('Sega vremeto e: ', this.weatherData.name);
+  
   }
 
-  
+  setWeatherData(newData: IWeatherData) {
+    this.weatherData = newData;
+  }
 
+}
+
+interface IWeatherData{
+  base: string;
+  clouds: Object;
+  cod: number;
+  coord: Object;
+  dt: number;
+  id: number;
+  main: Object;
+  name: string;
+  sys: Object;
+  visibility: number;
+  weather: Array<IWeather>;
+  wind: Object;
+}
+interface IWeather{
+  id: number;
+  main: string;
+  description: string;
+  icon: string;
 }

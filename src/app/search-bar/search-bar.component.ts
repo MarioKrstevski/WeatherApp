@@ -13,8 +13,8 @@ export class SearchBarComponent implements OnInit {
   // defaultCity: string='5128581';
   cityInfo: any = null;
 
-  @Output()
-  public childEvent = new EventEmitter();
+  
+  @Output() public childEvent = new EventEmitter();
 
   constructor(private weather: WeatherDataService) { }
 
@@ -27,16 +27,13 @@ export class SearchBarComponent implements OnInit {
   }
 
   updateWeather(city){
-    // this.cityInfo=this.weather.getWeather(city);
-    // console.log ' City Selected : ', city);
-    this.weather.getWeather(city).subscribe((weather) => {
-      console.log('weather', weather);
+    this.weather.getWeather(city).subscribe(newCityWeather => {
+      // console.log('weather', newCityWeather);
+      this.cityInfo=newCityWeather;
+      // console.log(this.cityInfo);
+      this.childEvent.emit(this.cityInfo);
+      // console.log('Ova e child eventot',this.cityInfo);
     })
-  }
-
-  fireEvent(){
-    this.childEvent.emit(this.cityInfo);
-    // console.log('Event Fired', this.cityInfo.name);
   }
 
 }

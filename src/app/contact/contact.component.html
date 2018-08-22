@@ -25,11 +25,11 @@
 
       <div class="innerElements  align-self-end "  >
 
-        <input type="file" (change)="onFileSelected($event)">
-        <button (click)="onUpload()" >Upload</button>
+        <!-- <input type="file" (change)="onFileSelected($event)">
+        <button (click)="onUpload()" >Upload</button> -->
         
         <!-- Upload Works, but if you select 2 times, and upload, 2 items will be uploaded -->
-        <!-- <img [src]="imageUrl" *ngIf="imageUrl" >
+        <img [src]="imageUrl" *ngIf="imageUrl" >
      
         <label class="uploadImage " >
 
@@ -43,24 +43,24 @@
            
             single ng2FileSelect [uploader]="uploader"
             type="file" name="photo" id="uploadImage" #image>
-          </label> -->
+          </label>
 
 
-          <!-- <div class="row uploadList" *ngFor="let upload of uploader.queue" >
+          <div class="row uploadList" *ngFor="let upload of uploader.queue" >
               <span>   {{upload.file.name}}</span>
                 <button
               (click)="upload.remove()"
               >X</button>
               </div>  
-     -->
-          <!-- <div class="progress">
+    
+          <div class="progress">
             <div class="progress-bar" 
             [ngStyle]="{width: uploader.progress+'%'}"></div>
             <span class="progressIndicator ">{{uploader.progress}}%</span>
             <span *ngIf="uploader.progress==100" class="progressIndicator"> Success</span>
-          </div> -->
+          </div>
           
-          <!-- <button  (click)="uploader.uploadAll()" type="submit" >SEND</button> -->
+          <button  (click)="uploader.uploadAll()" type="submit" >SEND</button>
     
       </div>
       
