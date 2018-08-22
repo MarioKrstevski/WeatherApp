@@ -14,9 +14,13 @@ export class WeatherDataService {
   constructor(private http: Http) {}
 
   getWeather(city){
-    return this.http.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${this.myKey}`)
+    return this.http.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=${this.myKey}`)
     .pipe(map(resp => resp.json()));;
     
+  }
+  getWeekly(city){
+    return this.http.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&APPID=${this.myKey}`)
+    .pipe(map(resp => resp.json()));;
   }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { WeatherDataService } from '../services/weather-data.service';
+import { TimeInterval } from 'rxjs/internal/operators/timeInterval';
 
 @Component({
   selector: 'app-city-weather-info',
@@ -15,9 +16,12 @@ export class CityWeatherInfoComponent implements OnInit {
 
   currentTime = new Date();
   defaultCity='New York';
-  currentDayIndex = 1;
+  currentDate = this.currentTime.toLocaleDateString("en-GB").replace(/\//g, ".");
   weatherData: IWeatherData;
-  cityName: string;
+
+  weeklyData;
+
+
   days = [
     {
       status:'Sunny',
@@ -144,15 +148,54 @@ export class CityWeatherInfoComponent implements OnInit {
   constructor(private http: HttpClient, private weather: WeatherDataService) { }
 
   ngOnInit() {
-    this.weather.getWeather(this.defaultCity).subscribe(weatherInfo => {this.weatherData=weatherInfo; console.dir(weatherInfo)});
+    this.weather.getWeather(this.defaultCity).subscribe(weatherInfo => this.weatherData=weatherInfo);
+    this.weather.getWeekly(this.defaultCity).subscribe(weeklyInfo => {this.weeklyData=weeklyInfo;console.dir(this.weeklyData)});
+    this.updateCurrentTime();  
+  
+  }
+
+  updateCurrentTime(){
+    setInterval(() => {         
+      this.currentTime = new Date();
+    }, 5000);
   }
 
   changeView(index){
     console.log('View should change');
     this.currentTime = new Date();
-    this.currentDayIndex=index;
     console.log('Sega vremeto e: ', this.weatherData.name);
+    console.log('weekly data', this.weeklyData);
   
+  }
+
+  isTodaysDate(objectDate){
+    let dt = new Date();
+    let date = dt.getFullYear() + '/' + (((dt.getMonth() + 1) < 10) ? '0' : '') + (dt.getMonth() + 1) + '/' + ((dt.getDate() < 10) ? '0' : '') + dt.getDate();
+    let dateFormated = date.replace(/\//g, "-");
+
+    let objectDateFormated = objectDate.substring(0,10);
+
+
+
+    if(objectDateFormated == dateFormated){
+      return true;
+    } else {
+      return false;
+    }
+  }
+  checkRange(msecA: number){
+    let time: number = parseInt(this.currentTime.getTime().toString().substring(0,10))+10800;
+    // console.log(time);
+    // let time:number = 1534971600;
+    let msecB: number = time + 10800;
+    
+    if((msecA<=time) && (time<msecB)){
+      return false;
+    } else {
+      return true;
+    }
+
+    
   }
 
   setWeatherData(newData: IWeatherData) {

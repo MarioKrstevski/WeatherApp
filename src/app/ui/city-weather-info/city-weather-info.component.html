@@ -9,14 +9,14 @@
     <div class="container-fluid blackborder">
         <div class="row backgroundContainer">
             <div class="col-3 mystyle weeklyPeak">
-                <div class="row perDay" *ngFor="let day of days; index as i" (click)="changeView(i)">
+                <div class="row perDay" *ngFor="let day of [1,2,3,4]; index as i" (click)="changeView(i)">
                    
                         <div class="col-6">
-                                <div class="row weatherStatus">{{day.status}}</div>
-                                <div class="row weatherTemp">{{day.temp}}&#0176;C </div>
+                                <div class="row weatherStatus">static</div>
+                                <div class="row weatherTemp">stati&#0176;C </div>
                         </div>
                         <div class="col-6  weatherDate">
-                                {{day.date}}
+                                static
                         </div>
                     
                 </div>
@@ -32,10 +32,10 @@
                                 {{currentTime | date:'shortTime'}}
                             </p>
                             <p class="theDate">
-                                {{days[currentDayIndex].date}}
+                                {{currentDate}}
                             </p>
                     </div>
-                    <div class=" colRow temperature">{{days[currentDayIndex].temp}}&#0176;C</div>
+                    <div class=" colRow temperature">{{weatherData?.main.temp_max}}&#0176;C</div>
 
                
             </div >
@@ -43,14 +43,17 @@
             <div class="col-3 mystyle everyTwoHours">
                 <div class="iconWeather">
                 <i class="wi wi-cloudy"></i>
-                <p>{{days[currentDayIndex].status}}</p>
+                <p>status</p>
                 </div>
                 <div class="timesPerDay">
-                  <div class="timeStatus" *ngFor="let info of days[currentDayIndex].allDay" >
-                        <p class="alignText">
-                                <span class="alignLeft"> {{info.time}}  </span>
-                                <span class="alignRight"> {{info.temp}}&#0176;C</span>
-                        </p>
+                  <div class="timeStatus" *ngFor="let info of weeklyData?.list" >
+                       
+                            <p class="alignText" *ngIf="isTodaysDate(info?.dt_txt)">
+                                <span class="alignLeft" *ngIf="checkRange(info?.dt)"> {{info?.dt_txt.substring(11,16)}}</span>
+                                <span class="alignLeft" *ngIf="!checkRange(info?.dt)"> Now </span>
+                                <span class="alignRight"> {{info?.main.temp_max | number:'1.0-0'}} &#0176;C</span>
+                            </p>    
+                        
                   </div>
                   
         </div>
