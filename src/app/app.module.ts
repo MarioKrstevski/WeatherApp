@@ -16,6 +16,7 @@ import { ContactComponent } from './contact/contact.component';
 import {NgxPageScrollModule} from 'ngx-page-scroll';  
 
 import { UiModule } from './ui/ui.module';
+
 // import { LayoutComponent } from './ui/layout/layout.component'
 
 // const appRoutes: Routes = [
@@ -30,7 +31,7 @@ import { UiModule } from './ui/ui.module';
     FooterComponent,
     GoToTopComponent,
     ContactComponent,
-    FileSelectDirective
+    FileSelectDirective,  
   ],
   imports: [
     BrowserModule,

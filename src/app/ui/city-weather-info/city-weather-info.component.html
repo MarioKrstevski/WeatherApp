@@ -1,11 +1,13 @@
 <div id="search" class="weatherInfo dataContainer">
 <h3 class="smallHeading">Search City</h3>
+<button (click)=createMyData()>Create</button>
 
-<app-search-bar (childEvent)="setWeatherData($event)" > </app-search-bar> 
+<app-search-bar (weatherData)="setWeatherData($event)"> </app-search-bar> 
 
 
 <div class="infoDisplay">
 
+    
     <div class="container-fluid blackborder">
         <div class="row backgroundContainer">
             <div class="col-3 mystyle weeklyPeak">
@@ -24,18 +26,18 @@
             <div class="col-6 mystyle today">
                 
                     <div class=" colRow city">
-                        <p >{{weatherData?.name}} City</p>
-                        <p class="allcaps">{{weatherData?.name}}</p>
+                        <p >{{weatherData?.city.name}} City</p>
+                        <p class="allcaps">{{weatherData?.city.name}}</p>
                     </div>
                     <div class=" colRow dateTime" >
                             <p class="Time">
-                                {{currentTime | date:'shortTime'}}
+                                {{currentTime | date:"HH:mm:ss"}}
                             </p>
                             <p class="theDate">
                                 {{currentDate}}
                             </p>
                     </div>
-                    <div class=" colRow temperature">{{weatherData?.main.temp_max}}&#0176;C</div>
+                    <div class=" colRow temperature">{{maxTemp | number:'1.0-0'}}&#0176;C</div>
 
                
             </div >
@@ -46,7 +48,7 @@
                 <p>status</p>
                 </div>
                 <div class="timesPerDay">
-                  <div class="timeStatus" *ngFor="let info of weeklyData?.list" >
+                  <div class="timeStatus" *ngFor="let info of weatherData?.list" >
                        
                             <p class="alignText" *ngIf="isTodaysDate(info?.dt_txt)">
                                 <span class="alignLeft" *ngIf="checkRange(info?.dt)"> {{info?.dt_txt.substring(11,16)}}</span>
