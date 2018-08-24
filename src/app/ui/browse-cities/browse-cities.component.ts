@@ -3,6 +3,8 @@ import { Http, Response } from '@angular/http';
 import { map } from 'rxjs/operators';
 
 import { PagerService } from '../services/pager.service';
+import { WeatherDataService } from '../services/weather-data.service';
+
 
 @Component({
   selector: 'app-browse-cities',
@@ -11,104 +13,43 @@ import { PagerService } from '../services/pager.service';
 })
 export class BrowseCitiesComponent implements OnInit {
 
-  dummyCities = [
-      {
-        name:'Berlin',
-        temp:'23',
-        humidity: '65',
-        wind:'6'
-
-      },
-      {
-        name:'Skopje',
-        temp:'22',
-        humidity: '35',
-        wind:'19'
-
-      },
-      {
-        name:'Kumanovo',
-        temp:'26',
-        humidity: '5',
-        wind:'63'
-
-      },
-      {
-        name:'Veles',
-        temp:'24',
-        humidity: '31',
-        wind:'12'
-
-      },
-      {
-        name:'Delchevo',
-        temp:'21',
-        humidity: '46',
-        wind:'6'
-
-      },
-      {
-        name:'Strumica',
-        temp:'12',
-        humidity: '42',
-        wind:'3'
-
-      },
-      {
-        name:'Tetovo',
-        temp:'15',
-        humidity: '35',
-        wind:'6'
-
-      },
-      {
-        name:'Pehchevo',
-        temp:'223',
-        humidity: '25',
-        wind:'6'
-
-      },
-      {
-        name:'Berovo',
-        temp:'21',
-        humidity: '35',
-        wind:'4'
-
-      },
-      {
-        name:'Prilep',
-        temp:'21',
-        humidity: '65',
-        wind:'2'
-
-      }
-  ];
-  private cities: any[];
-
+  
+  dummyUrl = "./assets/dummy-data.json";
+  urlForEurope = "http://api.openweathermap.org/dfata/2.5/box/city?bbox=12,32,15,37,10"
+  private cities;
   // pager object
   pager: any = {};
-
+  
   //paged cities
 
   pagedCities: any[];
 
-  constructor(private http: Http, private pagerService : PagerService) { }
-
+  constructor(private http: Http, private pagerService : PagerService, private weather: WeatherDataService) { }
   
   ngOnInit() {
   
-    this.http.get("./assets/dummy-data.json")
-    .pipe(map((response: Response) => response.json()))
-    .subscribe(data => {
-        // set items to json response
-        this.cities = data;
+    this.weather.getCities(57,-11,36.6,25.5).subscribe( citiesData => {
+      this.cities = citiesData.list;
+      console.log("Gradovi", this.cities);
+      let extra: number = (this.cities.length+1)%5;
+      if(extra!=0){
+        console.log('extra', extra);
 
-        // initialize to page 1
+      }
+      
 
-        // console.log(this.setPage(1));
-        this.setPage(1);
+      this.setPage(1);
+    })
+    // this.http.get(this.dummyUrl)
+    // .pipe(map((response: Response) => response.json()))
+    // .subscribe(data => {
+    //     // set items to json response
+    //     this.cities = data;
+    //     // initialize to page 1
+    //     // console.log(this.setPage(1));
+    //     this.setPage(1);
         
-    });
+    // });
     
   }
 
