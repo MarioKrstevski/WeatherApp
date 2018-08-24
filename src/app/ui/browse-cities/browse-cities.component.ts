@@ -16,7 +16,7 @@ export class BrowseCitiesComponent implements OnInit {
   
   dummyUrl = "./assets/dummy-data.json";
   urlForEurope = "http://api.openweathermap.org/dfata/2.5/box/city?bbox=12,32,15,37,10"
-  private cities;
+  private cities: IWeatherInfo[];
   // pager object
   pager: any = {};
   
@@ -24,19 +24,25 @@ export class BrowseCitiesComponent implements OnInit {
 
   pagedCities: any[];
 
+  fakeInfo: IWeatherInfo;
+
   constructor(private http: Http, private pagerService : PagerService, private weather: WeatherDataService) { }
   
   ngOnInit() {
   
-    this.weather.getCities(57,-11,36.6,25.5).subscribe( citiesData => {
+    this.weather.getCities(57,-11,36.6,24.7).subscribe( citiesData => {
       this.cities = citiesData.list;
       console.log("Gradovi", this.cities);
-      let extra: number = (this.cities.length+1)%5;
+      let extra: number = 5-(this.cities.length%5);
+      // this.fakeInfo = this.cities[0];
+   
       if(extra!=0){
-        console.log('extra', extra);
-
+        while(extra){
+          this.cities.push(this.fakeInfo);
+          extra--;
+        }
       }
-      
+      console.log("Gradovi", this.cities);
 
       this.setPage(1);
     })
@@ -61,4 +67,26 @@ export class BrowseCitiesComponent implements OnInit {
     this.pagedCities = this.cities.slice(this.pager.startIndex, this.pager.endIndex + 1);
 }
 
+}
+
+interface IWeatherInfo{
+  clouds: Object;
+  dt: number;
+  dt_txt: string;
+  main: IMain;
+  rain: Object;
+  sys: Object;
+  weather: Array<Object>;
+  wind: Object;
+}
+
+interface IMain{
+  grnd_level: number;
+  humidity: number;
+  pressure: number;
+  sea_level: number
+  temp: number;
+  temp_kf: number;
+  temp_max: number;
+  temp_min: number;
 }

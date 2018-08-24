@@ -180,13 +180,13 @@ interface IWeatherInfo{
   clouds: Object;
   dt: number;
   dt_txt: string;
-  main: iMain;
+  main: IMain;
   rain: Object;
   sys: Object;
   weather: Array<Object>;
   wind: Object;
 }
-interface iMain{
+interface IMain{
   grnd_level: number;
   humidity: number;
   pressure: number;

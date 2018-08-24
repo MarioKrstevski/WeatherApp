@@ -5,17 +5,19 @@
 
         <div class="container blackborder2 ">
             <div class="row justify-content-center" >
-              <div class="cityQuickInfo col-5 col-md-2" *ngFor="let city of pagedCities">
-                <i class="wi wi-day-sunny-overcast"></i>
-                <p class="cityTitle">{{city.name}}</p>
-                <p class="cityDetails"> {{city.temp}} &#0176;C</p>
-                <p class="cityDetails">{{city.humidity}}%</p>
-                <p class="cityDetails">{{city.wind}} km/h</p>
+              <div 
+              class="cityQuickInfo col-5 col-md-2" 
+              *ngFor="let city of pagedCities"
+              (click)="sendData(city.name)"
+              >
+                <i class="wi wi-day-sunny-overcast" *ngIf="city?.name"></i>
+                <p class="cityTitle" *ngIf="city?.name">{{city?.name}}</p>
+                <p class="cityDetails" *ngIf="city?.name"> {{city?.main.temp}} &#0176;C</p>
+                <p class="cityDetails" *ngIf="city?.name">{{city?.main.humidity}}% humidity</p>
+                <p class="cityDetails" *ngIf="city?.name">{{city?.wind.speed}} km/h wind</p>
                 </div>
-                
             </div>
         </div>
-
     </div>
 
     <div id="pager" class="container-fluid">
