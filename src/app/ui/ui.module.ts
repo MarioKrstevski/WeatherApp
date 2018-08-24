@@ -11,6 +11,7 @@ import { SearchBarComponent } from '../search-bar/search-bar.component';
 
 import { PagerService } from './services/pager.service';
 import { WeatherDataService } from './services/weather-data.service';
+import { DataSharingService } from './services/data-sharing.service';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { WeatherDataService } from './services/weather-data.service';
   ],
   providers:[
     PagerService,
-    WeatherDataService
+    WeatherDataService,
+    DataSharingService
   ],
   exports: [
     SearchBarComponent,
