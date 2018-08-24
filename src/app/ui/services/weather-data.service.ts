@@ -1,6 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { map } from "rxjs/operators";
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from "rxjs/operators";
 
 
 @Injectable({
@@ -15,8 +17,13 @@ export class WeatherDataService {
 
   getWeather(city){
     return this.http.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&APPID=${this.myKey}`)
-    .pipe(map(resp => resp.json()));;
-    
+    .pipe(map(resp => resp.json()),
+     catchError(this.errorHandler));
   }
+
+  errorHandler(error: HttpErrorResponse){
+    return throwError(error.message || "Unknown City")
+  }
+  
 
 }

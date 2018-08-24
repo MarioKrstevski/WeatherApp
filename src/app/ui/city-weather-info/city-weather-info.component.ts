@@ -15,7 +15,6 @@ export class CityWeatherInfoComponent implements OnInit {
   defaultCity = 'New York';
   currentDate = this.currentTime.toLocaleDateString("en-GB").replace(/\//g, ".");
   weatherData: IWeatherData;
-  maxTemp: number;
   preview: Array<IWeatherInfo>;
   previewTemp: Array<IWeatherInfo>;
   myData: Array<Array<IWeatherInfo>>;
@@ -35,6 +34,14 @@ export class CityWeatherInfoComponent implements OnInit {
     });
 
     this.updateCurrentTime();  
+  }
+
+  isSelected(day:Array<IWeatherInfo>){
+    if(day[0].dt_txt === this.preview[0].dt_txt){
+      return true;
+    } else {
+      return false;
+    }
   }
 
   // When we search for another city we get another Data, and this updates it
@@ -85,7 +92,17 @@ export class CityWeatherInfoComponent implements OnInit {
     return endResult;
   }
   // Function to find maxTemp for the day
-  checkMaxTemp(todaaysDate: Date, weatherData: IWeatherData){
+  findMaxTemp(){
+    let maxTemp: number = 0;
+    this.preview.forEach((timeStamp) =>{
+      if(timeStamp.main.temp_max > maxTemp){
+        maxTemp = timeStamp.main.temp_max ;
+      }
+    })
+
+    return maxTemp;
+  }
+  changeMaxTemp(todaaysDate: Date, weatherData: IWeatherData){
     let novaNiza= new Array<IWeatherInfo>();
     let todaysDate = new Date(weatherData.list[0].dt_txt)
     for(let info of weatherData.list){

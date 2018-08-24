@@ -10,14 +10,14 @@ import { EventEmitter } from '@angular/core';
 })
 export class SearchBarComponent implements OnInit {
 
-  // defaultCity: string='5128581';
-  cityInfo:any;
-  weekInfo:any;
 
-  
   @Output() public weatherData = new EventEmitter();
  
-
+   
+  cityInfo:any;
+  weekInfo:any;
+  errorMsg="";
+    
   constructor(private weather: WeatherDataService) { }
 
   ngOnInit() {
@@ -34,8 +34,10 @@ export class SearchBarComponent implements OnInit {
       this.cityInfo=newCityWeather;
       // console.log(this.cityInfo);
       this.weatherData.emit(this.cityInfo);
+      this.errorMsg = "";
       // console.log('Ova e child eventot',this.cityInfo);
-    });
+    },
+    error => this.errorMsg = error);
   }
 
 }

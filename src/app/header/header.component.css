@@ -22,14 +22,17 @@ header{
     display:none;
 }
 a, a:active, a:visited{
+    text-decoration: none;
     color:white;
 }
 a:hover{
-    text-decoration: none;
     color: #4AA2D1;
 }
 #brandName{
  font-size:2em;
+}
+#brandName:hover{
+ color:white;
 }
 
 .hamburger{

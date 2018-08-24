@@ -4,14 +4,11 @@
       background:rgb(27,30,33);
   }
 }
-
 input:-webkit-autofill{
     -webkit-animation-name: autofill;
     background-clip: content-box;
     -webkit-animation-fill-mode: both;
 } 
-
-
 input,
 button,
 .SearchBox:before {
@@ -23,11 +20,12 @@ button,
 }
 .searchField {
   display: flex;
+  /* position relative is need to style the error message
+  with position absolute */
+  position: relative;
 }
-
 .searchText {
-    flex: 1 0 8em;
-;     
+  flex: 1 0 8em;    
 }
 .searchButton {
   flex: 0 0 auto;
@@ -38,13 +36,11 @@ button,
   align-items: center;
   justify-content: center;
 }
-
 /* VISUAL DESIGN DETAILS */
 .SearchBox {
   margin: 2rem auto 0;
   max-width: 100%;
 }
-  
 .searchText {
   height: 50px;
   background-color: rgb(27,30,33);
@@ -65,4 +61,51 @@ button,
 }
 .searchButton:active{
   background-color: #408bb3;
+}
+#errorMessage{
+  width:fit-content;
+  height: 46px;
+  top:2px;
+  left: 35%;
+  position: absolute;
+  background: rgb(235, 93, 93) !important;
+  padding: 10px !important;
+  border-radius: 3px !important;
+  border:1px solid white;
+  color:black;
+  display: inline-block !important;
+  box-shadow: 0.5px 0.5px 9px #4b4a4a;
+
+}
+/* The Litte triangle on left */
+#errorMessage::before{
+  content: '';  
+  width: 0;  
+  height: 0px;  
+  outline:white;
+  border-left: 16px solid transparent;
+  border-right: 16px solid rgb(235, 93, 93);
+  border-bottom: 16px solid transparent;
+  border-top: 16px solid transparent;
+  position: absolute;  
+  left: -31px; 
+  top: 8px;
+  z-index: 13;
+}
+#errorMessage::after{
+  content: '';  
+  width: 0;  
+  height: 0;  
+  border-left: 16px solid transparent;
+  border-right: 16px solid white;
+  border-bottom: 16px solid transparent;
+  border-top: 16px solid transparent;
+  position: absolute;  
+  left: -33px; 
+  top:8px;
+  z-index: 12;
+}
+.error{
+  color:rgb(241, 85, 85);
+  border: 1px solid rgb(241, 85, 85);
 }

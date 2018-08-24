@@ -3,15 +3,19 @@
  submit="disabled" onsubmit="prevDefault()" class="SearchBox">
   <div class="searchField">
     <input 
+      [class.error]="errorMsg"
       #newCity
       type="search"
       name="search"
       placeholder="City..."
       class="searchText"/>
 
+    <span id="errorMessage" *ngIf="errorMsg">{{errorMsg}}</span>
     <button
       type="button"
       (click)="updateWeather(newCity.value)"
       class="searchButton">Search</button>
+
+
   </div>
 </form>

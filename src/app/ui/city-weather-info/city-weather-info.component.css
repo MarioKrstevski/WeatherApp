@@ -68,7 +68,10 @@
 .perDay:hover{
     color:white;
     background-color: rgba(87, 85, 91,.7);
-    
+}
+.selectedDay{
+    color:white;
+    background-color: rgba(87, 85, 91,.7);
 }
 .weatherStatus{
     font-size: 19px;
