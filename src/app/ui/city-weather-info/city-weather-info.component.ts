@@ -17,17 +17,19 @@ export class CityWeatherInfoComponent implements OnInit {
   weatherData: IWeatherData;
   maxTemp: number;
   preview: Array<IWeatherInfo>;
+  previewTemp: Array<IWeatherInfo>;
   myData: Array<Array<IWeatherInfo>>;
+  // myDataTemp: Array<Array<IWeatherInfo>>;
 
   constructor(private http: HttpClient, private weather: WeatherDataService) { }
 
   ngOnInit() {
     this.weather.getWeather(this.defaultCity).subscribe(weatherInfo => {
       this.weatherData = weatherInfo; 
-      console.dir(this.weatherData);
+      // console.dir(this.weatherData);
       // this.maxTemp = this.checkMaxTemp(this.currentTime, this.weatherData);
       this.myData = this.createMyData(weatherInfo);
-      console.dir(this.myData);
+      // console.dir(this.myData);
       this.preview = this.createPreview(this.myData);
       console.log('preview', this.preview);
     });
@@ -35,28 +37,32 @@ export class CityWeatherInfoComponent implements OnInit {
     this.updateCurrentTime();  
   }
 
-  setWeatherData(newWeatherData: IWeatherData) {
+  // When we search for another city we get another Data, and this updates it
+  updateWeatherData(newWeatherData: IWeatherData) {
     this.weatherData = newWeatherData;
-    //STUCK HERE
-    this.createMyData(newWeatherData);
+    // console.log('New Data: ',this.weatherData);
+    this.myData = this.createMyData(newWeatherData);
+    // console.log('New MyData', this.myData); 
+    this.preview = this.createPreview(this.myData);
+    // console.log('New Preview',this.preview);
+
+    return newWeatherData;
   }
-
-  createPreview(allWeek: Array<Array<IWeatherInfo>>){
-
-    let previewResult = allWeek[0];
-    console.log('allweek', allWeek);
-    console.dir('prevRes', previewResult);
-
+  // Creating the preview in the first place
+  createPreview(allWeek: Array<Array<IWeatherInfo>>, index:number = 0){
+    let previewResult = allWeek[index];
+    // console.log('index used', index);
+    // console.log('allweek', allWeek);
     return previewResult;
   }
-
-  changePreview(day: Array<IWeatherInfo>){
-    console.dir('day', day);
-    // this.preview = day;
-
-    return this.preview = day;
+  // Preview is the middle and right screen, and this decides what is shown
+  // Why cant day be displayed
+  changePreview(day: Array<IWeatherInfo>, index: number){
+    this.preview =  this.createPreview(this.myData,index)
+    // console.log('previewChangedTo ',this.preview);
+    return null;
   } 
-
+  // Changes the structure of the WeatherData sorted by days
   createMyData(data: IWeatherData){
     let endResult = new Array<Array<IWeatherInfo>>();
     let oneDay = new Array<IWeatherInfo>();
@@ -78,7 +84,7 @@ export class CityWeatherInfoComponent implements OnInit {
     console.dir(endResult);
     return endResult;
   }
-
+  // Function to find maxTemp for the day
   checkMaxTemp(todaaysDate: Date, weatherData: IWeatherData){
     let novaNiza= new Array<IWeatherInfo>();
     let todaysDate = new Date(weatherData.list[0].dt_txt)
@@ -101,26 +107,18 @@ export class CityWeatherInfoComponent implements OnInit {
     console.log(todaysMaxTemp);
     return todaysMaxTemp;
   }
-
+  // Compares if two dates are for the same day
   sameDay(d1, d2) {
     return d1.getFullYear() === d2.getFullYear() &&
       d1.getMonth() === d2.getMonth() &&
       d1.getDate() === d2.getDate();
   }
-
+  // Timer to update clock real time
   updateCurrentTime(){
     setInterval(() => {         
       this.currentTime = new Date();
     }, 5000);
   }
-
-  changeView(index){
-    console.log('View should change');
-    this.currentTime = new Date();
-    console.log('Sega vremeto e: ', this.weatherData);
-   
-  }
-
   isTodaysDate(objectDate){
     let dt = new Date();
     let date = dt.getFullYear() + '/' + (((dt.getMonth() + 1) < 10) ? '0' : '') + (dt.getMonth() + 1) + '/' + ((dt.getDate() < 10) ? '0' : '') + dt.getDate();
@@ -133,6 +131,7 @@ export class CityWeatherInfoComponent implements OnInit {
       return false;
     }
   }
+  // For displaying NOW
   checkRange(msecA: number){
     let time: number = parseInt(this.currentTime.getTime().toString().substring(0,10))+10800;
     // console.log(time);
@@ -145,8 +144,6 @@ export class CityWeatherInfoComponent implements OnInit {
       return true;
     }    
   }
-
- 
 }
 
 interface IWeatherData{
