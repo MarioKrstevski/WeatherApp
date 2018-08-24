@@ -7,42 +7,60 @@ import { WeatherDataService } from '../services/weather-data.service';
   selector: 'app-city-weather-info',
   templateUrl: './city-weather-info.component.html',
   styleUrls: ['./city-weather-info.component.css'],
-  providers:[
-    
-  ]
+  providers:[]
 })
 export class CityWeatherInfoComponent implements OnInit {
 
   currentTime = new Date();
-  defaultCity='New York';
+  defaultCity = 'New York';
   currentDate = this.currentTime.toLocaleDateString("en-GB").replace(/\//g, ".");
   weatherData: IWeatherData;
   maxTemp: number;
+  preview: Array<IWeatherInfo>;
   myData: Array<Array<IWeatherInfo>>;
 
   constructor(private http: HttpClient, private weather: WeatherDataService) { }
 
   ngOnInit() {
     this.weather.getWeather(this.defaultCity).subscribe(weatherInfo => {
-      this.weatherData=weatherInfo; 
+      this.weatherData = weatherInfo; 
       console.dir(this.weatherData);
-      this.maxTemp=this.checkMaxTemp(this.currentTime, this.weatherData);
-      // this.myData = this.createMyData(weatherInfo);
+      // this.maxTemp = this.checkMaxTemp(this.currentTime, this.weatherData);
+      this.myData = this.createMyData(weatherInfo);
+      console.dir(this.myData);
+      this.preview = this.createPreview(this.myData);
+      console.log('preview', this.preview);
     });
-
-
 
     this.updateCurrentTime();  
   }
-  createMyData(data: IWeatherData = this.weatherData){
+
+  setWeatherData(newWeatherData: IWeatherData) {
+    this.weatherData = newWeatherData;
+    //STUCK HERE
+    this.createMyData(newWeatherData);
+  }
+
+  createPreview(allWeek: Array<Array<IWeatherInfo>>){
+
+    let previewResult = allWeek[0];
+    console.log('allweek', allWeek);
+    console.dir('prevRes', previewResult);
+
+    return previewResult;
+  }
+
+  changePreview(day: Array<IWeatherInfo>){
+    console.dir('day', day);
+    // this.preview = day;
+
+    return this.preview = day;
+  } 
+
+  createMyData(data: IWeatherData){
     let endResult = new Array<Array<IWeatherInfo>>();
     let oneDay = new Array<IWeatherInfo>();
     let currentDay = new Date();
-    // currentDay.setDate(currentDay.getDate() + 1);
-
-    // data.list.forEach((item) => {
-    //   console.log('item: ', item);
-    // });
 
     for( let period of data.list){
       let pDate = new Date(period.dt_txt);
@@ -50,7 +68,6 @@ export class CityWeatherInfoComponent implements OnInit {
           oneDay.push(period);
       }
       else {
-        console.dir(period);
         endResult.push(oneDay);
         oneDay = new Array<IWeatherInfo>();
         oneDay.push(period);
@@ -129,9 +146,7 @@ export class CityWeatherInfoComponent implements OnInit {
     }    
   }
 
-  setWeatherData(newWeatherData: IWeatherData) {
-    this.weatherData = newWeatherData;
-  }
+ 
 }
 
 interface IWeatherData{

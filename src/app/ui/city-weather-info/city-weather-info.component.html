@@ -1,6 +1,6 @@
 <div id="search" class="weatherInfo dataContainer">
 <h3 class="smallHeading">Search City</h3>
-<button (click)=createMyData()>Create</button>
+<!-- <button (click)=createMyData()>Create</button> -->
 
 <app-search-bar (weatherData)="setWeatherData($event)"> </app-search-bar> 
 
@@ -11,20 +11,17 @@
     <div class="container-fluid blackborder">
         <div class="row backgroundContainer">
             <div class="col-3 mystyle weeklyPeak">
-                <div class="row perDay" *ngFor="let day of [1,2,3,4]; index as i" (click)="changeView(i)">
-                   
+                <div class="row perDay" *ngFor="let day of myData; index as i" (click)="changePreview(day)">                   
                         <div class="col-6">
-                                <div class="row weatherStatus">static</div>
-                                <div class="row weatherTemp">stati&#0176;C </div>
+                                <div class="row weatherStatus"> {{day[0].weather[0].main}}</div>
+                                <div class="row weatherTemp">{{day[0].main.temp_max | number:'1.0-0'}}&#0176;C </div>
                         </div>
                         <div class="col-6  weatherDate">
-                                static
-                        </div>
-                    
+                                {{day[0].dt_txt | date:"dd.MM.yyyy" }}
+                        </div>                   
                 </div>
             </div>
             <div class="col-6 mystyle today">
-                
                     <div class=" colRow city">
                         <p >{{weatherData?.city.name}} City</p>
                         <p class="allcaps">{{weatherData?.city.name}}</p>
@@ -34,7 +31,7 @@
                                 {{currentTime | date:"HH:mm:ss"}}
                             </p>
                             <p class="theDate">
-                                {{currentDate}}
+                                {{preview[0].dt_txt | date:"dd.MM.yyyy" }}
                             </p>
                     </div>
                     <div class=" colRow temperature">{{maxTemp | number:'1.0-0'}}&#0176;C</div>
@@ -45,15 +42,16 @@
             <div class="col-3 mystyle everyTwoHours">
                 <div class="iconWeather">
                 <i class="wi wi-cloudy"></i>
-                <p>status</p>
+                <p>{{preview[0].weather[0].main}}</p>
                 </div>
                 <div class="timesPerDay">
-                  <div class="timeStatus" *ngFor="let info of weatherData?.list" >
-                       
-                            <p class="alignText" *ngIf="isTodaysDate(info?.dt_txt)">
-                                <span class="alignLeft" *ngIf="checkRange(info?.dt)"> {{info?.dt_txt.substring(11,16)}}</span>
-                                <span class="alignLeft" *ngIf="!checkRange(info?.dt)"> Now </span>
-                                <span class="alignRight"> {{info?.main.temp_max | number:'1.0-0'}} &#0176;C</span>
+                  <div class="timeStatus" *ngFor="let hourly of preview" >
+                            <!-- <p>*ngIf="isTodaysDate(info?.dt_txt)"</p> -->
+                            <p class="alignText" >
+                                <!-- <p>*ngIf="checkRange(info?.dt)"</p> -->
+                                <span class="alignLeft" > {{hourly.dt_txt | date:"HH:mm"}}</span>
+                                <!-- <span class="alignLeft" *ngIf="!checkRange(info?.dt)"> Now </span> -->
+                                <span class="alignRight"> {{hourly.main.temp_max  | number:'1.0-0'}} &#0176;C</span>
                             </p>    
                         
                   </div>
