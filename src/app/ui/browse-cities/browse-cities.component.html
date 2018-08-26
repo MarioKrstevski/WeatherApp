@@ -25,7 +25,7 @@
             <nav aria-label="Page navigation example" class="paggination">
                 <ul class="pagination" *ngIf="pager.pages && pager.pages.length">
                     <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
-                        <a  (click)="setPage(1)" class="page-link" href="#"> &#171; </a>
+                        <a  (click)="setPage(1)" class="page-link"> &#171; </a>
                     </li>
                     <!-- <li class="page-item"><a class="page-link" href="#"> 1</a></li>
                     <li class="page-item"><a class="page-link" href="#">2</a></li>
