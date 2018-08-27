@@ -24,11 +24,9 @@ export class SearchBarComponent implements OnInit {
     
   }
 
-  prevDefault(event){
-    event.preventDefault();
-  }
-
   updateWeather(city){
+
+  
     this.weather.getWeather(city).subscribe(newCityWeather => {
       // console.log('weather', newCityWeather);
       this.cityInfo=newCityWeather;

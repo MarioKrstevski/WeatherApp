@@ -1,6 +1,6 @@
 
- <form action="prevent" method="GET"
- submit="disabled" onsubmit="prevDefault()" class="SearchBox">
+ <div
+ (keyup.enter)="updateWeather(newCity.value)" class="SearchBox">
   <div class="searchField">
     <input 
       [class.error]="errorMsg"
@@ -18,4 +18,4 @@
 
 
   </div>
-</form>
+ </div>
