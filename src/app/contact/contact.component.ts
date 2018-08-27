@@ -28,6 +28,11 @@ export class ContactComponent implements OnInit {
   
   attachmentList:any = [];
 
+
+  name: string = "";
+  email: string = "";
+  message: string = "";
+
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
@@ -52,11 +57,11 @@ export class ContactComponent implements OnInit {
     reader.readAsDataURL(this.fileToUpload);
   }
 
-  checkStuff(){
-    console.log("Data Sent");
-    return false;
-  }
+  formValid(){
 
+
+
+  }
   onFileSelected(event){
 
     // console.log(event);
@@ -69,7 +74,7 @@ export class ContactComponent implements OnInit {
   const fd= new FormData();
   fd.append('image',this.selectedFile, this.selectedFile.name)
 
-    this.http.post('https://api.imgur.com/3/image',fd,{
+    this.http.post(URL,fd,{
       reportProgress:true,
       observe:'events'
     })

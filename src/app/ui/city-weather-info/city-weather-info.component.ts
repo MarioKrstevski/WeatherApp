@@ -5,6 +5,8 @@ import { WeatherDataService } from '../services/weather-data.service';
 import { DataSharingService } from '../services/data-sharing.service';
 import { Subscription } from 'rxjs';
 
+import * as i from "../../interaces/weatherdata";
+
 @Component({
   selector: 'app-city-weather-info',
   templateUrl: './city-weather-info.component.html',
@@ -16,10 +18,10 @@ export class CityWeatherInfoComponent implements OnInit {
   currentTime = new Date();
   currentCity = 'New York';
   currentDate = this.currentTime.toLocaleDateString("en-GB").replace(/\//g, ".");
-  weatherData: IWeatherData;
-  preview: Array<IWeatherInfo>;
-  previewTemp: Array<IWeatherInfo>;
-  myData: Array<Array<IWeatherInfo>>;
+  weatherData: i.IWeatherData;
+  preview = new Array<i.IWeatherInfo>();
+  previewTemp: Array<i.IWeatherInfo>;
+  myData: Array<Array<i.IWeatherInfo>>;
   weatherSubscription: Subscription;
   // myDataTemp: Array<Array<IWeatherInfo>>;
 
@@ -39,7 +41,7 @@ export class CityWeatherInfoComponent implements OnInit {
 
   setData(weatherInfo){
     this.weatherData = weatherInfo; 
-    // console.dir(this.weatherData);
+    console.dir(this.weatherData);
     // this.maxTemp = this.checkMaxTemp(this.currentTime, this.weatherData);
     this.myData = this.createMyData(weatherInfo);
     // console.dir(this.myData);
@@ -47,7 +49,7 @@ export class CityWeatherInfoComponent implements OnInit {
     console.log('preview', this.preview);
   }
 
-  isSelected(day:Array<IWeatherInfo>){
+  isSelected(day:Array<i.IWeatherInfo>){
     if(day[0].dt_txt === this.preview[0].dt_txt){
       return true;
     } else {
@@ -56,7 +58,7 @@ export class CityWeatherInfoComponent implements OnInit {
   }
 
   // When we search for another city we get another Data, and this updates it
-  updateWeatherData(newWeatherData: IWeatherData) {
+  updateWeatherData(newWeatherData: i.IWeatherData) {
     this.weatherData = newWeatherData;
     // console.log('New Data: ',this.weatherData);
     this.myData = this.createMyData(newWeatherData);
@@ -67,7 +69,7 @@ export class CityWeatherInfoComponent implements OnInit {
     return newWeatherData;
   }
   // Creating the preview in the first place
-  createPreview(allWeek: Array<Array<IWeatherInfo>>, index:number = 0){
+  createPreview(allWeek: Array<Array<i.IWeatherInfo>>, index:number = 0){
     let previewResult = allWeek[index];
     // console.log('index used', index);
     // console.log('allweek', allWeek);
@@ -75,15 +77,15 @@ export class CityWeatherInfoComponent implements OnInit {
   }
   // Preview is the middle and right screen, and this decides what is shown
   // Why cant day be displayed
-  changePreview(day: Array<IWeatherInfo>, index: number){
+  changePreview(day: Array<i.IWeatherInfo>, index: number){
     this.preview =  this.createPreview(this.myData,index)
     // console.log('previewChangedTo ',this.preview);
     return null;
   } 
   // Changes the structure of the WeatherData sorted by days
-  createMyData(data: IWeatherData){
-    let endResult = new Array<Array<IWeatherInfo>>();
-    let oneDay = new Array<IWeatherInfo>();
+  createMyData(data: i.IWeatherData){
+    let endResult = new Array<Array<i.IWeatherInfo>>();
+    let oneDay = new Array<i.IWeatherInfo>();
     let currentDay = new Date();
 
     for( let period of data.list){
@@ -93,7 +95,7 @@ export class CityWeatherInfoComponent implements OnInit {
       }
       else {
         endResult.push(oneDay);
-        oneDay = new Array<IWeatherInfo>();
+        oneDay = new Array<i.IWeatherInfo>();
         oneDay.push(period);
         currentDay.setDate(currentDay.getDate() + 1);
       }
@@ -103,9 +105,9 @@ export class CityWeatherInfoComponent implements OnInit {
     return endResult;
   }
   // Function to find maxTemp for the day
-  findMaxTemp(){
+  findMaxTemp(day = this.preview){
     let maxTemp: number = 0;
-    this.preview.forEach((timeStamp) =>{
+    day.forEach((timeStamp) =>{
       if(timeStamp.main.temp_max > maxTemp){
         maxTemp = timeStamp.main.temp_max ;
       }
@@ -113,8 +115,8 @@ export class CityWeatherInfoComponent implements OnInit {
 
     return maxTemp;
   }
-  changeMaxTemp(todaaysDate: Date, weatherData: IWeatherData){
-    let novaNiza= new Array<IWeatherInfo>();
+  changeMaxTemp(todaaysDate: Date, weatherData: i.IWeatherData){
+    let novaNiza= new Array<i.IWeatherInfo>();
     let todaysDate = new Date(weatherData.list[0].dt_txt)
     for(let info of weatherData.list){
       let tempDate = new Date(info.dt_txt);
@@ -145,7 +147,7 @@ export class CityWeatherInfoComponent implements OnInit {
   updateCurrentTime(){
     setInterval(() => {         
       this.currentTime = new Date();
-    }, 5000);
+    }, 1000);
   }
   isTodaysDate(objectDate){
     let dt = new Date();
@@ -172,38 +174,4 @@ export class CityWeatherInfoComponent implements OnInit {
       return true;
     }    
   }
-}
-
-interface IWeatherData{
-  city: ICity;
-  ctn: number;
-  cod: string;
-  list: Array<IWeatherInfo>;
-  message: number;
-}
-interface ICity{
-  coord: JSON;
-  country: string;
-  name: string;
-  population: number;
-}
-interface IWeatherInfo{
-  clouds: Object;
-  dt: number;
-  dt_txt: string;
-  main: IMain;
-  rain: Object;
-  sys: Object;
-  weather: Array<Object>;
-  wind: Object;
-}
-interface IMain{
-  grnd_level: number;
-  humidity: number;
-  pressure: number;
-  sea_level: number
-  temp: number;
-  temp_kf: number;
-  temp_max: number;
-  temp_min: number;
 }

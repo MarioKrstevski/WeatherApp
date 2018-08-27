@@ -37,7 +37,6 @@
     
             <input 
             required
-            style="border:2px solid pink"
             (change)="onFileSelected($event); "
             (change)="handleFileInput($event.target.files)"
            
@@ -46,23 +45,28 @@
           </label>
 
 
-          <div class="row uploadList" *ngFor="let upload of uploader.queue" >
+          <!-- <div class="row uploadList" *ngFor="let upload of uploader.queue" >
               <span>   {{upload.file.name}}</span>
                 <button
               (click)="upload.remove()"
               >X</button>
-              </div>  
+          </div>   -->
     
           <div class="progress">
             <div class="progress-bar" 
             [ngStyle]="{width: uploader.progress+'%'}"></div>
-            <span class="progressIndicator ">{{uploader.progress}}%</span>
-            <span *ngIf="uploader.progress==100" class="progressIndicator"> Success</span>
+            <span *ngIf="uploader.progress!=100" class="progressIndicator ">{{uploader.progress}}%</span> 
+             <span *ngIf="uploader.progress===100" class="progressIndicator"> Success</span> 
+         <div class="progress-bar">
+
+          <span *ngIf="uploader.progress===100" class="successIndicator" > Your image was succesfuly uploaded </span>
+         </div>
+         
           </div>
           
-          <button  (click)="uploader.uploadAll()" type="submit" >SEND</button>
+          <button class="sendButton"  (click)="uploader.uploadAll()" type="submit" >SEND</button>
     
-      </div>
+        </div>
       
       </div>
      </div>

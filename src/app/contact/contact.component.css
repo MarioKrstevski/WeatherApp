@@ -67,8 +67,17 @@ textarea{
 .progressIndicator, .progressSuccess{
    position: absolute;
    bottom:170px;
-   left:50%;
+   left:48%;
    color:white;
+}
+.successIndicator{
+    background-color: greenyellow;
+    position: absolute;
+    height:50px;
+    line-height: 50px;
+    color:black;
+    font-size: 18px; 
+    width:100%;
 }
 .progressSuccess{
     margin-left:-10px;
@@ -147,6 +156,9 @@ img{
     height: 30px !important;
 }
 
+.disabled{
+    background-color: gray !important;
+}
 @media only screen and (max-width: 767px){
     .innerElements{
         position: relative;

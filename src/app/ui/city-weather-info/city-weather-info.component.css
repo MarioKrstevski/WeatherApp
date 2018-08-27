@@ -121,11 +121,18 @@
 .Time{
     font-size: 2em;
 }
-.temperature{
+.daySummary{
     position: absolute;
-    bottom:10px;
+    bottom:-15px;
     right:20px;
-    font-size: 3.5em;
+    text-align: right;
+    font-size: 1.2em;
+}
+.daySummary p:not(:last-child){
+    margin:0;
+}
+.temperature{
+    font-size: 3em;
 }
 
 .colRow{
@@ -158,10 +165,16 @@
 }
 .iconWeather .wi{
     color:white;
-    font-size:6em;
+    /* font-size:6em; */
 }
 .iconWeather p{
     font-size:25px;
+}
+.iconWeather img{
+  
+   width: 80px;
+   height: 80px;
+
 }
 .timesPerDay{
     height: 180px;

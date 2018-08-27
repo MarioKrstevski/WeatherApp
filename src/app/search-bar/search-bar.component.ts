@@ -25,8 +25,6 @@ export class SearchBarComponent implements OnInit {
   }
 
   updateWeather(city){
-
-  
     this.weather.getWeather(city).subscribe(newCityWeather => {
       // console.log('weather', newCityWeather);
       this.cityInfo=newCityWeather;
@@ -35,7 +33,9 @@ export class SearchBarComponent implements OnInit {
       this.errorMsg = "";
       // console.log('Ova e child eventot',this.cityInfo);
     },
-    error => this.errorMsg = error);
+    error => {
+      this.errorMsg = error.replace('xyz',city);
+    });
   }
 
 }
