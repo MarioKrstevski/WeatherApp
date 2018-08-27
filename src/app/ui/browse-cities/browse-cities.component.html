@@ -8,7 +8,7 @@
               <div 
               class="cityQuickInfo col-5 col-md-2" 
               *ngFor="let city of pagedCities"
-              (click)="sendData(city.name)"
+              (click)="newCity(city?.name)"
               >
                 <i class="wi wi-day-sunny-overcast" *ngIf="city?.name"></i>
                 <p class="cityTitle" *ngIf="city?.name">{{city?.name}}</p>

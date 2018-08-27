@@ -34,8 +34,8 @@
                             <p class="Time">
                                 {{currentTime | date:"HH:mm:ss"}}
                             </p>
-                            <p class="theDate">
-                                {{preview[0].dt_txt | date:"dd.MM.yyyy" }}
+                            <p class="theDate" *ngIf="preview">
+                                {{preview[0]?.dt_txt | date:"dd.MM.yyyy" }}
                             </p>
                     </div>
                     <div class=" colRow temperature">{{findMaxTemp() | number:'1.0-0'}}&#0176;C</div>

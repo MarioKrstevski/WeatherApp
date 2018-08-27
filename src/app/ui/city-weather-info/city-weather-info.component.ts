@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { WeatherDataService } from '../services/weather-data.service';
+import { DataSharingService } from '../services/data-sharing.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-city-weather-info',
@@ -12,28 +14,37 @@ import { WeatherDataService } from '../services/weather-data.service';
 export class CityWeatherInfoComponent implements OnInit {
 
   currentTime = new Date();
-  defaultCity = 'New York';
+  currentCity = 'New York';
   currentDate = this.currentTime.toLocaleDateString("en-GB").replace(/\//g, ".");
   weatherData: IWeatherData;
   preview: Array<IWeatherInfo>;
   previewTemp: Array<IWeatherInfo>;
   myData: Array<Array<IWeatherInfo>>;
+  weatherSubscription: Subscription;
   // myDataTemp: Array<Array<IWeatherInfo>>;
 
-  constructor(private http: HttpClient, private weather: WeatherDataService) { }
+  constructor(private http: HttpClient,private dataSharing: DataSharingService ,private weather: WeatherDataService) { }
 
   ngOnInit() {
-    this.weather.getWeather(this.defaultCity).subscribe(weatherInfo => {
-      this.weatherData = weatherInfo; 
-      // console.dir(this.weatherData);
-      // this.maxTemp = this.checkMaxTemp(this.currentTime, this.weatherData);
-      this.myData = this.createMyData(weatherInfo);
-      // console.dir(this.myData);
-      this.preview = this.createPreview(this.myData);
-      console.log('preview', this.preview);
-    });
+    this.weatherSubscription = this.weather.getWeather(this.currentCity).subscribe(weatherInfo => this.setData(weatherInfo));
 
     this.updateCurrentTime();  
+
+    this.dataSharing.newCity.subscribe((newCity) => {
+      // console.log(newCity);
+      this.weatherSubscription.unsubscribe();
+      this.weather.getWeather(newCity).subscribe(weatherInfo => this.setData(weatherInfo))
+    })
+  }
+
+  setData(weatherInfo){
+    this.weatherData = weatherInfo; 
+    // console.dir(this.weatherData);
+    // this.maxTemp = this.checkMaxTemp(this.currentTime, this.weatherData);
+    this.myData = this.createMyData(weatherInfo);
+    // console.dir(this.myData);
+    this.preview = this.createPreview(this.myData);
+    console.log('preview', this.preview);
   }
 
   isSelected(day:Array<IWeatherInfo>){

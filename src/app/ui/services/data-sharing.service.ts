@@ -7,14 +7,13 @@ import { BehaviorSubject } from 'rxjs';
 
 export class DataSharingService {
 
-  private messageSource = new BehaviorSubject('default message');
-  currentMessage = this.messageSource.asObservable();
+  private defaultCity = new BehaviorSubject<string>('New York');
+  newCity = this.defaultCity.asObservable();
 
   constructor() { }
 
-  changeMessage(message: string) {
-  this.messageSource.next(message)
-
+  changeCity(city: string) {
+  this.defaultCity.next(city);
   }
 }
  

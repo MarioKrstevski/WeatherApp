@@ -4,6 +4,8 @@ import { map } from 'rxjs/operators';
 
 import { PagerService } from '../services/pager.service';
 import { WeatherDataService } from '../services/weather-data.service';
+import { DataSharingService } from '../services/data-sharing.service';
+
 
 
 @Component({
@@ -25,8 +27,9 @@ export class BrowseCitiesComponent implements OnInit {
   pagedCities: any[];
 
   fakeInfo: IWeatherInfo;
+  currentCity: string;
 
-  constructor(private http: Http, private pagerService : PagerService, private weather: WeatherDataService) { }
+  constructor(private http: Http,private dataSharing: DataSharingService, private pagerService : PagerService, private weather: WeatherDataService) { }
   
   ngOnInit() {
   
@@ -53,10 +56,16 @@ export class BrowseCitiesComponent implements OnInit {
     //     this.cities = data;
     //     // initialize to page 1
     //     // console.log(this.setPage(1));
-    //     this.setPage(1);
+    //     this.setPage(1);h
         
     // });
+
+    this.dataSharing.newCity.subscribe(message => this.currentCity = message)
     
+  }
+
+  newCity(city: string){
+    this.dataSharing.changeCity(city);
   }
 
   setPage(page: number) {

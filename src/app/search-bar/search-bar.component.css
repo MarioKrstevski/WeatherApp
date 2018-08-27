@@ -27,6 +27,9 @@ button,
 .searchText {
   flex: 1 0 8em;    
 }
+.searchText:focus{
+  border:1px solid #4298CA;
+}
 .searchButton {
   flex: 0 0 auto;
 }
