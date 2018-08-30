@@ -32,7 +32,11 @@ export class WeatherDataService {
     return this.http.get(`http://api.openweathermap.org/data/2.5/box/city?bbox=${alat},${alon},${blat},${blon},10&cluster=no&APPID=${this.myKey}`)
     .pipe(map(resp => resp.json()));
   }
-
+  getAirPolutionForCity(city: string, datetime: Date = new Date()){
+   
+    return this.http.get('http://api.openweathermap.org/pollution/v1/co/{location}/{datetime}.json?appid={api_key}')
+    .pipe(map(resp => resp.json()));
+  }
   errorHandler(error: HttpErrorResponse){
     return throwError(error.message || "The city with the name xyz does not exist!");
   }

@@ -7,6 +7,7 @@ const CLOUDINARY_URL='cloudinary://295464739934565:E3nd8figX26VtvW1b4PTx6ToAUw@d
 
 const URL = 'http://localhost:3000/api/upload';
 
+
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
@@ -17,6 +18,8 @@ export class ContactComponent implements OnInit {
   // imageUrl: string = '../../assets/Images/default.png';
   imageUrl: string = null;
   fileToUpload: File = null;
+
+  URL1 = 'http://localhost:3300/sendData';
 
   selectedFile: File = null;
   uploader: FileUploader = new FileUploader(
@@ -30,8 +33,7 @@ export class ContactComponent implements OnInit {
   attachmentList:any = [];
 
 
- userModel = new User('Mario Krstevski','mariokrstevski@hotmail.com','', false);
- 
+ userModel = new User('','','', false);
 
   constructor(private http: HttpClient) { }
 
@@ -40,51 +42,61 @@ export class ContactComponent implements OnInit {
       file.withCredentials = false;
     };
     this.uploader.onCompleteItem = (items:any , response: any, status:any, headers:any ) => {
-      console.log('ImageUpload:uploaded', items, status, response);
-      
+      console.log('ImageUpload:uploaded', items, status, response, headers);
       this.attachmentList.push(JSON.parse(response));
     };
-
   }
   handleFileInput(file: FileList){
-    
     this.fileToUpload = file.item(0);
-
     let reader = new FileReader();
     reader.onload = (event:any) => {
-      this.imageUrl = event.target.result;
+    this.imageUrl = event.target.result;
     }
     reader.readAsDataURL(this.fileToUpload);
-  }
 
-  formValid(){
-
-
+    
 
   }
-  onFileSelected(event){
-
-    // console.log(event);
-    this.selectedFile = <File> event.target.files[0];
-
+  //add an inside method to update image uploaded to true and also
+  // make that change from the html when we lick teh upload file and something is changed
+  // disable send until everything is in order
+  uploadData(){
+    this.uploader.queue[0].upload();
+    if(this.selectedFile === null){
+      this.userModel.imageUploaded = true;
+    }
+    this.sendUserData(this.userModel);
   }
 
-  onUpload(){
+  sendUserData(user: User){
+    return this.http.post<any>(this.URL1, user).subscribe(data => console.log(data));
+  }
+// onFileSelected(event){
+//     console.log(event);
+//     this.selectedFile = <File> event.target.files[0];
+//     console.log('Ova e fajlot',this.selectedFile);
+    
+//   }
 
-  const fd= new FormData();
-  fd.append('image',this.selectedFile, this.selectedFile.name)
+//   onUpload(){
+//   const fd= new FormData();
+  
+//   fd.append('image',this.selectedFile, this.selectedFile.name)
+// console.log('format data: ', fd);
+// console.log('format selFIle ', this.selectedFile);
+// console.log('format SelFIleName: ',  this.selectedFile.name);
 
-    this.http.post(URL,fd,{
-      reportProgress:true,
-      observe:'events'
-    })
-    .subscribe( event => {
-      if (event.type === HttpEventType.UploadProgress ){
-        console.log('Upload progress: ' + Math.round(event.loaded/event.total * 100 )+ '%');
-      } else if (event.type === HttpEventType.Response){
-        console.log(event);
-      }
+//     this.http.post(URL,this.selectedFile,{
+//       reportProgress:true,
+//       observe:'events'
+//     })
+//     .subscribe( event => {
+//       if (event.type === HttpEventType.UploadProgress ){
+//         console.log('Upload progress: ' + Math.round(event.loaded/event.total * 100 )+ '%');
+//       } else if (event.type === HttpEventType.Response){
+//         console.log(event);
+//       }
    
-    })
-  }
+//     })
+//   }
 }

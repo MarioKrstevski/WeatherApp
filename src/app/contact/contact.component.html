@@ -4,9 +4,9 @@
    <div class="conatainer-fluid">
      <div class="row">
         
-      <div class="personInfo col-12 col-md-6  ">
+      <small> <pre> {{userModel | json}} </pre> </small>
 
-        <small><pre> {{ userModel | json }}</pre></small>
+      <div class="personInfo col-12 col-md-6  ">
 
           <small class="errorMsg" *ngIf="name.invalid && name.touched">You must enter your name</small>
           <div class="input-container"  [class.invalid]="name.invalid && name.touched" >
@@ -45,20 +45,17 @@
         
         <!-- Upload Works, but if you select 2 times, and upload, 2 items will be uploaded -->
         <img [src]="imageUrl" *ngIf="imageUrl" >
-     
+       
         <label class="uploadImage " >
 
           <button >Upload</button>
-    
+            <!-- <pre>  (change)="onFileSelected($event); "</pre> -->
             <input 
             required
-            (change)="onFileSelected($event); "
             (change)="handleFileInput($event.target.files)"
-           
             single ng2FileSelect [uploader]="uploader"
             type="file" name="photo" id="uploadImage" #image>
           </label>
-
 
           <!-- <div class="row uploadList" *ngFor="let upload of uploader.queue" >
               <span>   {{upload.file.name}}</span>
@@ -71,16 +68,17 @@
             <div class="progress-bar" 
             [ngStyle]="{width: uploader.progress+'%'}"></div>
             <span *ngIf="uploader.progress!=100" class="progressIndicator ">{{uploader.progress}}%</span> 
-             <span *ngIf="uploader.progress===100" class="progressIndicator"> Success</span> 
-         <div class="progress-bar">
+             <!-- <span *ngIf="uploader.progress===100" class="progressIndicator"> Success</span>  -->
+             <span *ngIf="uploader.progress===100" class="successIndicator" > Your image was succesfuly uploaded </span>
+       
+             <div class="progress-bar">
 
-          <span *ngIf="uploader.progress===100" class="successIndicator" > Your image was succesfuly uploaded </span>
-         </div>
+            </div>
          
           </div>
-          
-          <button class="sendButton"  (click)="uploader.uploadAll()" type="submit" >SEND</button>
-    
+          <!-- <pre> onUpload()</pre> -->
+          <button class="sendButton"  (click)="uploadData()" type="button" >SEND</button>
+          <button class="sendButton" type="button" (click)="sendUserData(userModel)"> DataSend </button>
         </div>
       
       </div>

@@ -1,0 +1,19 @@
+#airPolution{
+    height: 350px;
+    background-color: #384347;
+}
+
+.smallHeading{
+    color:white;
+    text-align: center;
+    padding:20px ;
+    margin-bottom: -25px;
+}
+
+.polutionDetails{
+    margin-top: 15px;
+    height: 280px;
+}
+.whiteBorder{
+   border:  1px solid white;
+}

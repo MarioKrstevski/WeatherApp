@@ -3,6 +3,6 @@ export class User {
         private name: string,
         private email: string,
         private message: string,
-        private imageUploaded: boolean
+        public imageUploaded: boolean
     ){}
 }
