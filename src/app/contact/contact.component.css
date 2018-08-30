@@ -18,7 +18,7 @@
 }
 .input-container{
     display:flex;
-    height: 53px;
+    height: 55px;
     width:100%;
     margin-bottom:30px;
 }
@@ -154,6 +154,13 @@ img{
 }
 .uploadList > *{
     height: 30px !important;
+}
+
+.errorMsg{
+    color:red;
+}
+.invalid{
+    border:1px solid rgb(238, 58, 58) !important;
 }
 
 .disabled{

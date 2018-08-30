@@ -1,24 +1,39 @@
 <div id="contact" class="dataContainer">
   <p class="smallHeading">Contact</p>
-  <form (submit)="checkStuff()" #contactForm  >
+  <form (submit)="checkStuff()" #contactForm="ngForm"  >
    <div class="conatainer-fluid">
      <div class="row">
         
       <div class="personInfo col-12 col-md-6  ">
 
-          <div class="input-container">
-              <i class="fa fa-user icon"></i>
-              <input class="input-field" type="text" placeholder="Name" name="name" required>
+        <small><pre> {{ userModel | json }}</pre></small>
+
+          <small class="errorMsg" *ngIf="name.invalid && name.touched">You must enter your name</small>
+          <div class="input-container"  [class.invalid]="name.invalid && name.touched" >
+              <i class="fa fa-user icon"> </i>
+              <input 
+              #name="ngModel"
+              class="input-field" type="text" placeholder="Name" [(ngModel)]="userModel.name" name="name" required>
           </div>
         
-          <div class="input-container">
-            <i class="fa fa-envelope icon "></i>
-            <input class="input-field" type="email" placeholder="E-mail" name="email" required> 
+          <small class="errorMsg" *ngIf="email.touched && userModel.email === ''">You must enter your email</small>
+          <small class="errorMsg" *ngIf="email.invalid && email.touched && userModel.email != ''">Make sure it's an email format</small>
+          <div class="input-container" [class.invalid]="email.invalid && email.touched" >
+            <i class="fa fa-envelope icon "> </i>
+            <input 
+            #email="ngModel"
+            class="input-field" 
+            pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+            type="email" placeholder="E-mail" [(ngModel)]="userModel.email" name="email" required> 
           </div>
 
-          
-          <div class="input-container">
-              <textarea class="input-field" placeholder="Message" name="message" cols="30" rows="10" required></textarea>
+          <small class="errorMsg" *ngIf="message.invalid && message.touched">You must a message </small>
+          <div class="input-container" >
+              <textarea 
+              #message="ngModel"
+              [(ngModel)]="userModel.message"
+              [class.invalid]="message.invalid && message.touched"
+              class="input-field" placeholder="Message" name="message" cols="30" rows="10" required></textarea>
           </div>
       </div>
       <div class="imageUpload col-12 col-md-6  ">

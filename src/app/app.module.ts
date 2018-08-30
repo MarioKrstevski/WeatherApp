@@ -31,7 +31,7 @@ import { UiModule } from './ui/ui.module';
     FooterComponent,
     GoToTopComponent,
     ContactComponent,
-    FileSelectDirective,  
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,

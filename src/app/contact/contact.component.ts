@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { FileSelectDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import { User } from '../user';
 
 const CLOUDINARY_URL='cloudinary://295464739934565:E3nd8figX26VtvW1b4PTx6ToAUw@dprdrh0oz';
 
@@ -29,9 +30,8 @@ export class ContactComponent implements OnInit {
   attachmentList:any = [];
 
 
-  name: string = "";
-  email: string = "";
-  message: string = "";
+ userModel = new User('Mario Krstevski','mariokrstevski@hotmail.com','', false);
+ 
 
   constructor(private http: HttpClient) { }
 
