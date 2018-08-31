@@ -19,5 +19,5 @@ app.listen(PORT, function(){
 
 app.post('/sendData', function(req, res){
     console.log(req.body);
-    res.status(200).send({"message":"Data From User Recieved"})
+    res.status(200).send({"message":"Data From User Recieved", "body": req.body})
 })

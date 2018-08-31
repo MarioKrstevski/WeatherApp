@@ -71,13 +71,14 @@ textarea{
    color:white;
 }
 .successIndicator{
-    background-color: greenyellow;
+    background-color: rgb(145, 216, 38);
     position: absolute;
     height:50px;
     line-height: 50px;
     color:black;
     font-size: 18px; 
     width:100%;
+   text-align: center;
 }
 .progressSuccess{
     margin-left:-10px;
@@ -135,6 +136,7 @@ img{
     margin: 0;
     outline: none;
 }
+
 .imageUpload button:last-child{
     margin-bottom:30px;
 }
@@ -165,6 +167,9 @@ img{
 
 .disabled{
     background-color: gray !important;
+}
+.imageUpload button:disabled{
+    background-color: gray;
 }
 @media only screen and (max-width: 767px){
     .innerElements{

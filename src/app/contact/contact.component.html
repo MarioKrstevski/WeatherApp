@@ -1,11 +1,9 @@
 <div id="contact" class="dataContainer">
   <p class="smallHeading">Contact</p>
-  <form (submit)="checkStuff()" #contactForm="ngForm"  >
+  <form #contactForm="ngForm" novalidate (ngSubmit)="uploadData()" >
    <div class="conatainer-fluid">
      <div class="row">
-        
-      <small> <pre> {{userModel | json}} </pre> </small>
-
+    
       <div class="personInfo col-12 col-md-6  ">
 
           <small class="errorMsg" *ngIf="name.invalid && name.touched">You must enter your name</small>
@@ -77,9 +75,10 @@
          
           </div>
           <!-- <pre> onUpload()</pre> -->
-          <button class="sendButton"  (click)="uploadData()" type="button" >SEND</button>
-          <button class="sendButton" type="button" (click)="sendUserData(userModel)"> DataSend </button>
-        </div>
+          <button 
+          [disabled]="!(contactForm.form.valid && userModel.imageUploaded )"
+          class="sendButton"  type="submit" disabled="disabled" >SEND</button>
+          </div>
       
       </div>
      </div>
