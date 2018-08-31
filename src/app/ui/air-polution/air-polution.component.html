@@ -1,12 +1,16 @@
 <div id="airPolution" class="dataContainer">
     <h3 class="smallHeading">Air Polution</h3>
 
-    <div class="polutionDetails whiteBorder">
+    <div class="pollutionDetails whiteBorder">
 
-            <input type="text" #airPolution >
-            <button (click)="getAirPolution(airPolution.value)">Get Weather</button>
+            <!-- <input type="text" #airPolution > -->
+            <!-- <button (click)="getAirPolution(airPolution.value)">Get Weather</button> -->
 
-            <pre> hellp {{airHTML | json}}</pre>
+            <pre> {{ cityCoords | json }} </pre>
+            <pre> {{ errorMsg }} </pre>
+            <pre>{{ airPolutionInfo | json}}</pre>
+
+            
     </div>
 </div>
 

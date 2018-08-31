@@ -37,14 +37,18 @@ export class CityWeatherInfoComponent implements OnInit {
 
     this.updateCurrentTime();  
 
+
+
     this.dataSharing.newCity.subscribe((newCity) => {
       // console.log(newCity);
       this.weatherSubscription.unsubscribe();
-      this.weather.getWeather(newCity).subscribe(weatherInfo => this.setData(weatherInfo))
+      this.weather.getWeather(newCity).subscribe(weatherInfo => this.setData(weatherInfo));
     })
+
   }
 
   setData(weatherInfo){
+
     this.weatherData = weatherInfo; 
     console.dir(this.weatherData);
 
@@ -52,6 +56,8 @@ export class CityWeatherInfoComponent implements OnInit {
     this.cityLonLat.lat = this.weatherData.city.coord.lat;
 
     console.log('kooridnati', this.cityLonLat);
+
+    this.dataSharing.changeCoords(this.cityLonLat);
     
 
     // this.maxTemp = this.checkMaxTemp(this.currentTime, this.weatherData);
@@ -76,7 +82,7 @@ export class CityWeatherInfoComponent implements OnInit {
     this.cityLonLat.lon = this.weatherData.city.coord.lon;
     this.cityLonLat.lat = this.weatherData.city.coord.lat;
     console.log('kooridnati na promena', this.cityLonLat);
-    
+    this.dataSharing.changeCoords(this.cityLonLat);
     // console.log('New Data: ',this.weatherData);
     this.myData = this.createMyData(newWeatherData);
     // console.log('New MyData', this.myData); 

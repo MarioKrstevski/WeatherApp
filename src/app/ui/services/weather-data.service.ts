@@ -32,9 +32,9 @@ export class WeatherDataService {
     return this.http.get(`http://api.openweathermap.org/data/2.5/box/city?bbox=${alat},${alon},${blat},${blon},10&cluster=no&APPID=${this.myKey}`)
     .pipe(map(resp => resp.json()));
   }
-  getAirPolutionForCity(city: string, datetime: string = new Date().toISOString()){
+  getAirPolutionForCoords(cityCoords: i.ICoord, datetime: string = 'current'){
    
-    return this.http.get(`http://api.openweathermap.org/pollution/v1/co/${city}/${datetime}.json?appid=${this.myKey}`)
+    return this.http.get(`http://api.openweathermap.org/pollution/v1/co/${parseFloat(cityCoords.lon).toFixed(1)},${parseFloat(cityCoords.lat).toFixed(1)}/${datetime}.json?appid=${this.myKey}`)
     .pipe(map(resp => resp.json()));
   }
   errorHandler(error: HttpErrorResponse){

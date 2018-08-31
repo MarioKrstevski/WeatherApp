@@ -1,6 +1,7 @@
 #airPolution{
     height: 350px;
     background-color: #384347;
+   
 }
 
 .smallHeading{
@@ -10,9 +11,10 @@
     margin-bottom: -25px;
 }
 
-.polutionDetails{
+.pollutionDetails{
     margin-top: 15px;
     height: 280px;
+    overflow: scroll;
 }
 .whiteBorder{
    border:  1px solid white;
