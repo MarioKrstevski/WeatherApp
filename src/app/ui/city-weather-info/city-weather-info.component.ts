@@ -17,8 +17,13 @@ export class CityWeatherInfoComponent implements OnInit {
 
   currentTime = new Date();
   currentCity = 'New York';
+
   currentDate = this.currentTime.toLocaleDateString("en-GB").replace(/\//g, ".");
   weatherData: i.IWeatherData;
+  cityLonLat = {
+    "lon": 0,
+    "lat": 0
+  };
   preview = new Array<i.IWeatherInfo>();
   previewTemp: Array<i.IWeatherInfo>;
   myData: Array<Array<i.IWeatherInfo>>;
@@ -42,6 +47,13 @@ export class CityWeatherInfoComponent implements OnInit {
   setData(weatherInfo){
     this.weatherData = weatherInfo; 
     console.dir(this.weatherData);
+
+    this.cityLonLat.lon = this.weatherData.city.coord.lon;
+    this.cityLonLat.lat = this.weatherData.city.coord.lat;
+
+    console.log('kooridnati', this.cityLonLat);
+    
+
     // this.maxTemp = this.checkMaxTemp(this.currentTime, this.weatherData);
     this.myData = this.createMyData(weatherInfo);
     // console.dir(this.myData);
@@ -60,6 +72,11 @@ export class CityWeatherInfoComponent implements OnInit {
   // When we search for another city we get another Data, and this updates it
   updateWeatherData(newWeatherData: i.IWeatherData) {
     this.weatherData = newWeatherData;
+
+    this.cityLonLat.lon = this.weatherData.city.coord.lon;
+    this.cityLonLat.lat = this.weatherData.city.coord.lat;
+    console.log('kooridnati na promena', this.cityLonLat);
+    
     // console.log('New Data: ',this.weatherData);
     this.myData = this.createMyData(newWeatherData);
     // console.log('New MyData', this.myData); 

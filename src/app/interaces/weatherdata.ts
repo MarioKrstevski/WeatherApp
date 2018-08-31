@@ -7,7 +7,7 @@ export interface IWeatherData{
     message: number;
   }
   export interface ICity{
-    coord: JSON;
+    coord: ICoord;
     country: string;
     name: string;
     population: number;
@@ -31,4 +31,9 @@ export interface IWeatherData{
     temp_kf: number;
     temp_max: number;
     temp_min: number;
+  }
+
+  export interface ICoord{
+    lon: number;
+    lat: number
   }

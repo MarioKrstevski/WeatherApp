@@ -17,3 +17,7 @@
 .whiteBorder{
    border:  1px solid white;
 }
+
+pre{
+    color:white;
+}
