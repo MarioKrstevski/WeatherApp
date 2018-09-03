@@ -2,8 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { Subscription } from 'rxjs';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DatePickerComponent } from '../date-picker/date-picker.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { WeatherDataService } from '../services/weather-data.service';
 import { DataSharingService } from '../services/data-sharing.service';
+
+
+
 
 import * as i from "../../interaces/weatherdata";
 @Component({
@@ -17,7 +24,7 @@ export class AirPolutionComponent implements OnInit {
   airPolutionSubscription: Subscription;
   errorMsg: string = '';
   airPollutionInfo: i.IPollution;
-  currentDate = new Date().toLocaleTimeString();
+  currentDate = new Date().toLocaleDateString();
 
   constructor(private airPolution: WeatherDataService, private sharedData : DataSharingService ){ }
 

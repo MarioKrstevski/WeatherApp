@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
+import { FormsModule }   from '@angular/forms';
 
 import { LayoutComponent } from './layout/layout.component';
 import { CityWeatherInfoComponent } from './city-weather-info/city-weather-info.component';
@@ -14,11 +15,17 @@ import { WeatherDataService } from './services/weather-data.service';
 import { DataSharingService } from './services/data-sharing.service';
 import { AirPolutionComponent } from './air-polution/air-polution.component';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { DatePickerComponent } from './date-picker/date-picker.component';
+
 
 @NgModule({
   imports: [
     CommonModule,
-    HttpModule
+    HttpModule,
+    FormsModule,
+    NgbModule.forRoot()
   ],
   declarations: [
     LayoutComponent, 
@@ -27,7 +34,8 @@ import { AirPolutionComponent } from './air-polution/air-polution.component';
     InteractiveMapComponent,
     WelcomeComponent,
     SearchBarComponent,
-    AirPolutionComponent
+    AirPolutionComponent,
+    DatePickerComponent
   ],
   providers:[
     PagerService,
