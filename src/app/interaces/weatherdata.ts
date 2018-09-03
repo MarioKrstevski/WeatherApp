@@ -34,6 +34,20 @@ export interface IWeatherData{
   }
 
   export interface ICoord{
+    lat: number;
     lon: number;
-    lat: number
   }
+
+  export interface IPollution{
+    data: IPolutionData[];
+    location: ICoord;
+    time: string;
+
+  }
+
+  export interface IPolutionData{
+    precision: number;
+    pressure: number;
+    value: number;
+  }
+

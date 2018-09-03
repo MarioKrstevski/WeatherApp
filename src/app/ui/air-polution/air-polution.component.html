@@ -1,14 +1,59 @@
 <div id="airPolution" class="dataContainer">
     <h3 class="smallHeading">Air Polution</h3>
 
-    <div class="pollutionDetails whiteBorder">
+    <div class="pollutionDetails ">
 
-            <!-- <input type="text" #airPolution > -->
-            <!-- <button (click)="getAirPolution(airPolution.value)">Get Weather</button> -->
+            <div class="container-fluid" *ngIf="airPollutionInfo">
+                <div class="row text-center justify-content-center">
+                    <div class="lola col-3">
+                        
+                        <p><small>Latitude</small> &nbsp; &nbsp; {{airPollutionInfo?.location?.latitude}}</p>
+                        
+                    </div>
+                    <div class="col-1 datePicker">
+                        datePick
+                    </div>
+                    <div class="lola col-3">
+                        
+                        <p>{{airPollutionInfo?.location?.longitude}}  &nbsp; &nbsp;   <small>Longitude</small></p>
+                      
+                    </div>
+                </div>
+                <br>
+                <div class="row justify-content-center center-block text-left ">
+                    <p class="col-5 infoBlock"><label>Precision: </label> <span>{{airPollutionInfo?.data[0]?.precision}}</span></p>
+                   
+                </div>
+                <div class="row justify-content-center center-block text-left ">
+                    <p class="col-5 infoBlock"><label> Pressure: </label><span>{{airPollutionInfo?.data[0]?.pressure}}</span></p>
+                </div>
+                <div class="row justify-content-center center-block text-left ">
+                    <p class="col-5 infoBlock"><label >Value: </label> <span>{{airPollutionInfo?.data[0]?.value}}</span></p>
+                </div>
 
-            <pre> {{ cityCoords | json }} </pre>
-            <pre> {{ errorMsg }} </pre>
-            <pre>{{ airPolutionInfo | json}}</pre>
+                <div class="row justify-content-center center-block text-left ">
+                        <p class="col-5 infoBlock"><label >Info For Date: </label> <span>{{currentDate}}</span></p>
+                </div>
+
+            </div>    
+
+            <br>
+
+            <div class="container-fluid" *ngIf="errorMsg">
+
+                    
+                    <div class="row text-center justify-content-center ">
+                        <div class="col-5 datePicker">datePick</div>
+                    </div>
+
+                    <br>
+                    <br>
+                    <div class="row text-center justify-content-center ">
+                        <p class="col-5 errorMsg" >{{errorMsg}}</p>
+                    </div>
+            </div>
+            
+        
 
             
     </div>

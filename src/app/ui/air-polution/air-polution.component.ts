@@ -13,25 +13,26 @@ import * as i from "../../interaces/weatherdata";
 })
 export class AirPolutionComponent implements OnInit {
 
-  cityCoords: i.ICoord = {lat: 40.7, lon: -74.2};
+  cityCoords: i.ICoord = {lat: -74.2,lon: 40.7};
   airPolutionSubscription: Subscription;
-  errorMsg = '';
-  airPolutionInfo;
+  errorMsg: string = '';
+  airPollutionInfo: i.IPollution;
+  currentDate = new Date().toLocaleTimeString();
 
   constructor(private airPolution: WeatherDataService, private sharedData : DataSharingService ){ }
 
   ngOnInit() {
     this.airPolutionSubscription=this.airPolution.getAirPolutionForCoords(this.cityCoords).subscribe(airPollutionData => {
-      console.log('zagadenost',airPollutionData);
-      this.airPolutionInfo = airPollutionData;
+      console.log('onInitZagadenost',airPollutionData);
+      this.airPollutionInfo = airPollutionData;
     }, error => {
       this.errorMsg = "There is no information for current city";
-      this.airPolutionInfo = null;
-    })
+      this.airPollutionInfo = null;
+    });
 
 
 
-    this.sharedData.newCoords.subscribe( (newCoords) => {
+    this.sharedData.newCoords.subscribe( (newCoords : i.ICoord) => {
       console.log('Koordinati mi se smeneti');
       
       this.airPolutionSubscription.unsubscribe();
@@ -39,13 +40,14 @@ export class AirPolutionComponent implements OnInit {
       this.airPolution.getAirPolutionForCoords(newCoords).subscribe( airPollutionData =>{
         this.errorMsg = "";
         console.log("Stuff is logged now but not  changed in the DOM");
+        console.log('zagadenost',airPollutionData);
         
-        this.airPolutionInfo = airPollutionData;
+        this.airPollutionInfo = airPollutionData;
       }, error => {
         this.errorMsg = "There is no information for that location or timeframe";
-        this.airPolutionInfo = null;
+        this.airPollutionInfo = null;
       })
-    })
+    });
   }
 
   getAirPolution(newCity: string){

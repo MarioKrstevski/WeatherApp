@@ -13,8 +13,8 @@ export class DataSharingService {
   newCity = this.defaultCity.asObservable();
 
   private defaultCoords = new BehaviorSubject({
-    lon: -73.9867,
-    lat: 40.7306
+    lat: -74.2121,
+    lon: 40.7306
   });
   newCoords = this.defaultCoords.asObservable();
 

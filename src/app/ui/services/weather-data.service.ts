@@ -27,14 +27,12 @@ export class WeatherDataService {
   }
 
   getCities(alat: number,alon: number,blat: number,blon: number){
-
-
     return this.http.get(`http://api.openweathermap.org/data/2.5/box/city?bbox=${alat},${alon},${blat},${blon},10&cluster=no&APPID=${this.myKey}`)
     .pipe(map(resp => resp.json()));
   }
   getAirPolutionForCoords(cityCoords: i.ICoord, datetime: string = 'current'){
    
-    return this.http.get(`http://api.openweathermap.org/pollution/v1/co/${(cityCoords.lon).toFixed(1)},${(cityCoords.lat).toFixed(1)}/${datetime}.json?appid=${this.myKey}`)
+    return this.http.get(`http://api.openweathermap.org/pollution/v1/co/${cityCoords.lat.toFixed(6).slice(0,-5)},${cityCoords.lon.toFixed(6).slice(0,-5)}/${datetime}.json?appid=${this.myKey}`)
     .pipe(map(resp => resp.json()));
   }
   errorHandler(error: HttpErrorResponse){
