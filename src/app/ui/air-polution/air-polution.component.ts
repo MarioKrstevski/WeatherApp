@@ -34,7 +34,6 @@ export class AirPolutionComponent implements OnInit {
     this.sharedData.newCoords.subscribe( (newCoords) => {
       console.log('Koordinati mi se smeneti');
       
-      
       this.airPolutionSubscription.unsubscribe();
 
       this.airPolution.getAirPolutionForCoords(newCoords).subscribe( airPollutionData =>{

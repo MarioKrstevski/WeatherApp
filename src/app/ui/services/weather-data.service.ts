@@ -34,7 +34,7 @@ export class WeatherDataService {
   }
   getAirPolutionForCoords(cityCoords: i.ICoord, datetime: string = 'current'){
    
-    return this.http.get(`http://api.openweathermap.org/pollution/v1/co/${parseFloat(cityCoords.lon).toFixed(1)},${parseFloat(cityCoords.lat).toFixed(1)}/${datetime}.json?appid=${this.myKey}`)
+    return this.http.get(`http://api.openweathermap.org/pollution/v1/co/${(cityCoords.lon).toFixed(1)},${(cityCoords.lat).toFixed(1)}/${datetime}.json?appid=${this.myKey}`)
     .pipe(map(resp => resp.json()));
   }
   errorHandler(error: HttpErrorResponse){

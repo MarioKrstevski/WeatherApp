@@ -82,6 +82,7 @@ export class CityWeatherInfoComponent implements OnInit {
     this.cityLonLat.lon = this.weatherData.city.coord.lon;
     this.cityLonLat.lat = this.weatherData.city.coord.lat;
     console.log('kooridnati na promena', this.cityLonLat);
+    
     this.dataSharing.changeCoords(this.cityLonLat);
     // console.log('New Data: ',this.weatherData);
     this.myData = this.createMyData(newWeatherData);
