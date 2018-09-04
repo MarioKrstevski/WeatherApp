@@ -35,7 +35,7 @@ export class BrowseCitiesComponent implements OnInit {
   
     this.weather.getCities(57,-11,36.6,24.7).subscribe( citiesData => {
       this.cities = citiesData.list;
-      console.log("Gradovi", this.cities);
+      // console.log("Gradovi", this.cities);
       let extra: number = 5-(this.cities.length%5);
       // this.fakeInfo = this.cities[0];
    
@@ -45,7 +45,7 @@ export class BrowseCitiesComponent implements OnInit {
           extra--;
         }
       }
-      console.log("Gradovi", this.cities);
+      // console.log("Gradovi", this.cities);
 
       this.setPage(1);
     })

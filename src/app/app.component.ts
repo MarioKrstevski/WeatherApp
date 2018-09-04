@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { WeatherDataService  } from './ui/services/weather-data.service';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  promenliva: boolean = false;
+  showSpinner: boolean = true;
 
   ngOnInit() {
-    this.promenliva = true;
+   
   }
 }

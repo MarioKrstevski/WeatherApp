@@ -26,7 +26,7 @@ export class AirPolutionComponent implements OnInit {
   constructor(private airPolution: WeatherDataService, private sharedData : DataSharingService ){ }
 
   ngOnInit() {
-    console.log('TUKA GLEJ GO VREMETO',this.currentDateTime);
+    // console.log('TUKA GLEJ GO VREMETO',this.currentDateTime);
     
     this.airPolutionSubscription=this.airPolution.getAirPolutionForCoords(this.cityCoords,this.currentDateTime).subscribe(airPollutionData => {
       console.log('onInitZagadenost',airPollutionData);
@@ -37,18 +37,18 @@ export class AirPolutionComponent implements OnInit {
     });
 
     this.sharedData.newCoords.subscribe((newCoords : i.ICoord) => {
-      console.log('Koordinati mi se smeneti');
+      // console.log('Koordinati mi se smeneti');
 
       this.cityCoords = newCoords;
-      console.log('onInitStuf',this.cityCoords);
+      // console.log('onInitStuf',this.cityCoords);
       
       
       this.airPolutionSubscription.unsubscribe();
 
       this.airPolution.getAirPolutionForCoords(newCoords,this.currentDateTime).subscribe( airPollutionData =>{
         this.errorMsg = "";
-        console.log("Stuff is logged now but not  changed in the DOM");
-        console.log('zagadenost',airPollutionData);
+        // console.log("Stuff is logged now but not  changed in the DOM");
+        // console.log('zagadenost',airPollutionData);
         
         this.airPollutionInfo = airPollutionData;
       }, error => {
@@ -58,15 +58,15 @@ export class AirPolutionComponent implements OnInit {
     });
 
     this.sharedData.newDateTime.subscribe((newDateTime : string) => {
-      console.log('Vremeto e smeneto');
+      // console.log('Vremeto e smeneto');
       
       this.airPolutionSubscription.unsubscribe();
 
       this.airPolution.getAirPolutionForCoords(this.cityCoords, newDateTime).subscribe( airPollutionData =>{
         this.currentDateTime = newDateTime;
         this.errorMsg = "";
-        console.log("Stuff is logged now but not  changed in the DOM");
-        console.log('zagadenost',airPollutionData);
+        // console.log("Stuff is logged now but not  changed in the DOM");
+        // console.log('zagadenost',airPollutionData);
         
         this.airPollutionInfo = airPollutionData;
       }, error => {

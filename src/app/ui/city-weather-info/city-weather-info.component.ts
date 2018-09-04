@@ -30,10 +30,16 @@ export class CityWeatherInfoComponent implements OnInit {
   weatherSubscription: Subscription;
   // myDataTemp: Array<Array<IWeatherInfo>>;
 
+  showSpinner = true;
+
   constructor(private http: HttpClient,private dataSharing: DataSharingService ,private weather: WeatherDataService) { }
 
   ngOnInit() {
-    this.weatherSubscription = this.weather.getWeather(this.currentCity).subscribe(weatherInfo => this.setData(weatherInfo));
+    this.weatherSubscription = this.weather.getWeather(this.currentCity).subscribe(weatherInfo => {
+      console.log("Mi vrakja nesto");
+      
+      this.setData(weatherInfo);
+      });
 
     this.updateCurrentTime();  
 
@@ -46,6 +52,8 @@ export class CityWeatherInfoComponent implements OnInit {
   }
 
   setData(weatherInfo){
+
+    this.showSpinner = false;
 
     this.weatherData = weatherInfo; 
     console.dir(this.weatherData);

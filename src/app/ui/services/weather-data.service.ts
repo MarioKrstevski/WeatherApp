@@ -32,7 +32,7 @@ export class WeatherDataService {
   }
   getAirPolutionForCoords(cityCoords: i.ICoord, datetime: string){
     
-    console.log(`http://api.openweathermap.org/pollution/v1/co/${cityCoords.lat.toFixed(6).slice(0,-5)},${cityCoords.lon.toFixed(6).slice(0,-5)}/${datetime}.json?appid=${this.myKey}`);
+    // console.log(`http://api.openweathermap.org/pollution/v1/co/${cityCoords.lat.toFixed(6).slice(0,-5)},${cityCoords.lon.toFixed(6).slice(0,-5)}/${datetime}.json?appid=${this.myKey}`);
 
     return this.http.get(`http://api.openweathermap.org/pollution/v1/co/${cityCoords.lat.toFixed(6).slice(0,-5)},${cityCoords.lon.toFixed(6).slice(0,-5)}/${datetime}.json?appid=${this.myKey}`)
     .pipe(map(resp => resp.json()));
