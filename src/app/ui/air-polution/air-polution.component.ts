@@ -21,11 +21,13 @@ export class AirPolutionComponent implements OnInit {
   airPolutionSubscription: Subscription;
   errorMsg: string = '';
   airPollutionInfo: i.IPollution;
-  currentDateTime = new Date().toLocaleDateString();
+  currentDateTime = new Date().toISOString().substring(0,10)+'Z';
 
   constructor(private airPolution: WeatherDataService, private sharedData : DataSharingService ){ }
 
   ngOnInit() {
+    console.log('TUKA GLEJ GO VREMETO',this.currentDateTime);
+    
     this.airPolutionSubscription=this.airPolution.getAirPolutionForCoords(this.cityCoords,this.currentDateTime).subscribe(airPollutionData => {
       console.log('onInitZagadenost',airPollutionData);
       this.airPollutionInfo = airPollutionData;
@@ -43,7 +45,7 @@ export class AirPolutionComponent implements OnInit {
       
       this.airPolutionSubscription.unsubscribe();
 
-      this.airPolution.getAirPolutionForCoords(newCoords).subscribe( airPollutionData =>{
+      this.airPolution.getAirPolutionForCoords(newCoords,this.currentDateTime).subscribe( airPollutionData =>{
         this.errorMsg = "";
         console.log("Stuff is logged now but not  changed in the DOM");
         console.log('zagadenost',airPollutionData);
@@ -74,10 +76,4 @@ export class AirPolutionComponent implements OnInit {
     });
   }
   
-  getAirPolution(newCity: string){
-    this.airPolution.getAirPolutionForCoords(this.cityCoords, '2016-01-02T15:04:05Z').subscribe(updatedData =>{
-      this.cityCoords = updatedData;
-    })
-  }
-
 }
