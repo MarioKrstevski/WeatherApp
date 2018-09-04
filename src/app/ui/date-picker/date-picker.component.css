@@ -19,3 +19,19 @@
     color:white;
     border: 0.7px solid white;
 } 
+.form-group {
+    margin:0 auto;
+}
+.datePick input{
+    text-align: center;
+}
+
+.lastSample{
+    background-color:transparent;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.lastSample:hover{
+    background-color: #616A72;
+    border-color: #616A72;
+}

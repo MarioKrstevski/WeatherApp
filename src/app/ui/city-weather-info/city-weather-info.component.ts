@@ -37,8 +37,6 @@ export class CityWeatherInfoComponent implements OnInit {
 
     this.updateCurrentTime();  
 
-
-
     this.dataSharing.newCity.subscribe((newCity) => {
       // console.log(newCity);
       this.weatherSubscription.unsubscribe();
@@ -55,16 +53,15 @@ export class CityWeatherInfoComponent implements OnInit {
     this.cityLonLat.lat = this.weatherData.city.coord.lon;
     this.cityLonLat.lon = this.weatherData.city.coord.lat;
 
-    console.log('kooridnati', this.cityLonLat);
+    // console.log('kooridnati', this.cityLonLat);
 
     this.dataSharing.changeCoords(this.cityLonLat);
     
-
     // this.maxTemp = this.checkMaxTemp(this.currentTime, this.weatherData);
     this.myData = this.createMyData(weatherInfo);
     // console.dir(this.myData);
     this.preview = this.createPreview(this.myData);
-    console.log('preview', this.preview);
+    // console.log('preview', this.preview);
   }
 
   isSelected(day:Array<i.IWeatherInfo>){

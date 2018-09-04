@@ -2,18 +2,21 @@
   <div class="form-group">
     <div class="input-group">
       <div class="datePick">
-        <label >Change the date: </label>
-        <input class="form-control" 
-             name="dp" [(ngModel)]="currentDate" ngbDatepicker #d="ngbDatepicker">
+
+     
+        <input class="form-control"
+             name="dp" [ngModel]="currentDate" (dateSelect)="updateDateTime($event)" ngbDatepicker #d="ngbDatepicker">
         <div class="input-group-append">
           <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">
             <i class="fa fa-calendar" aria-hidden="true"></i>
           </button>
+          <button class="lastSample" (click)="updateForCurrent()"> Last Sample </button>
+          <!-- <p style="position: absolute">{{d | json}} nesto</p> -->
       </div>
       </div>
     </div>
   </div>
 </form>
 
-<hr/>
-<pre>Model: {{ currentDate | json }}</pre>
+
+

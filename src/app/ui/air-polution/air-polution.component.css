@@ -1,5 +1,5 @@
 #airPolution{
-    height: 350px;
+    height: 450px;
     background-color: #384347;
     color:white;
    
@@ -16,8 +16,10 @@
 
 .pollutionDetails{
     margin-top: 15px;
+    padding-top: 15px;
     height: 280px;
-   height: fit-content;
+    height: fit-content;
+    box-shadow: inset 0px 0px 3px 3px rgba(245, 245, 245,0.2);
 }
 .whiteBorder{
    border:  1px solid white;

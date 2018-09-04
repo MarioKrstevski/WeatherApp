@@ -18,6 +18,8 @@ export class DataSharingService {
   });
   newCoords = this.defaultCoords.asObservable();
 
+  private defaultDateTime = new BehaviorSubject<string>(new Date().toLocaleDateString());
+  newDateTime = this.defaultDateTime.asObservable();
 
   constructor() { }
 
@@ -27,6 +29,10 @@ export class DataSharingService {
 
   changeCoords(coords: i.ICoord){
     this.defaultCoords.next(coords);
+  }
+
+  changeDateTime(dateTime: string){
+    this.defaultDateTime.next(dateTime);
   }
 }
  

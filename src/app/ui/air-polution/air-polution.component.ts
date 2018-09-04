@@ -9,9 +9,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WeatherDataService } from '../services/weather-data.service';
 import { DataSharingService } from '../services/data-sharing.service';
 
-
-
-
 import * as i from "../../interaces/weatherdata";
 @Component({
   selector: 'app-air-polution',
@@ -24,23 +21,25 @@ export class AirPolutionComponent implements OnInit {
   airPolutionSubscription: Subscription;
   errorMsg: string = '';
   airPollutionInfo: i.IPollution;
-  currentDate = new Date().toLocaleDateString();
+  currentDateTime = new Date().toLocaleDateString();
 
   constructor(private airPolution: WeatherDataService, private sharedData : DataSharingService ){ }
 
   ngOnInit() {
-    this.airPolutionSubscription=this.airPolution.getAirPolutionForCoords(this.cityCoords).subscribe(airPollutionData => {
+    this.airPolutionSubscription=this.airPolution.getAirPolutionForCoords(this.cityCoords,this.currentDateTime).subscribe(airPollutionData => {
       console.log('onInitZagadenost',airPollutionData);
       this.airPollutionInfo = airPollutionData;
-    }, error => {
+    }, error => { 
       this.errorMsg = "There is no information for current city";
       this.airPollutionInfo = null;
     });
 
-
-
-    this.sharedData.newCoords.subscribe( (newCoords : i.ICoord) => {
+    this.sharedData.newCoords.subscribe((newCoords : i.ICoord) => {
       console.log('Koordinati mi se smeneti');
+
+      this.cityCoords = newCoords;
+      console.log('onInitStuf',this.cityCoords);
+      
       
       this.airPolutionSubscription.unsubscribe();
 
@@ -55,8 +54,26 @@ export class AirPolutionComponent implements OnInit {
         this.airPollutionInfo = null;
       })
     });
-  }
 
+    this.sharedData.newDateTime.subscribe((newDateTime : string) => {
+      console.log('Vremeto e smeneto');
+      
+      this.airPolutionSubscription.unsubscribe();
+
+      this.airPolution.getAirPolutionForCoords(this.cityCoords, newDateTime).subscribe( airPollutionData =>{
+        this.currentDateTime = newDateTime;
+        this.errorMsg = "";
+        console.log("Stuff is logged now but not  changed in the DOM");
+        console.log('zagadenost',airPollutionData);
+        
+        this.airPollutionInfo = airPollutionData;
+      }, error => {
+        this.errorMsg = "There is no information for that location or timeframe";
+        this.airPollutionInfo = null;
+      })
+    });
+  }
+  
   getAirPolution(newCity: string){
     this.airPolution.getAirPolutionForCoords(this.cityCoords, '2016-01-02T15:04:05Z').subscribe(updatedData =>{
       this.cityCoords = updatedData;

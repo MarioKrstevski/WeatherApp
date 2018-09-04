@@ -10,8 +10,8 @@
                         <p><small>Latitude</small> &nbsp; &nbsp; {{airPollutionInfo?.location?.latitude}}</p>
                         
                     </div>
-                    <div class="col-1 datePicker">
-                          
+                    <div class="col-3 datePicker">
+                        <app-date-picker></app-date-picker>
                     </div>
                     <div class="lola col-3">
                         
@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="row justify-content-center center-block text-left ">
-                        <p class="col-5 infoBlock"><label >Info For Date: </label> <span>{{currentDate}}</span></p>
+                        <p class="col-5 infoBlock"><label >Info For Date: </label> <span>{{currentDateTime}}</span></p>
                 </div>
 
             </div>    
@@ -42,14 +42,15 @@
             <div class="container-fluid" *ngIf="errorMsg">
 
                 
+                
+                <div class="row text-center justify-content-center ">
+                    <div class="col-3 datePicker">
+                        <app-date-picker  ></app-date-picker>
+                    </div>
+                </div>
+                <br>
                 <div class="row text-center justify-content-center ">
                     <p class="col-5 errorMsg" >{{errorMsg}}</p>
-                </div>
-             
-                <div class="row text-center justify-content-center ">
-                    <div class="col-5 datePicker whiteBorder">
-                        <app-date-picker></app-date-picker>
-                    </div>
                 </div>
                     
             </div>
