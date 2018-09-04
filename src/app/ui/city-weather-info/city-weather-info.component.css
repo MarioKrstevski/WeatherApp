@@ -212,6 +212,4 @@ app-loading-spinner{
     align-items: center;
     justify-content: center;
 }
-app-loading-spinner .sk-cube{
-    background-color: white;
-}
+

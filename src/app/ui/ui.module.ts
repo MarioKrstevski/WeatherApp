@@ -46,7 +46,8 @@ import { DataSharingService } from './services/data-sharing.service';
   ],
   exports: [
     SearchBarComponent,
-    LayoutComponent
+    LayoutComponent,
+    LoadingSpinnerComponent
   ]
 })
 export class UiModule { }

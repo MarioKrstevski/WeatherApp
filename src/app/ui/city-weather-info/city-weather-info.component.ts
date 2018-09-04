@@ -11,7 +11,7 @@ import * as i from "../../interaces/weatherdata";
   selector: 'app-city-weather-info',
   templateUrl: './city-weather-info.component.html',
   styleUrls: ['./city-weather-info.component.css'],
-  providers:[]
+  providers: []
 })
 export class CityWeatherInfoComponent implements OnInit {
 
@@ -32,16 +32,16 @@ export class CityWeatherInfoComponent implements OnInit {
 
   showSpinner = true;
 
-  constructor(private http: HttpClient,private dataSharing: DataSharingService ,private weather: WeatherDataService) { }
+  constructor(private http: HttpClient, private dataSharing: DataSharingService, private weather: WeatherDataService) { }
 
   ngOnInit() {
     this.weatherSubscription = this.weather.getWeather(this.currentCity).subscribe(weatherInfo => {
       console.log("Mi vrakja nesto");
-      
-      this.setData(weatherInfo);
-      });
 
-    this.updateCurrentTime();  
+      this.setData(weatherInfo);
+    });
+
+    this.updateCurrentTime();
 
     this.dataSharing.newCity.subscribe((newCity) => {
       // console.log(newCity);
@@ -51,11 +51,11 @@ export class CityWeatherInfoComponent implements OnInit {
 
   }
 
-  setData(weatherInfo){
+  setData(weatherInfo) {
 
     this.showSpinner = false;
 
-    this.weatherData = weatherInfo; 
+    this.weatherData = weatherInfo;
     console.dir(this.weatherData);
 
     this.cityLonLat.lat = this.weatherData.city.coord.lon;
@@ -64,7 +64,7 @@ export class CityWeatherInfoComponent implements OnInit {
     // console.log('kooridnati', this.cityLonLat);
 
     this.dataSharing.changeCoords(this.cityLonLat);
-    
+
     // this.maxTemp = this.checkMaxTemp(this.currentTime, this.weatherData);
     this.myData = this.createMyData(weatherInfo);
     // console.dir(this.myData);
@@ -72,8 +72,8 @@ export class CityWeatherInfoComponent implements OnInit {
     // console.log('preview', this.preview);
   }
 
-  isSelected(day:Array<i.IWeatherInfo>){
-    if(day[0].dt_txt === this.preview[0].dt_txt){
+  isSelected(day: Array<i.IWeatherInfo>) {
+    if (day[0].dt_txt === this.preview[0].dt_txt) {
       return true;
     } else {
       return false;
@@ -87,7 +87,7 @@ export class CityWeatherInfoComponent implements OnInit {
     this.cityLonLat.lat = this.weatherData.city.coord.lon;
     this.cityLonLat.lon = this.weatherData.city.coord.lat;
     console.log('kooridnati na promena', this.cityLonLat);
-    
+
     this.dataSharing.changeCoords(this.cityLonLat);
     // console.log('New Data: ',this.weatherData);
     this.myData = this.createMyData(newWeatherData);
@@ -98,7 +98,7 @@ export class CityWeatherInfoComponent implements OnInit {
     return newWeatherData;
   }
   // Creating the preview in the first place
-  createPreview(allWeek: Array<Array<i.IWeatherInfo>>, index:number = 0){
+  createPreview(allWeek: Array<Array<i.IWeatherInfo>>, index: number = 0) {
     let previewResult = allWeek[index];
     // console.log('index used', index);
     // console.log('allweek', allWeek);
@@ -106,21 +106,21 @@ export class CityWeatherInfoComponent implements OnInit {
   }
   // Preview is the middle and right screen, and this decides what is shown
   // Why cant day be displayed
-  changePreview(day: Array<i.IWeatherInfo>, index: number){
-    this.preview =  this.createPreview(this.myData,index)
+  changePreview(day: Array<i.IWeatherInfo>, index: number) {
+    this.preview = this.createPreview(this.myData, index)
     // console.log('previewChangedTo ',this.preview);
     return null;
-  } 
+  }
   // Changes the structure of the WeatherData sorted by days
-  createMyData(data: i.IWeatherData){
+  createMyData(data: i.IWeatherData) {
     let endResult = new Array<Array<i.IWeatherInfo>>();
     let oneDay = new Array<i.IWeatherInfo>();
     let currentDay = new Date();
 
-    for( let period of data.list){
+    for (let period of data.list) {
       let pDate = new Date(period.dt_txt);
-      if(this.sameDay(pDate,currentDay)){
-          oneDay.push(period);
+      if (this.sameDay(pDate, currentDay)) {
+        oneDay.push(period);
       }
       else {
         endResult.push(oneDay);
@@ -134,32 +134,32 @@ export class CityWeatherInfoComponent implements OnInit {
     return endResult;
   }
   // Function to find maxTemp for the day
-  findMaxTemp(day = this.preview){
+  findMaxTemp(day = this.preview) {
     let maxTemp: number = 0;
-    day.forEach((timeStamp) =>{
-      if(timeStamp.main.temp_max > maxTemp){
-        maxTemp = timeStamp.main.temp_max ;
+    day.forEach((timeStamp) => {
+      if (timeStamp.main.temp_max > maxTemp) {
+        maxTemp = timeStamp.main.temp_max;
       }
     })
 
     return maxTemp;
   }
-  changeMaxTemp(todaaysDate: Date, weatherData: i.IWeatherData){
-    let novaNiza= new Array<i.IWeatherInfo>();
+  changeMaxTemp(todaaysDate: Date, weatherData: i.IWeatherData) {
+    let novaNiza = new Array<i.IWeatherInfo>();
     let todaysDate = new Date(weatherData.list[0].dt_txt)
-    for(let info of weatherData.list){
+    for (let info of weatherData.list) {
       let tempDate = new Date(info.dt_txt);
-      
 
-      if (this.sameDay(tempDate,todaysDate)){
+
+      if (this.sameDay(tempDate, todaysDate)) {
         novaNiza.push(info);
       }
     }
     console.dir(novaNiza);
 
     let todaysMaxTemp = 0;
-    for(let i of novaNiza){
-      if (i.main.temp_max > todaysMaxTemp){
+    for (let i of novaNiza) {
+      if (i.main.temp_max > todaysMaxTemp) {
         todaysMaxTemp = i.main.temp_max;
       }
     }
@@ -173,34 +173,34 @@ export class CityWeatherInfoComponent implements OnInit {
       d1.getDate() === d2.getDate();
   }
   // Timer to update clock real time
-  updateCurrentTime(){
-    setInterval(() => {         
+  updateCurrentTime() {
+    setInterval(() => {
       this.currentTime = new Date();
     }, 1000);
   }
-  isTodaysDate(objectDate){
+  isTodaysDate(objectDate) {
     let dt = new Date();
     let date = dt.getFullYear() + '/' + (((dt.getMonth() + 1) < 10) ? '0' : '') + (dt.getMonth() + 1) + '/' + ((dt.getDate() < 10) ? '0' : '') + dt.getDate();
     let dateFormated = date.replace(/\//g, "-");
-    let objectDateFormated = objectDate.substring(0,10);
+    let objectDateFormated = objectDate.substring(0, 10);
 
-    if(objectDateFormated == dateFormated){
+    if (objectDateFormated == dateFormated) {
       return true;
     } else {
       return false;
     }
   }
   // For displaying NOW
-  checkRange(msecA: number){
-    let time: number = parseInt(this.currentTime.getTime().toString().substring(0,10))+10800;
+  checkRange(msecA: number) {
+    let time: number = parseInt(this.currentTime.getTime().toString().substring(0, 10)) + 10800;
     // console.log(time);
     // let time:number = 1534971600;
     let msecB: number = time + 10800;
-    
-    if((msecA<=time) && (time<msecB)){
+
+    if ((msecA <= time) && (time < msecB)) {
       return false;
     } else {
       return true;
-    }    
+    }
   }
 }
