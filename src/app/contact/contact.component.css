@@ -2,7 +2,9 @@
     margin-top:100px;
     color:#616161;
     border: 1px solid red;
-   
+    /* Height problem for smaller content */
+    min-height: fit-content - 100px;
+    height: 79vh;
 }
 .smallHeading{
     text-align: center;

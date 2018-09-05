@@ -1,7 +1,10 @@
 <div id="browse" class="browseCities dataContainer">
     <h3 class="smallHeading">Browse City</h3>
 
-    <div class="differentCities blackborder">
+    <app-loading-spinner  *ngIf="showSpinner">
+    </app-loading-spinner>
+
+    <div class="differentCities" *ngIf="!showSpinner">
 
         <div class="container blackborder2 ">
             <div class="row justify-content-center" >

@@ -24,6 +24,8 @@ export class BrowseCitiesComponent implements OnInit {
   
   //paged cities
 
+  showSpinner = true;
+
   pagedCities: any[];
 
   fakeInfo: IWeatherInfo;
@@ -34,6 +36,8 @@ export class BrowseCitiesComponent implements OnInit {
   ngOnInit() {
   
     this.weather.getCities(57,-11,36.6,24.7).subscribe( citiesData => {
+
+      this.showSpinner = false;
       this.cities = citiesData.list;
       // console.log("Gradovi", this.cities);
       let extra: number = 5-(this.cities.length%5);
