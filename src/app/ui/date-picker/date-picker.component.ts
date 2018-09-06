@@ -32,11 +32,13 @@ export class DatePickerComponent implements OnInit {
     this.currentDate.month = newDateTime.month;
     this.currentDate.year = newDateTime.year;
 
+    this.dataSharing.turnOnSpinnerForAirPollution();
     this.dataSharing.changeDateTime(this.currentDate.createDateString());
   }
 
   updateForCurrent(){
     this.dataSharing.changeDateTime('current');
+    this.dataSharing.turnOnSpinnerForAirPollution();
   }
 
 }

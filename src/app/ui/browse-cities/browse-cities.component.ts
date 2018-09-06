@@ -70,6 +70,7 @@ export class BrowseCitiesComponent implements OnInit {
 
   newCity(city: string){
     this.dataSharing.changeCity(city);
+    this.dataSharing.turnOnSpinner();
   }
 
   setPage(page: number) {

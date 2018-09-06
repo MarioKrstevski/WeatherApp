@@ -1,6 +1,10 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { WeatherDataService } from '../ui/services/weather-data.service';
+
+import { DataSharingService } from '../ui/services/data-sharing.service';
+
 import { EventEmitter } from '@angular/core';
+
 
 
 @Component({
@@ -18,15 +22,25 @@ export class SearchBarComponent implements OnInit {
   weekInfo:any;
   errorMsg="";
     
-  constructor(private weather: WeatherDataService) { }
+  constructor(private weather: WeatherDataService, private dataService: DataSharingService) { }
 
   ngOnInit() {
+
     
   }
 
-  updateWeather(city){
+  updateWeather(city: string){
+
+    if (city.trim() == ""){
+      return ;
+    }
+
+    this.dataService.turnOnSpinner();
+
     this.weather.getWeather(city).subscribe(newCityWeather => {
       // console.log('weather', newCityWeather);
+
+      
       this.cityInfo=newCityWeather;
       // console.log(this.cityInfo);
       this.weatherData.emit(this.cityInfo);
@@ -35,6 +49,7 @@ export class SearchBarComponent implements OnInit {
     },
     error => {
       this.errorMsg = error.replace('xyz',city);
+      this.dataService.turnOffSpinner();
     });
   }
 

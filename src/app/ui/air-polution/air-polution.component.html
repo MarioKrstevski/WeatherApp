@@ -1,7 +1,11 @@
 <div id="airPolution" class="dataContainer">
     <h3 class="smallHeading">Air Polution</h3>
 
-    <div class="pollutionDetails ">
+    <app-secondary-loading-spinner *ngIf="showSpinner">
+
+    </app-secondary-loading-spinner>
+    
+    <div class="pollutionDetails " *ngIf="!showSpinner">
 
             <div class="container-fluid" *ngIf="airPollutionInfo">
                 <div class="row text-center justify-content-center">

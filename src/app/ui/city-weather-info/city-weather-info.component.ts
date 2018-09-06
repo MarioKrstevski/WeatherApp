@@ -35,18 +35,34 @@ export class CityWeatherInfoComponent implements OnInit {
   constructor(private http: HttpClient, private dataSharing: DataSharingService, private weather: WeatherDataService) { }
 
   ngOnInit() {
-    this.weatherSubscription = this.weather.getWeather(this.currentCity).subscribe(weatherInfo => {
-      console.log("Mi vrakja nesto");
 
+    this.dataSharing.turnOnSpinner();
+
+    
+    this.weatherSubscription = this.weather.getWeather(this.currentCity).subscribe(weatherInfo => {
+      this.showSpinner = false;
+      console.log("Mi vrakja nesto");
       this.setData(weatherInfo);
+     
     });
 
     this.updateCurrentTime();
 
     this.dataSharing.newCity.subscribe((newCity) => {
       // console.log(newCity);
+
+      this.showSpinner = false;
       this.weatherSubscription.unsubscribe();
-      this.weather.getWeather(newCity).subscribe(weatherInfo => this.setData(weatherInfo));
+      this.weather.getWeather(newCity).subscribe(weatherInfo => {
+        
+        this.showSpinner = false;
+        this.setData(weatherInfo);
+        
+      });
+    })
+
+    this.dataSharing.newSpinnerToggle.subscribe( (newValue: boolean) =>{
+      this.showSpinner = newValue;
     })
 
   }
@@ -82,12 +98,14 @@ export class CityWeatherInfoComponent implements OnInit {
 
   // When we search for another city we get another Data, and this updates it
   updateWeatherData(newWeatherData: i.IWeatherData) {
+
+    this.dataSharing.turnOffSpinner();
+   
     this.weatherData = newWeatherData;
 
     this.cityLonLat.lat = this.weatherData.city.coord.lon;
     this.cityLonLat.lon = this.weatherData.city.coord.lat;
     console.log('kooridnati na promena', this.cityLonLat);
-
     this.dataSharing.changeCoords(this.cityLonLat);
     // console.log('New Data: ',this.weatherData);
     this.myData = this.createMyData(newWeatherData);
@@ -99,6 +117,7 @@ export class CityWeatherInfoComponent implements OnInit {
   }
   // Creating the preview in the first place
   createPreview(allWeek: Array<Array<i.IWeatherInfo>>, index: number = 0) {
+    
     let previewResult = allWeek[index];
     // console.log('index used', index);
     // console.log('allweek', allWeek);
@@ -108,11 +127,13 @@ export class CityWeatherInfoComponent implements OnInit {
   // Why cant day be displayed
   changePreview(day: Array<i.IWeatherInfo>, index: number) {
     this.preview = this.createPreview(this.myData, index)
+    this.showSpinner  = false;
     // console.log('previewChangedTo ',this.preview);
     return null;
   }
   // Changes the structure of the WeatherData sorted by days
   createMyData(data: i.IWeatherData) {
+
     let endResult = new Array<Array<i.IWeatherInfo>>();
     let oneDay = new Array<i.IWeatherInfo>();
     let currentDay = new Date();
