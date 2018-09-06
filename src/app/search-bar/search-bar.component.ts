@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component,Input, OnInit, Output } from '@angular/core';
 import { WeatherDataService } from '../ui/services/weather-data.service';
 
 import { DataSharingService } from '../ui/services/data-sharing.service';
@@ -18,15 +18,21 @@ export class SearchBarComponent implements OnInit {
   @Output() public weatherData = new EventEmitter();
  
    
-  cityInfo:any;
-  weekInfo:any;
-  errorMsg="";
+  cityInfo: any;
+  weekInfo: any;
+  errorMsg="" ;
+  selectedCity = "New York";
     
   constructor(private weather: WeatherDataService, private dataService: DataSharingService) { }
 
   ngOnInit() {
 
-    
+    this.dataService.newCity.subscribe((newCity) => {
+      if(this.selectedCity !== newCity){
+      this.selectedCity = newCity;
+      console.log('Smenet e selectedCity vo SearchBarComponent vo  ',this.selectedCity);
+      }
+    })
   }
 
   updateWeather(city: string){
@@ -34,6 +40,11 @@ export class SearchBarComponent implements OnInit {
     if (city.trim() == ""){
       return ;
     }
+
+    if(this.selectedCity!==city){
+
+      console.log('Se raboti za razlicen grad i KJE SE se povika api vo SBC', this.selectedCity);
+      
 
     this.dataService.turnOnSpinner();
 
@@ -51,6 +62,14 @@ export class SearchBarComponent implements OnInit {
       this.errorMsg = error.replace('xyz',city);
       this.dataService.turnOffSpinner();
     });
+
+    this.selectedCity = city;
+    }
+
+    console.log('Se raboti za IST grad i N E M A se povika api vo SBC', this.selectedCity);
+
+
+
   }
 
 }

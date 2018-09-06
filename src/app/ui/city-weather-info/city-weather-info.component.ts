@@ -15,8 +15,13 @@ import * as i from "../../interaces/weatherdata";
 })
 export class CityWeatherInfoComponent implements OnInit {
 
+  
+
   currentTime = new Date();
   currentCity = 'New York';
+
+  currentSelectedCity = 'New York';
+  canSendRequests = true;
 
   currentDate = this.currentTime.toLocaleDateString("en-GB").replace(/\//g, ".");
   weatherData: i.IWeatherData;
@@ -49,16 +54,24 @@ export class CityWeatherInfoComponent implements OnInit {
     this.updateCurrentTime();
 
     this.dataSharing.newCity.subscribe((newCity) => {
-      // console.log(newCity);
 
-      this.showSpinner = false;
-      this.weatherSubscription.unsubscribe();
-      this.weather.getWeather(newCity).subscribe(weatherInfo => {
-        
+      // console.log(newCity);
+      if(newCity!==this.currentSelectedCity){
+        console.log('KJE SE NAPRAVI API povik bidejki e razlicen grad vo prasanje CWI component', this.currentSelectedCity);
         this.showSpinner = false;
-        this.setData(weatherInfo);
-        
-      });
+        this.weatherSubscription.unsubscribe();
+        this.weather.getWeather(newCity).subscribe(weatherInfo => {
+          
+          this.showSpinner = false;
+          this.setData(weatherInfo);
+          
+        });
+
+        this.currentSelectedCity=newCity;
+      }
+
+      console.log('Ne se pravi api povik bidejki e ist grad vo prasanje CWI component', this.currentSelectedCity);
+      
     })
 
     this.dataSharing.newSpinnerToggle.subscribe( (newValue: boolean) =>{

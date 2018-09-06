@@ -25,12 +25,11 @@ export class BrowseCitiesComponent implements OnInit {
   //paged cities
 
   showSpinner = true;
-  canSendRequest = true;
 
   pagedCities: any[];
 
   fakeInfo: i.IWeatherInfo;
-  currentCity: string;
+  currentCity: string = "";
 
   constructor(private http: Http,private dataSharing: DataSharingService, private pagerService : PagerService, private weather: WeatherDataService) { }
   
@@ -70,8 +69,16 @@ export class BrowseCitiesComponent implements OnInit {
   }
 
   newCity(city: string){
-    this.dataSharing.changeCity(city);
-    this.dataSharing.turnOnSpinner();
+
+    if(this.currentCity!==city){
+      this.dataSharing.changeCity(city);
+      this.dataSharing.turnOnSpinner();
+      this.currentCity = city;
+    } else {
+      console.log('si kliknal na ista grad i ne se povikuva nisto');
+      
+    }
+   
   }
 
   setPage(page: number) {
