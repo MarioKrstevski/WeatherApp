@@ -24,7 +24,7 @@ export class AirPolutionComponent implements OnInit {
   airPollutionInfo: i.IPollution;
   currentDateTime = new Date().toISOString().substring(0,10)+'Z';
 
-  showSpinner = true;
+  showSpinner = false;
 
   constructor(private airPolution: WeatherDataService, private sharedData : DataSharingService ){ }
 
@@ -32,19 +32,20 @@ export class AirPolutionComponent implements OnInit {
     this.sharedData.turnOnSpinnerForAirPollution();
     console.log("Startue se spiner za airPollution");
     
-    this.airPolutionSubscription=this.airPolution.getAirPolutionForCoords(this.cityCoords,this.currentDateTime).subscribe(airPollutionData => {
+    this.airPolution.getAirPolutionForCoords(this.cityCoords,this.currentDateTime).subscribe((airPollutionData) => {
       console.log('onInitZagadenost',airPollutionData);
       this.airPollutionInfo = airPollutionData;
       this.sharedData.turnOffSpinnerForAirPollution();
 
       console.log("Gasi se spiner za airPollution");
-    }, error => { 
+    }, (error: Error) => { 
+      console.log('onInitZagadenost');
       this.errorMsg = "There is no information for current city";
       this.airPollutionInfo = null;
       this.sharedData.turnOffSpinnerForAirPollution();
       console.log("Gasi se spiner za airPollution muhaha");
-    });
-
+    }
+  );
     this.sharedData.newSpinnerToggle.subscribe( (newValue: boolean) =>{
       this.showSpinner = newValue;
     })
@@ -60,7 +61,7 @@ export class AirPolutionComponent implements OnInit {
       // console.log('onInitStuf',this.cityCoords);
       
       
-      this.airPolutionSubscription.unsubscribe();
+      this.unsubscribe(this.airPolutionSubscription);
 
       this.airPolution.getAirPolutionForCoords(newCoords,this.currentDateTime).subscribe( airPollutionData =>{
         this.sharedData.turnOffSpinnerForAirPollution();
@@ -83,8 +84,7 @@ export class AirPolutionComponent implements OnInit {
       // console.log('Vremeto e smeneto');
 
      
-      
-      this.airPolutionSubscription.unsubscribe();
+      this.unsubscribe(this.airPolutionSubscription);
 
       this.airPolution.getAirPolutionForCoords(this.cityCoords, newDateTime).subscribe( airPollutionData =>{
         this.sharedData.turnOffSpinnerForAirPollution();
@@ -104,4 +104,9 @@ export class AirPolutionComponent implements OnInit {
     });
   }
   
+  unsubscribe(subscription: Subscription) {
+    if(subscription) {
+      subscription.unsubscribe();
+    }
+  }
 }
