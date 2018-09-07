@@ -26,7 +26,7 @@ export interface IWeatherData{
     grnd_level: number;
     humidity: number;
     pressure: number;
-    sea_level: number
+    sea_level: number;
     temp: number;
     temp_kf: number;
     temp_max: number;
@@ -50,4 +50,23 @@ export interface IWeatherData{
     pressure: number;
     value: number;
   }
+
+  export interface ISingeCity{
+    clouds: Object;
+    coord: ICoordCity;
+    dt: number;
+    id: number;
+    main: IMain;
+    name: string;
+    rain: Object;
+    snow: Object;
+    weather: Array<Object>;
+    wind: Object;
+  }
+
+  export interface ICoordCity{
+    Lat: number;
+    Lon: number;
+  }
+
 

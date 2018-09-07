@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AgmCoreModule } from '@agm/core';
 
 import { LayoutComponent } from './layout/layout.component';
 import { CityWeatherInfoComponent } from './city-weather-info/city-weather-info.component';
@@ -27,10 +28,13 @@ import { SecondaryLoadingSpinnerComponent } from './secondary-loading-spinner/se
     CommonModule,
     HttpModule,
     FormsModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyC-UOu23S6rRvG4vbsbT9ps0U5tHsSgccA'
+    })
   ],
   declarations: [
-    LayoutComponent, 
+    LayoutComponent,
     CityWeatherInfoComponent,
     BrowseCitiesComponent,
     InteractiveMapComponent,

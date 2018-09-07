@@ -8,13 +8,16 @@
 
         <div class="container blackborder2 ">
             <div class="row justify-content-center" >
-              <div 
-              class="cityQuickInfo col-5 col-md-2" 
+              <div
+              class="cityQuickInfo col-5 col-md-2"
               *ngFor="let city of pagedCities"
               (click)="newCity(city?.name)"
-             
+
               >
-                <i class="wi wi-day-sunny-overcast" *ngIf="city?.name"></i>
+                <!-- <i class="wi wi-day-sunny-overcast" ></i> -->
+
+                <!-- {{city | json}} -->
+                <img class="wi" src="http://openweathermap.org/img/w/{{city?.weather[0].icon}}.png" alt="weather icon"*ngIf="city?.name" >
                 <p class="cityTitle" *ngIf="city?.name">{{city?.name}}</p>
                 <p class="cityDetails" *ngIf="city?.name"> {{city?.main.temp}} &#0176;C</p>
                 <p class="cityDetails" *ngIf="city?.name">{{city?.main.humidity}}% humidity</p>
@@ -36,13 +39,13 @@
                     <li class="page-item"><a class="page-link" href="#">3</a></li>
                     <li class="page-item"><a class="page-link" href="#">4</a></li> -->
 
-                    <li 
-                    *ngFor="let page of pager.pages" 
-                    [ngClass]="{active:pager.currentPage === page}" 
+                    <li
+                    *ngFor="let page of pager.pages"
+                    [ngClass]="{active:pager.currentPage === page}"
                     class="page-item" >
                             <a (click)="setPage(page)" class="page-link">{{page}}</a>
                     </li>
-                        
+
                     <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}"
                     class="page-item">
                             <a (click)="setPage(pager.totalPages)" class="page-link"> &#187;</a>
@@ -51,6 +54,6 @@
                     <!-- <li class="page-item"><a class="page-link" href="#"> &#187; Last </a></li> -->
                 </ul>
             </nav>
-        </div>        
+        </div>
     </div>
 </div>

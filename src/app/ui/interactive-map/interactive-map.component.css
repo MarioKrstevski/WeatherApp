@@ -16,3 +16,11 @@
 .mapPlaceHolder iframe{
     height: 400px;
 }
+
+agm-map{
+    height: 400px;
+}
+
+agm-info-window{
+
+}

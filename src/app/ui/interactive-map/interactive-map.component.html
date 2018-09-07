@@ -1,7 +1,65 @@
 <div id="map" class="interactiveMap dataContainer">
   <h3 class="smallHeading">Map</h3>
-  <div class="mapPlaceHolder">
-      <div style="width: 100%"><iframe width="100%" height="600" src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;coord=42.00174,21.42333&amp;q=Skopje+(Web%20Factory)&amp;ie=UTF8&amp;t=&amp;z=16&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a href="https://www.maps.ie/create-google-map/">Embed Google Map</a></iframe></div><br />
-      
-  </div>
+  <!-- <div class="mapPlaceHolder">
+      <div style="width: 100%"><iframe width="100%" height="600"
+        src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;coord=42.00174,21.42333&amp;q=Skopje+(Web%20Factory)&amp;ie=UTF8&amp;t=&amp;z=16&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a href="https://www.maps.ie/create-google-map/">Embed Google Map</a></iframe></div><br />
+
+  </div> -->
+
+  <agm-map [latitude]="lat" [longitude]="lng"
+
+  (mapClick)="onChoseLocation($event)" *ngIf="cities">
+
+
+      <!-- <agm-marker [latitude]="now.lat" [longitude]="now.lot" *ngFor="let now of coords" >
+
+      </agm-marker> -->
+
+      <agm-marker *ngFor="let city of cities; index as i"
+      [animation]="'bounce'"
+      [latitude]="city?.coord?.Lat"
+      [longitude]="city?.coord?.Lon"
+      iconUrl="http://openweathermap.org/img/w/{{city?.weather[0].icon}}.png">
+
+
+          <agm-info-window [style.color]="'green'">
+
+              <div class="infoDesign"  style="background-color: lightblue; color: blueviolet">
+                  <p > {{city?.main.temp}} &#0176;C</p>
+                  <p >{{city?.main.humidity}}% humidity</p>
+                  <p >{{city?.wind.speed}} km/h wind</p>
+              </div>
+
+            </agm-info-window>
+
+
+
+
+
+
+          </agm-marker>
+
+          <!-- <agm-data-layer>
+
+            </agm-data-layer>
+
+            <agm-circle  [latitude]="lat" [longitude]="lng"
+            [radius]="5000"
+      [fillColor]="'red'"
+      [circleDraggable]="true"
+      [editable]="true">
+            ></agm-circle>
+            <agm-kml-layer></agm-kml-layer>
+            <agm-polygon></agm-polygon>
+            <agm-polyline-point></agm-polyline-point> -->
+
+  </agm-map>
+<!--
+ <div *ngIf="cities">
+    <div *ngFor="let city of cities">
+        <p>Lat: {{city?.coord?.Lat}}   Lon: {{city?.coord?.Lon}}</p>
+      </div>
+
+ </div> -->
+
 </div>
