@@ -1,11 +1,10 @@
-import { Component,Input, OnInit, Output } from '@angular/core';
-import { WeatherDataService } from '../ui/services/weather-data.service';
-
-import { DataSharingService } from '../ui/services/data-sharing.service';
-
+import { Component, OnInit, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 
+import { WeatherDataService } from '../ui/services/weather-data.service';
+import { DataSharingService } from '../ui/services/data-sharing.service';
 
+import * as i from "../interaces/weatherdata";
 
 @Component({
   selector: 'app-search-bar',
@@ -14,62 +13,39 @@ import { EventEmitter } from '@angular/core';
 })
 export class SearchBarComponent implements OnInit {
 
-
   @Output() public weatherData = new EventEmitter();
- 
-   
-  cityInfo: any;
-  weekInfo: any;
-  errorMsg="" ;
+
+  weatherDataForCity: i.IWeatherData;
+  errorMsg = "" ;
   selectedCity = "New York";
-    
-  constructor(private weather: WeatherDataService, private dataService: DataSharingService) { }
+
+  constructor(private weather: WeatherDataService, private dataSharingService: DataSharingService) { }
 
   ngOnInit() {
-
-    this.dataService.newCity.subscribe((newCity) => {
+    this.dataSharingService.newCity.subscribe((newCity) => {
       if(this.selectedCity !== newCity){
       this.selectedCity = newCity;
-      console.log('Smenet e selectedCity vo SearchBarComponent vo  ',this.selectedCity);
+      // console.log('Smenet e selectedCity vo SearchBarComponent vo  ',this.selectedCity);
       }
-    })
-  }
-
-  updateWeather(city: string){
-
-    if (city.trim() == ""){
-      return ;
-    }
-
-    if(this.selectedCity!==city){
-
-      console.log('Se raboti za razlicen grad i KJE SE se povika api vo SBC', this.selectedCity);
-      
-
-    this.dataService.turnOnSpinner();
-
-    this.weather.getWeather(city).subscribe(newCityWeather => {
-      // console.log('weather', newCityWeather);
-
-      
-      this.cityInfo=newCityWeather;
-      // console.log(this.cityInfo);
-      this.weatherData.emit(this.cityInfo);
-      this.errorMsg = "";
-      // console.log('Ova e child eventot',this.cityInfo);
-    },
-    error => {
-      this.errorMsg = error.replace('xyz',city);
-      this.dataService.turnOffSpinner();
     });
-
-    this.selectedCity = city;
-    }
-
-    console.log('Se raboti za IST grad i N E M A se povika api vo SBC', this.selectedCity);
-
-
-
   }
 
+  updateWeather(newCity: string){
+    if (newCity.trim() === ""){
+      return;
+    }
+    if(this.selectedCity!==newCity){
+      this.dataSharingService.turnOnSpinner();
+      this.weather.getWeather(newCity).subscribe((newCityWeather: i.IWeatherData) => {
+        this.weatherDataForCity = newCityWeather;
+        this.weatherData.emit(this.weatherDataForCity);
+        this.errorMsg = "";
+      },
+      error => {
+        this.errorMsg = error.replace('xyz',newCity);
+        this.dataSharingService.turnOffSpinner();
+      });
+      this.selectedCity = newCity;
+    }
+  }
 }

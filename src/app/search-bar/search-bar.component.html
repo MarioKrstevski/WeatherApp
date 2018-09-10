@@ -1,21 +1,18 @@
 
- <div
- (keyup.enter)="updateWeather(newCity.value)" class="SearchBox">
+ <div class="SearchBox" (keyup.enter)="updateWeather(newCity.value)">
   <div class="searchField">
-    <input 
+    <input
+      class="searchText"
       [class.error]="errorMsg"
       #newCity
       type="search"
-      name="search"
-      placeholder="City..."
-      class="searchText"/>
+      placeholder="City..."/>
 
-    <span id="errorMessage" *ngIf="errorMsg">{{errorMsg}}</span>
+    <span id="errorMessage" *ngIf="errorMsg"> {{errorMsg}} </span>
     <button
-      type="button"
-      (click)="updateWeather(newCity.value)"
-      class="searchButton">Search</button>
-
-
+      class="searchButton"
+      (click)="updateWeather(newCity.value)">
+      Search
+    </button>
   </div>
  </div>

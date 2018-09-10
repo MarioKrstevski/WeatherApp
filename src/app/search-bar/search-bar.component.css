@@ -1,3 +1,4 @@
+/* CSS to change the default autofill styling for browser */
 @-webkit-keyframes autofill {
   to {
       color: rgb(168,168,168);
@@ -8,7 +9,7 @@ input:-webkit-autofill{
     -webkit-animation-name: autofill;
     background-clip: content-box;
     -webkit-animation-fill-mode: both;
-} 
+}
 input,
 button,
 .SearchBox:before {
@@ -25,10 +26,10 @@ button,
   position: relative;
 }
 .searchText {
-  flex: 1 0 8em;    
+  flex: 1 0 8em;
 }
 .searchText:focus{
-  border:1px solid #4298CA;
+  border: 1px solid #4298CA;
 }
 .searchButton {
   flex: 0 0 auto;
@@ -66,15 +67,15 @@ button,
   background-color: #408bb3;
 }
 #errorMessage{
-  width:fit-content;
+  width: fit-content;
   height: 46px;
-  top:2px;
+  top: 2px;
   left: 35%;
   position: absolute;
   background: rgb(235, 93, 93) !important;
   padding: 10px !important;
   border-radius: 3px !important;
-  border:1px solid white;
+  border: 1px solid white;
   color:black;
   display: inline-block !important;
   box-shadow: 0.5px 0.5px 9px #4b4a4a;
@@ -82,29 +83,29 @@ button,
 }
 /* The Litte triangle on left */
 #errorMessage::before{
-  content: '';  
-  width: 0;  
-  height: 0px;  
+  content: '';
+  width: 0;
+  height: 0px;
   outline:white;
   border-left: 16px solid transparent;
   border-right: 16px solid rgb(235, 93, 93);
   border-bottom: 16px solid transparent;
   border-top: 16px solid transparent;
-  position: absolute;  
-  left: -31px; 
+  position: absolute;
+  left: -31px;
   top: 8px;
   z-index: 13;
 }
 #errorMessage::after{
-  content: '';  
-  width: 0;  
-  height: 0;  
+  content: '';
+  width: 0;
+  height: 0;
   border-left: 16px solid transparent;
   border-right: 16px solid white;
   border-bottom: 16px solid transparent;
   border-top: 16px solid transparent;
-  position: absolute;  
-  left: -33px; 
+  position: absolute;
+  left: -33px;
   top:8px;
   z-index: 12;
 }

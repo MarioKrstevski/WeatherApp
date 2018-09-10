@@ -1,73 +1,73 @@
 header{
-    background-color:rgba(31, 33, 36,0.7);
-    height: 100px;
-    width:100%;
-    top:0;
-    left:0;
-    display: flex;
-    align-items: center;
-    position: fixed;
-    z-index: 100;
-}
-.navbarStandard{
-    display:inline-block;
-    margin-left: auto;
-    order: 2;
-}
-.navbarStandard a{
-    padding:5px;
-    margin-left:25px;
-}
-.navbarHamburger{
-    display:none;
+  background-color:rgba(31, 33, 36,0.7);
+  height: 100px;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  z-index: 100;
 }
 a, a:active, a:visited{
-    text-decoration: none;
-    color:white;
+  text-decoration: none;
+  color:white;
 }
 a:hover{
-    color: #4AA2D1;
+  color: #4AA2D1;
 }
-#brandName{
- font-size:2em;
+.navbarStandard{
+  display: inline-block;
+  margin-left: auto;
+  order: 2;
 }
-#brandName:hover{
- color:white;
+.navbarStandard a{
+  padding: 5px;
+  margin-left: 25px;
 }
-
+.navbarHamburger{
+  display:none;
+}
+#brandLogo{
+  font-size: 2em;
+}
+#brandLogo:hover{
+  color:white;
+}
 .hamburger{
-    display:none;
-    color:white;
+  display: none;
+  color:white;
 }
 @media only screen and (max-width: 720px){
-    .hamburger{
-        font-size: 2em;
-        display:inline;
-    }
-    .hamburger:hover{
-       color:rgb(252, 252, 215);
-    }
-    .menuItems{
-        display:none;
-    }
-    .navbarHamburger {
-        overflow: hidden;
-        display: block;
-        position:fixed;
-        height: 0;
-        top:100px;
-        right:0;
-        transition:0.4s;
-        z-index: 10;
-    }
-    .navbarHamburger a{
-        text-align: center;
-        width:280px;
-        display:block;
-        padding:10px 15px;
-        background-color:rgba(31, 33, 36, .7);
-    }
-    .navbarHamburger a:hover{
-        text-decoration: underline;
-    }
+  .navbarHamburger {
+    overflow: hidden;
+    display: block;
+    position: fixed;
+    height: 0;
+    top: 100px;
+    right: 0;
+    transition: 0.4s;
+    z-index: 10;
+  }
+  .navbarHamburger a{
+    text-align: center;
+    width: 280px;
+    display:block;
+    padding:10px 15px;
+    background-color:rgba(31, 33, 36, .7);
+  }
+  .navbarHamburger a:hover{
+    text-decoration: underline;
+  }
+  .menuLinks{
+    display:none;
+  }
+  .hamburger{
+    font-size: 2em;
+    display: inline;
+  }
+  .hamburger:hover{
+    /* This is not in specs, it's just for my visualization */
+    color:rgb(252, 252, 215);
+  }
 }

@@ -11,10 +11,11 @@ export class GoToTopComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-   
-  }
 
-  
+  }
+}
+
+  // The code below is vanilla, it is replaced with a directory from angular 'PageScroll'
 
   // $(window).scroll(function(){
 	// 	if ($(this).scrollTop() > 300) { // 300px from top
@@ -36,4 +37,3 @@ export class GoToTopComponent implements OnInit {
   //   }
 
 
-  }

@@ -9,26 +9,18 @@ export class HeaderComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    
-  }
-  
-  displaySideMenu(el){
-    let prop=el.style.height;
+  ngOnInit() {}
 
-    if(prop === '250px'){
-     this.closeSideMenu(el);
-    } 
-    else {
-      this.openSideMenu(el);
-     
-    }
+  toggleSideMenu(el){
+    let prop = el.style.height;
+    prop === '250px' ? this.closeSideMenu(el) : this.openSideMenu(el);
+
   }
- closeSideMenu(el){
-  el.style.height='0px';
- }
- openSideMenu(el){
-  el.style.height='250px';
- }
+  closeSideMenu(el){
+    el.style.height = '0px';
+  }
+  openSideMenu(el){
+    el.style.height = '250px';
+  }
 
 }
