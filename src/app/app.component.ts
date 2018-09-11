@@ -15,5 +15,13 @@ export class AppComponent implements OnInit, AfterViewInit{
 
   ngAfterViewInit(){
     document.querySelector('#spinner').remove();
+
+    window.onscroll = function(){
+      if(window.scrollY > 800){
+          document.querySelector("#goToTop").classList.remove('hide');
+      } else {
+         document.querySelector("#goToTop").classList.add('hide');
+      }
+    }
   }
 }

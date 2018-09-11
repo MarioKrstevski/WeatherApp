@@ -45,8 +45,6 @@ export class BrowseCitiesComponent implements OnInit {
         }
       }
 
-      console.log(this.cities);
-
       //Sets first page of pagination
       this.setPage(1);
     });
@@ -68,9 +66,7 @@ export class BrowseCitiesComponent implements OnInit {
   }
 
   newCity(city: string) {
-    console.log(city);
-
-    if (this.currentCity !== city && city !== null) { //city !== null covers the empty fields we add
+       if (this.currentCity !== city && city !== null) { //city !== null covers the empty fields we add
       this.dataSharingService.changeCity(city);
       this.dataSharingService.turnOnSpinner();
       this.currentCity = city;

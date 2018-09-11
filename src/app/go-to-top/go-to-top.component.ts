@@ -11,7 +11,6 @@ export class GoToTopComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
   }
 }
 
