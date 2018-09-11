@@ -10,14 +10,12 @@ export class PagerService {
   getPager(totalItems: number, currentPage: number = 1, pageSize: number = 10) {
     // calculate total pages
     let totalPages = Math.ceil(totalItems / pageSize);
-
     // ensure current page isn't out of range
-    if (currentPage < 1) { 
-        currentPage = 1; 
-    } else if (currentPage > totalPages) { 
-        currentPage = totalPages; 
+    if (currentPage < 1) {
+        currentPage = 1;
+    } else if (currentPage > totalPages) {
+        currentPage = totalPages;
     }
-    
     let startPage: number, endPage: number;
     if (totalPages <= 10) {
         // less than 10 total pages so show all
@@ -36,7 +34,6 @@ export class PagerService {
             endPage = currentPage + 4;
         }
     }
-
     // calculate start and end item indexes
     let startIndex = (currentPage - 1) * pageSize;
     let endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);

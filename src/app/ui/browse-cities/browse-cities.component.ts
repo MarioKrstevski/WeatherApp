@@ -1,6 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { Http, Response } from "@angular/http";
-import { map } from "rxjs/operators";
 
 import { PagerService } from "../services/pager.service";
 import { WeatherDataService } from "../services/weather-data.service";
@@ -15,46 +13,46 @@ import * as i from "../../interaces/weatherdata";
 })
 export class BrowseCitiesComponent implements OnInit {
   dummyUrl = "./assets/dummy-data.json";
-  urlForEurope =
-    "http://api.openweathermap.org/dfata/2.5/box/city?bbox=12,32,15,37,10";
+  urlForEurope = "http://api.openweathermap.org/dfata/2.5/box/city?bbox=12,32,15,37,10";
   private cities: i.IWeatherInfo[];
+
   // pager object
   pager: any = {};
 
-  //paged cities
-
-  showSpinner = true;
-
   pagedCities: any[];
 
+  showSpinner = true;
   fakeInfo: i.IWeatherInfo;
   currentCity: string = "";
 
   constructor(
-    private http: Http,
-    private dataSharing: DataSharingService,
+    private dataSharingService: DataSharingService,
     private pagerService: PagerService,
     private weather: WeatherDataService
   ) {}
 
   ngOnInit() {
-    this.weather.getCities(-10,39.5,32,57.6).subscribe(citiesData => {
+    this.weather.getCitiesInRange(-10,39.5,32,57.6).subscribe(citiesData => {
       this.showSpinner = false;
       this.cities = citiesData.list;
-      // console.log("Gradovi", this.cities);
-      let extra: number = 5 - (this.cities.length % 5);
-      // this.fakeInfo = this.cities[0];
 
+      //Adding extra empty objects to fill cities number to be % 5;
+      let extra: number = 5 - (this.cities.length % 5);
       if (extra != 0) {
         while (extra) {
           this.cities.push(this.fakeInfo);
           extra--;
         }
       }
-      // console.log("Gradovi", this.cities);
 
+      console.log(this.cities);
+
+      //Sets first page of pagination
       this.setPage(1);
     });
+
+    // Code if you want to work with locak json file instaed of API
+
     // this.http.get(this.dummyUrl)
     // .pipe(map((response: Response) => response.json()))
     // .subscribe(data => {
@@ -66,19 +64,20 @@ export class BrowseCitiesComponent implements OnInit {
 
     // });
 
-    this.dataSharing.newCity.subscribe(message => (this.currentCity = message));
+    this.dataSharingService.newCity.subscribe(newCity => (this.currentCity = newCity));
   }
 
   newCity(city: string) {
-    if (this.currentCity !== city) {
-      this.dataSharing.changeCity(city);
-      this.dataSharing.turnOnSpinner();
+    console.log(city);
+
+    if (this.currentCity !== city && city !== null) { //city !== null covers the empty fields we add
+      this.dataSharingService.changeCity(city);
+      this.dataSharingService.turnOnSpinner();
       this.currentCity = city;
     } else {
-      console.log("si kliknal na ista grad i ne se povikuva nisto ");
+      // Else, the same city is clicked and nothing will happen, to optimize performance
     }
   }
-
   setPage(page: number) {
     // get pager object from service
     this.pager = this.pagerService.getPager(this.cities.length, page);

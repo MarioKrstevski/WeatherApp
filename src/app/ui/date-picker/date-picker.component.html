@@ -2,8 +2,6 @@
   <div class="form-group">
     <div class="input-group">
       <div class="datePick">
-
-     
         <input class="form-control"
              name="dp" [ngModel]="currentDate" (dateSelect)="updateDateTime($event)" ngbDatepicker #d="ngbDatepicker">
         <div class="input-group-append">
@@ -11,7 +9,6 @@
             <i class="fa fa-calendar" aria-hidden="true"></i>
           </button>
           <button class="lastSample" (click)="updateForCurrent()"> Last Sample </button>
-          <!-- <p style="position: absolute">{{d | json}} nesto</p> -->
       </div>
       </div>
     </div>

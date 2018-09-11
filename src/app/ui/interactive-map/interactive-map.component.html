@@ -7,13 +7,7 @@
   </div> -->
 
   <agm-map [latitude]="lat" [longitude]="lng"
-
   (mapClick)="onChoseLocation($event)" *ngIf="cities">
-
-
-      <!-- <agm-marker [latitude]="now.lat" [longitude]="now.lot" *ngFor="let now of coords" >
-
-      </agm-marker> -->
 
       <agm-marker *ngFor="let city of cities; index as i"
       [animation]="'bounce'"
@@ -21,23 +15,14 @@
       [longitude]="city?.coord?.Lon"
       iconUrl="http://openweathermap.org/img/w/{{city?.weather[0].icon}}.png">
 
-
           <agm-info-window [style.color]="'green'">
-
               <div class="infoDesign"  style="background-color: lightblue; color: blueviolet">
                   <p > {{city?.main.temp}} &#0176;C</p>
                   <p >{{city?.main.humidity}}% humidity</p>
                   <p >{{city?.wind.speed}} km/h wind</p>
               </div>
-
             </agm-info-window>
-
-
-
-
-
-
-          </agm-marker>
+      </agm-marker>
 
           <!-- <agm-data-layer>
 

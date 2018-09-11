@@ -9,8 +9,6 @@ const routes: Routes = [
     {path:'contact',component:ContactComponent}
 ];
 
-
-
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),

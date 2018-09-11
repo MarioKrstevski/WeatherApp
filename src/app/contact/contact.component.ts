@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpEventType } from '@angular/common/http';
-import { FileSelectDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import { HttpClient } from '@angular/common/http';
+import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { User } from '../user';
-import { queue } from 'rxjs/internal/scheduler/queue';
 
-const CLOUDINARY_URL='cloudinary://295464739934565:E3nd8figX26VtvW1b4PTx6ToAUw@dprdrh0oz';
-
+// const CLOUDINARY_URL='cloudinary://295464739934565:E3nd8figX26VtvW1b4PTx6ToAUw@dprdrh0oz';
 const URL = 'http://localhost:3000/api/upload';
 
+//another endpoint just for receiving the userModel information, without the image
+const URL1 = 'http://localhost:3300/sendData';
 
 @Component({
   selector: 'app-contact',
@@ -16,40 +16,38 @@ const URL = 'http://localhost:3000/api/upload';
 })
 export class ContactComponent implements OnInit {
 
-  // imageUrl: string = '../../assets/Images/default.png';
   imageUrl: string = null;
   fileToUpload: File = null;
-
-  URL1 = 'http://localhost:3300/sendData';
-
   selectedFile: File = null;
   uploader: FileUploader = new FileUploader(
     {
       url: URL,
-      itemAlias:'photo',
+      itemAlias: 'photo',
       allowedMimeType: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'],
       maxFileSize: 10485760
      });
-  
+
   attachmentList:any = [];
 
-
- userModel = new User('','','', false, null);
+  userModel = new User('','','', false, null);
 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.uploader.onAfterAddingFile = (file) => {
-      this.userModel.imageUploaded = true;
-      this.userModel.imageFile = file.file;
-      file.withCredentials = false;
+      this.settingTheFile(file);
     };
     this.uploader.onCompleteItem = (items:any , response: any, status:any, headers:any ) => {
-     
-      console.log('ImageUpload:uploaded', items, status, response, headers);
+      // console.log('ImageUpload:uploaded', items, status, response, headers);
       this.attachmentList.push(JSON.parse(response));
     };
   }
+  settingTheFile(newFile){
+    this.userModel.imageUploaded = true;
+    this.userModel.imageFile = newFile.file;
+    newFile.withCredentials = false;
+  }
+
   handleFileInput(file: FileList){
     this.fileToUpload = file.item(0);
     let reader = new FileReader();
@@ -58,42 +56,41 @@ export class ContactComponent implements OnInit {
     }
     reader.readAsDataURL(this.fileToUpload);
   }
-  //add an inside method to update image uploaded to true and also
-  // make that change from the html when we lick teh upload file and something is changed
-  // disable send until everything is in order
-  uploadData(){
 
-  
+  uploadData(){
       let temp = this.uploader.queue[this.uploader.queue.length-1];
       this.uploader.queue = [];
       this.uploader.queue.push(temp);
 
       this.uploader.queue[this.uploader.queue.length-1].upload();
       this.sendUserData(this.userModel);
-  
-    
   }
   validateImage(){
     if ( this.userModel.imageUploaded = false)
       return false;
     else if( this.userModel.imageFile = null)
       return false
-      else 
+      else
       return true;
   }
   sendUserData(user: User){
-    return this.http.post<any>(this.URL1, user).subscribe(data => console.log(data));
+    return this.http.post<any>(URL1, user).subscribe(data => console.log(data));
   }
+
+}
+//Code below is for uploading the image without using angular directive 'ng2FileSelect'
+
+//
 // onFileSelected(event){
 //     console.log(event);
 //     this.selectedFile = <File> event.target.files[0];
 //     console.log('Ova e fajlot',this.selectedFile);
-    
+
 //   }
 
 //   onUpload(){
 //   const fd= new FormData();
-  
+
 //   fd.append('image',this.selectedFile, this.selectedFile.name)
 // console.log('format data: ', fd);
 // console.log('format selFIle ', this.selectedFile);
@@ -109,7 +106,7 @@ export class ContactComponent implements OnInit {
 //       } else if (event.type === HttpEventType.Response){
 //         console.log(event);
 //       }
-   
+
 //     })
 //   }
-}
+

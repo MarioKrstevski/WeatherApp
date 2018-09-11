@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 import * as i from "../../interaces/weatherdata";
-  
+
 @Injectable({
   providedIn: 'root'
 })
@@ -32,30 +32,23 @@ export class DataSharingService {
   turnOnSpinner(){
     this.toggleSpinner.next(true);
   }
-
   turnOffSpinner(){
     this.toggleSpinner.next(false);
   }
-
   turnOnSpinnerForAirPollution(){
     this.toggleSpinnerForAirPollution.next(true);
   }
-
   turnOffSpinnerForAirPollution(){
     this.toggleSpinnerForAirPollution.next(false);
   }
 
-
   changeCity(city: string) {
     this.defaultCity.next(city);
   }
-
   changeCoords(coords: i.ICoord){
     this.defaultCoords.next(coords);
   }
-
   changeDateTime(dateTime: string){
     this.defaultDateTime.next(dateTime);
   }
 }
- 

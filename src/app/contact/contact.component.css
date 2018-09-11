@@ -16,7 +16,7 @@ form {
     position: relative;
     border: 1px solid black;
 }
-.personInfo,.imageUpload{
+.userInfo,.imageUpload{
     min-height: 455px;
     padding:0 5px;
     height: 100%;
@@ -55,21 +55,18 @@ input:-webkit-autofill{
     -webkit-animation-name: autofill;
     background-clip: content-box;
     -webkit-animation-fill-mode: both;
-} 
+}
 textarea, input{
     background: rgb(222, 222, 222);
     border:none;
-    outline: none;    
+    outline: none;
 }
 textarea{
-    
     position: relative;
     min-height: 260px;
     height: 100%;
     /* height: 260px !important; */
-    
 }
-
 .errorInput{
     position: relative;
 }
@@ -81,13 +78,10 @@ textarea{
 .invalid{
     border:1px solid rgb(238, 58, 58) !important;
 }
-
-
 .progress{
     border-radius: 0;
     margin-bottom: 73px;
 }
-
 .progressIndicator, .progressSuccess{
    position: absolute;
    bottom:170px;
@@ -100,14 +94,13 @@ textarea{
     height:50px;
     line-height: 50px;
     color:black;
-    font-size: 18px; 
+    font-size: 18px;
     width:100%;
    text-align: center;
 }
 .progressSuccess{
     margin-left:-10px;
 }
-
 .progress{
     height: 50px;
     background-color: rgb(177, 175, 175);
@@ -115,14 +108,12 @@ textarea{
 .progress-bar{
     background-color: rgb(78, 168, 212);
 }
-
 .uploadImage {
     overflow: hidden;
     position: relative;
     margin:0;
     margin-bottom:30px;
 }
-
 .uploadImage input[type="file"] {
     cursor: inherit;
     display: block;
@@ -136,7 +127,6 @@ textarea{
     top: 0;
     cursor: pointer;
 }
-
 /* Example stylistic flourishes */
 img{
     display: block;
@@ -144,7 +134,6 @@ img{
     height: 166px;
     width: 100%;
 }
-
 .imageUpload{
     position: relative;
     width: 100%;
@@ -160,20 +149,17 @@ img{
     margin: 0;
     outline: none;
 }
-
 .imageUpload button:last-child{
     margin-bottom:30px;
 }
 .innerElements{
    width:100%;
-   margin-right: 30px;  
+   margin-right: 30px;
    position: absolute;
-   bottom:0; 
+   bottom:0;
 }
-
 .uploadList{
     padding-left: 20px;
-
 }
 .uploadList span, button{
     display: inline;

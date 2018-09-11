@@ -10,9 +10,7 @@ input:-webkit-autofill{
     background-clip: content-box;
     -webkit-animation-fill-mode: both;
 }
-input,
-button,
-.SearchBox:before {
+input, button, .SearchBox:before {
   padding: .35em .75em;
   border: none;
   font-size: 16px;

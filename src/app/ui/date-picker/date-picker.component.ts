@@ -11,34 +11,31 @@ import { DataSharingService } from '../services/data-sharing.service';
 export class DatePickerComponent implements OnInit {
 
   currentDate: DateModel = new DateModel();
-  
 
-  constructor(private dataSharing : DataSharingService) { }
+  constructor(private dataSharingService : DataSharingService) { }
 
   ngOnInit() {
     let now = new Date();
-    
     this.currentDate.day = now.getDate();
     this.currentDate.month = now.getMonth()+1;
     this.currentDate.year = now.getFullYear();
-
-    console.log('this is current date',this.currentDate);
   }
-
   updateDateTime(newDateTime){
+    //we need to create a new instance/reference because the directory we are using
+    //is returning a simple json object to us, and we need to cast it to our DateModel
+    //so that it works nicely with the other components/function logic
     this.currentDate = new DateModel();
-
     this.currentDate.day = newDateTime.day;
     this.currentDate.month = newDateTime.month;
     this.currentDate.year = newDateTime.year;
 
-    this.dataSharing.turnOnSpinnerForAirPollution();
-    this.dataSharing.changeDateTime(this.currentDate.createDateString());
+    this.dataSharingService.turnOnSpinnerForAirPollution();
+    this.dataSharingService.changeDateTime(this.currentDate.createDateString());
   }
 
   updateForCurrent(){
-    this.dataSharing.changeDateTime('current');
-    this.dataSharing.turnOnSpinnerForAirPollution();
+    this.dataSharingService.changeDateTime('current');
+    this.dataSharingService.turnOnSpinnerForAirPollution();
   }
 
 }

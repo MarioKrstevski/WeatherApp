@@ -1,8 +1,10 @@
 export class User {
+
+    //Properties are public because they need to be binded with ngModel in the forms
     constructor(
-        private name: string,
-        private email: string,
-        private message: string,
+        public name: string,
+        public email: string,
+        public message: string,
         public imageUploaded: boolean,
         public imageFile: any
     ){}

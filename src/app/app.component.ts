@@ -1,8 +1,6 @@
-import { Component, OnInit, AfterViewChecked, AfterViewInit } from '@angular/core';
-import { WeatherDataService  } from './ui/services/weather-data.service';
-import { Event, Router, NavigationStart, NavigationCancel, NavigationEnd, NavigationError} from '@angular/router';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 
-import * as $ from 'jquery';
+// import * as $ from 'jquery';
 
 @Component({
   selector: 'app-root',
@@ -12,10 +10,10 @@ import * as $ from 'jquery';
 export class AppComponent implements OnInit, AfterViewInit{
 
   showSpinner: boolean = true;
-  
+
   ngOnInit() {}
 
   ngAfterViewInit(){
-    $("#spinner").remove(); 
+    document.querySelector('#spinner').remove();
   }
 }

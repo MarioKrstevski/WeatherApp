@@ -20,9 +20,6 @@ import { WeatherDataService } from './services/weather-data.service';
 import { DataSharingService } from './services/data-sharing.service';
 import { SecondaryLoadingSpinnerComponent } from './secondary-loading-spinner/secondary-loading-spinner.component';
 
-
-
-
 @NgModule({
   imports: [
     CommonModule,
@@ -56,4 +53,5 @@ import { SecondaryLoadingSpinnerComponent } from './secondary-loading-spinner/se
     LoadingSpinnerComponent
   ]
 })
+
 export class UiModule { }

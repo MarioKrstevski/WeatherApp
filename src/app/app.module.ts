@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { AppRoutingModule, routingComponents } from './app-routing.module'
+import { AppRoutingModule } from './app-routing.module'
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { FileSelectDirective } from 'ng2-file-upload';
+
+import { UiModule } from './ui/ui.module';
 
 
 import { AppComponent } from './app.component';
@@ -13,16 +13,8 @@ import { FooterComponent } from './footer/footer.component';
 import { GoToTopComponent } from './go-to-top/go-to-top.component';
 import { ContactComponent } from './contact/contact.component';
 
-import {NgxPageScrollModule} from 'ngx-page-scroll';  
-
-import { UiModule } from './ui/ui.module';
-
-// import { LayoutComponent } from './ui/layout/layout.component'
-
-// const appRoutes: Routes = [
-//   {path:'',component:LayoutComponent},
-//   {path:'/contact',component:ContactComponent}
-// ];
+import {NgxPageScrollModule} from 'ngx-page-scroll';
+import { FileSelectDirective } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -42,7 +34,7 @@ import { UiModule } from './ui/ui.module';
     FormsModule
   ],
   providers: [
-    
+
   ],
   bootstrap: [AppComponent]
 })

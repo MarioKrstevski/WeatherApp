@@ -28,15 +28,15 @@
     /* border: 1px solid black; */
     display:inline-block;
     /* Height is set to 370px but is actually 325px */
-    height: 370px; 
-    
+    height: 370px;
+
 }
 .weeklyPeak{
     overflow: scroll;
     margin:0;
     padding:0;
     color:black;
- 
+
 }
 .weeklyPeak::-webkit-scrollbar{
     display: none;
@@ -51,13 +51,13 @@
     background-color:rgba(265, 224, 215, .65);
     /* border:1px solid yellow; */
     padding:20px 35px 20px 25px;
-    
+
 }
 .perDay:after{
-    content: ""; 
-    display: block;     
-    width: 100%; 
-    padding-top: 0px; 
+    content: "";
+    display: block;
+    width: 100%;
+    padding-top: 0px;
     border-bottom: 1px solid black;
 }
 .perDay:hover{
@@ -73,37 +73,30 @@
 }
 .weatherTemp{
     font-size: 26px;
-    
 }
-
 .weatherDate{
-    padding-top:45px;
+    padding-top: 45px;
     padding-left: 25px;
-    margin:0;
-    line-height:14px;
+    margin: 0;
+    line-height: 14px;
     font-size: 14px;
 }
-
 .today{
     position: relative;
-    background-color:transparent;
-    padding:0;
+    background-color: transparent;
+    padding: 0;
     color: white;
-
 }
-
 .city{
     position: absolute;
-    top:15px;
+    top: 15px;
     right: 20px;
 }
-
 .city p{
-    margin:-5px;
+    margin: -5px;
     font-size: 28px;
     text-align: right;
     color:white;
-
 }
 .city .allcaps{
     font-size: 16px;
@@ -111,76 +104,63 @@
 }
 .dateTime{
     position: absolute;
-    bottom:10px;
-    left:20px;
+    bottom: 10px;
+    left: 20px;
 }
 .dateTime p{
-    margin:0;
-
+    margin: 0;
 }
 .Time{
     font-size: 2em;
 }
-.daySummary{
+.statsForTheDay{
     position: absolute;
-    bottom:-15px;
-    right:20px;
+    bottom: -15px;
+    right: 20px;
     text-align: right;
     font-size: 1.2em;
 }
-.daySummary p:not(:last-child){
-    margin:0;
+.statsForTheDay p:not(:last-child){
+    margin: 0;
 }
 .temperature{
     font-size: 3em;
 }
-
-.colRow{
-    /* background-color: aqua; */
-}
-
-.blackborder{
-    border:1px solid black;
-}
-
 .everyTwoHours{
     color:white;
-    padding: 20px 25px;   
+    padding: 20px 25px;
     overflow: hidden;
     background-color: rgba(54, 50, 49, 0.65);
 }
-.iconWeather{
+.weatherIcon{
     margin:0 auto;
     /* width:180px; */
     height: 140px;
     /* background-color:purple; */
     text-align: center;
 }
-.iconWeather:after{
-    content: ""; 
-    display: block;     
-    width: 100%; 
-    padding-top: 0px; 
+.weatherIcon:after{
+    content: "";
+    display: block;
+    width: 100%;
+    padding-top: 0px;
     border-bottom: 3px solid white;
 }
-.iconWeather .wi{
+.weatherIcon .wi{
     color:white;
     /* font-size:6em; */
 }
-.iconWeather p{
+.weatherIcon p{
     font-size:25px;
 }
-.iconWeather img{
-  
+.weatherIcon img{
    width: 80px;
    height: 80px;
-
 }
 .timesPerDay{
     height: 180px;
-   
-    margin:0 auto;
-    margin-top:22px;
+    margin: 0 auto;
+    margin-top: 22px;
     overflow: scroll;
     /* background-color:pink; */
 }
@@ -188,10 +168,10 @@
     display: none;
 }
 .alignText:after{
-    content: ""; 
-    display: block;     
-    width: 100%; 
-    padding-top: 30px; 
+    content: "";
+    display: block;
+    width: 100%;
+    padding-top: 30px;
     border-bottom: 1px solid white;
 }
 .alignText p{
@@ -199,15 +179,14 @@
 }
 .alignLeft{
     padding-left: 15px;
-    float:left;
+    float: left;
 }
-
 .alignRight{
     padding-right: 15px;
-    float:right;
+    float: right;
 }
 app-loading-spinner{
-    
+
     display: flex;
     align-items: center;
     justify-content: center;

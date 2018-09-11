@@ -1,19 +1,13 @@
-#airPolution{
+#airPollution{
     height: 450px;
     background-color: #384347;
     color:white;
-   
 }
-.blackBorder{
-    border:1px solid black;
-}
-
 .smallHeading{
     text-align: center;
-    padding:20px ;
+    padding: 20px ;
     margin-bottom: -15px;
 }
-
 .pollutionDetails{
     margin-top: 15px;
     padding-top: 15px;
@@ -21,33 +15,23 @@
     height: fit-content;
     box-shadow: inset 0px 0px 3px 3px rgba(245, 245, 245,0.2);
 }
-.whiteBorder{
-   border:  1px solid white;
-}
-
-pre{
-    color:white;
-}
 .infoBlock{
     border-bottom: 2px solid #39626d;
-    
 }
 .row p label{
-    width:105px;
-    float:left;
+    width: 105px;
+    float: left;
 }
 .row p span {
-    float:right;
+    float: right;
 }
 small{
     color:#7dd0e7;
 }
-
-.container-fluid{ 
+.container-fluid{
     min-height: 250px;
-    width:100% !important;
+    width: 100% !important;
 }
-
 .errorMsg{
     font-size: 1.6em;
     color:rgb(218, 98, 98);

@@ -1,64 +1,52 @@
-<div id="airPolution" class="dataContainer">
+<div id="airPollution" class="dataContainer">
     <h3 class="smallHeading">Air Polution</h3>
 
-    <app-secondary-loading-spinner *ngIf="showSpinner">
+    <app-secondary-loading-spinner *ngIf="showSpinner"></app-secondary-loading-spinner>
 
-    </app-secondary-loading-spinner>
-    
-    <div class="pollutionDetails " *ngIf="!showSpinner">
+    <div class="pollutionDetails" *ngIf="!showSpinner">
 
             <div class="container-fluid" *ngIf="airPollutionInfo">
                 <div class="row text-center justify-content-center">
-                    <div class="lola col-3">
-                        
-                        <p><small>Latitude</small> &nbsp; &nbsp; {{airPollutionInfo?.location?.latitude}}</p>
-                        
+                    <div class="col-3">
+                        <p><small> Latitude </small> &nbsp; &nbsp; {{airPollutionInfo?.location?.latitude}} </p>
                     </div>
                     <div class="col-3 datePicker">
                         <app-date-picker></app-date-picker>
                     </div>
-                    <div class="lola col-3">
-                        
-                        <p>{{airPollutionInfo?.location?.longitude}}  &nbsp; &nbsp;   <small>Longitude</small></p>
-                      
+                    <div class="col-3">
+                        <p> {{airPollutionInfo?.location?.longitude}}  &nbsp; &nbsp;   <small> Longitude </small></p>
                     </div>
                 </div>
                 <br>
-                <div class="row justify-content-center center-block text-left ">
-                    <p class="col-5 infoBlock"><label>Precision: </label> <span>{{airPollutionInfo?.data[0]?.precision}}</span></p>
-                   
+                <div class="row justify-content-center center-block text-left">
+                    <p class="col-5 infoBlock"><label> Precision: </label> <span>{{airPollutionInfo?.data[0]?.precision}}</span></p>
                 </div>
-                <div class="row justify-content-center center-block text-left ">
+                <div class="row justify-content-center center-block text-left">
                     <p class="col-5 infoBlock"><label> Pressure: </label><span>{{airPollutionInfo?.data[0]?.pressure}}</span></p>
                 </div>
-                <div class="row justify-content-center center-block text-left ">
-                    <p class="col-5 infoBlock"><label >Value: </label> <span>{{airPollutionInfo?.data[0]?.value}}</span></p>
+                <div class="row justify-content-center center-block text-left">
+                    <p class="col-5 infoBlock"><label> Value: </label> <span>{{airPollutionInfo?.data[0]?.value}}</span></p>
                 </div>
-
-                <div class="row justify-content-center center-block text-left ">
-                        <p class="col-5 infoBlock"><label >Info For Date: </label> <span>{{airPollutionInfo?.time}}</span></p>
+                <div class="row justify-content-center center-block text-left">
+                        <p class="col-5 infoBlock"><label> Info For Date: </label> <span>{{airPollutionInfo?.time}}</span></p>
                 </div>
-
-            </div>    
+            </div>
 
             <br>
 
             <div class="container-fluid" *ngIf="errorMsg">
-
-                
-                
-                <div class="row text-center justify-content-center ">
-                    <div class="col-3 datePicker">
-                        <app-date-picker  ></app-date-picker>
+                <div class="row text-center justify-content-center">
+                    <div class="datePicker col-3">
+                        <app-date-picker ></app-date-picker>
                     </div>
                 </div>
                 <br>
-                <div class="row text-center justify-content-center ">
-                    <p class="col-5 errorMsg" >{{errorMsg}}</p>
+                <div class="row text-center justify-content-center">
+                    <p class="col-5 errorMsg"> {{errorMsg}} </p>
                 </div>
-                    
+
             </div>
-        
+
     </div>
 </div>
 

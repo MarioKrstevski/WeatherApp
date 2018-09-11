@@ -1,16 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
 import { Subscription } from 'rxjs';
-
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { DatePickerComponent } from '../date-picker/date-picker.component';
 
 import { WeatherDataService } from '../services/weather-data.service';
 import { DataSharingService } from '../services/data-sharing.service';
 
 import * as i from "../../interaces/weatherdata";
+
 @Component({
   selector: 'app-air-polution',
   templateUrl: './air-polution.component.html',
@@ -18,7 +13,8 @@ import * as i from "../../interaces/weatherdata";
 })
 export class AirPolutionComponent implements OnInit {
 
-  cityCoords: i.ICoord = {lat: -74.2,lon: 40.7};
+  cityCoords: i.ICoord = {lat: -74.2,lon: 40.7}; //Coords for New York, the default city
+
   airPolutionSubscription: Subscription;
   errorMsg: string = '';
   airPollutionInfo: i.IPollution;
@@ -26,84 +22,45 @@ export class AirPolutionComponent implements OnInit {
 
   showSpinner = false;
 
-  constructor(private airPolution: WeatherDataService, private sharedData : DataSharingService ){ }
+  constructor(private airPolution: WeatherDataService, private dataSharingService : DataSharingService ){ }
 
   ngOnInit() {
-    this.sharedData.turnOnSpinnerForAirPollution();
-    console.log("Startue se spiner za airPollution");
-    
-    this.airPolution.getAirPolutionForCoords(this.cityCoords,this.currentDateTime).subscribe((airPollutionData) => {
-      console.log('onInitZagadenost',airPollutionData);
-      this.airPollutionInfo = airPollutionData;
-      this.sharedData.turnOffSpinnerForAirPollution();
+    this.dataSharingService.turnOnSpinnerForAirPollution();
+    this.requestNewPollutionData(this.cityCoords,this.currentDateTime);
 
-      console.log("Gasi se spiner za airPollution");
-    }, (error: Error) => { 
-      console.log('onInitZagadenost');
+    //Called when the are new coordinates/city selected
+    this.dataSharingService.newCoords.subscribe((newCoords : i.ICoord) => {
+      this.cityCoords = newCoords;
+      this.unsubscribe(this.airPolutionSubscription);
+      this.requestNewPollutionData(newCoords,this.currentDateTime);
+    });
+    //Called when the date is changed for the measurements
+    this.dataSharingService.newDateTime.subscribe((newDateTime : string) => {
+      this.unsubscribe(this.airPolutionSubscription);
+      this.requestNewPollutionData(this.cityCoords, newDateTime);
+    });
+    //Controlling the loading spinner based on the data recieved
+    this.dataSharingService.newSpinnerToggle.subscribe((newValue: boolean) =>{
+      this.showSpinner = newValue;
+    })
+    this.dataSharingService.newSpinnerToggleForAirPollution.subscribe((newValue: boolean) =>{
+      this.showSpinner = newValue;
+    })
+  }
+
+  requestNewPollutionData(coords,dateTime){
+    this.airPolution.getAirPolution(coords,dateTime).subscribe(airPollutionData => {
+      this.errorMsg = "";
+      this.airPollutionInfo = airPollutionData;
+      this.dataSharingService.turnOffSpinnerForAirPollution();
+    }, (error: Error) => {
       this.errorMsg = "There is no information for current city";
       this.airPollutionInfo = null;
-      this.sharedData.turnOffSpinnerForAirPollution();
-      console.log("Gasi se spiner za airPollution muhaha");
-    }
-  );
-    this.sharedData.newSpinnerToggle.subscribe( (newValue: boolean) =>{
-      this.showSpinner = newValue;
-    })
-
-    this.sharedData.newSpinnerToggleForAirPollution.subscribe( (newValue: boolean) =>{
-      this.showSpinner = newValue;
-    })
-
-    this.sharedData.newCoords.subscribe((newCoords : i.ICoord) => {
-      // console.log('Koordinati mi se smeneti');
-
-      this.cityCoords = newCoords;
-      // console.log('onInitStuf',this.cityCoords);
-      
-      
-      this.unsubscribe(this.airPolutionSubscription);
-
-      this.airPolution.getAirPolutionForCoords(newCoords,this.currentDateTime).subscribe( airPollutionData =>{
-        this.sharedData.turnOffSpinnerForAirPollution();
-        console.log("Gasi se spiner za airPollution");
-        this.errorMsg = "";
-        console.log("Stuff is logged now but not  changed in the DOM");
-        console.log('zagadenost',airPollutionData);
-        
-        this.airPollutionInfo = airPollutionData;
-        
-      }, error => {
-        this.sharedData.turnOffSpinnerForAirPollution();
-        console.log("Gasi se spiner za airPollution");
-        this.errorMsg = "There is no information for that location or timeframe";
-        this.airPollutionInfo = null;
-      })
-    });
-
-    this.sharedData.newDateTime.subscribe((newDateTime : string) => {
-      // console.log('Vremeto e smeneto');
-
-     
-      this.unsubscribe(this.airPolutionSubscription);
-
-      this.airPolution.getAirPolutionForCoords(this.cityCoords, newDateTime).subscribe( airPollutionData =>{
-        this.sharedData.turnOffSpinnerForAirPollution();
-        console.log("Gasi se spiner za airPollution");
-        this.currentDateTime = newDateTime;
-        this.errorMsg = "";
-        // console.log("Stuff is logged now but not  changed in the DOM");
-        // console.log('zagadenost',airPollutionData);
-        
-        this.airPollutionInfo = airPollutionData;
-      }, error => {
-        this.sharedData.turnOffSpinnerForAirPollution();
-         console.log("Gasi se spiner za airPollution");
-        this.errorMsg = "There is no information for that location or timeframe";
-        this.airPollutionInfo = null;
-      })
-    });
+      this.dataSharingService.turnOffSpinnerForAirPollution();
+      }
+    );
   }
-  
+  //unsubscribe method for any subscription
   unsubscribe(subscription: Subscription) {
     if(subscription) {
       subscription.unsubscribe();
