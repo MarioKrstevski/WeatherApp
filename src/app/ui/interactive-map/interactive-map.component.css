@@ -20,23 +20,3 @@
 agm-map{
     height: 400px;
 }
-
-.marker{
-  position: relative;
-   top: -80px;
-   left: -35px;
-   background-color: rgba(108, 112, 96, 0.3);
-   width: 70px;
-   height: 80px;
-}
-.marker img{
-  display: block;
-  margin:0 auto;
-}
-.marker h1{
-  text-align: center;
-  color:white;
-  font-size: 2em;
-  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
-}
-

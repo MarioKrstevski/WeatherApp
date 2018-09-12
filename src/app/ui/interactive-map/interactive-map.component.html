@@ -6,9 +6,6 @@
 
     <agm-marker-cluster imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
 
-
-        iconUrl="http://openweathermap.org/img/w/{{city?.weather[0].icon}}.png"> -->
-
       <!-- OverLay is the marker -->
       <agm-overlay
         *ngFor="let city of cities; index as i"
@@ -16,24 +13,7 @@
         [longitude]="city?.coord?.Lon">
 
         <!-- Popup window design -->
-        <agm-info-window [style.color]="'green'">
-          <div class="infoDesign"  style="background-color: lightblue; color: blueviolet">
-              <p > {{city?.main.temp}} &#0176;C</p>
-              <p >{{city?.main.humidity}}% humidity</p>
-              <p >{{city?.wind.speed}} km/h wind</p>
-          </div>
-
-
-        </agm-info-window>
-
-        <!-- My custom design for the marker -->
-
-        <!-- <div style="height: 2px;width: 2px;background-color: red;"></div> -->
-        <div class="marker">
-
-          <img src="http://openweathermap.org/img/w/{{city?.weather[0].icon}}.png" alt="Weather Icon">
-          <h1>{{city?.main.temp | number:'1.0-0' }} &#0176;C</h1>
-        </div>
+        <app-my-marker [displayInfo]="city"></app-my-marker>
 
       </agm-overlay>
     </agm-marker-cluster>

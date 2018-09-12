@@ -23,9 +23,33 @@ export class InteractiveMapComponent implements OnInit {
     });
   }
 
-  onChoseLocation(event) {
-    this.lat = event.coords.lat;
-    this.lng = event.coords.lng;
+  onChoseLocation(eve) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    console.log(eve);
+
+    this.lat = eve.coords.lat;
+    this.lng = eve.coords.lng;
     this.locationChosen = true;
+  }
+
+  toggleMoreInfo(event, moreInfoElement){
+
+    event.stopPropagation();
+    // let eleme = document.getElementsByClassName("moreInfo");
+    // eleme.forEach((element) => {
+      //   element.style.color = 'red';
+      // });
+      // console.log(eleme);
+      let b:any = document.getElementById('goToTop');
+      let a: any = document.getElementsByClassName('moreInfo')[0];
+      moreInfoElement.style.color = 'red';
+
+
+  }
+  log(){
+    console.log('kliknat sum');
+
   }
 }

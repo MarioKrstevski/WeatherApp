@@ -24,6 +24,7 @@ import { PagerService } from './services/pager.service';
 import { WeatherDataService } from './services/weather-data.service';
 import { DataSharingService } from './services/data-sharing.service';
 import { SecondaryLoadingSpinnerComponent } from './secondary-loading-spinner/secondary-loading-spinner.component';
+import { MyMarkerComponent } from './interactive-map/my-marker/my-marker.component';
 
 @NgModule({
   imports: [
@@ -50,6 +51,7 @@ import { SecondaryLoadingSpinnerComponent } from './secondary-loading-spinner/se
     DatePickerComponent,
     LoadingSpinnerComponent,
     SecondaryLoadingSpinnerComponent,
+    MyMarkerComponent,
   ],
   providers:[
     PagerService,
