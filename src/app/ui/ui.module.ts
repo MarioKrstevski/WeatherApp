@@ -3,7 +3,11 @@ import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserModule } from '@angular/platform-browser'
 import { AgmCoreModule } from '@agm/core';
+import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
+import { AgmOverlays } from "agm-overlays";
+import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 
 import { LayoutComponent } from './layout/layout.component';
 import { CityWeatherInfoComponent } from './city-weather-info/city-weather-info.component';
@@ -14,6 +18,7 @@ import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { AirPolutionComponent } from './air-polution/air-polution.component';
 import { DatePickerComponent } from './date-picker/date-picker.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+
 
 import { PagerService } from './services/pager.service';
 import { WeatherDataService } from './services/weather-data.service';
@@ -28,7 +33,11 @@ import { SecondaryLoadingSpinnerComponent } from './secondary-loading-spinner/se
     NgbModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyC-UOu23S6rRvG4vbsbT9ps0U5tHsSgccA'
-    })
+    }),
+    AgmSnazzyInfoWindowModule,
+    BrowserModule,
+    AgmOverlays,
+    AgmJsMarkerClustererModule
   ],
   declarations: [
     LayoutComponent,
@@ -40,7 +49,7 @@ import { SecondaryLoadingSpinnerComponent } from './secondary-loading-spinner/se
     AirPolutionComponent,
     DatePickerComponent,
     LoadingSpinnerComponent,
-    SecondaryLoadingSpinnerComponent
+    SecondaryLoadingSpinnerComponent,
   ],
   providers:[
     PagerService,

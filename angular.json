@@ -26,7 +26,8 @@
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css",
-              "src/assets/icons/weather-icons-master/css/weather-icons.css"
+              "src/assets/icons/weather-icons-master/css/weather-icons.css",
+              "node_modules/snazzy-info-window/dist/snazzy-info-window.css"
             ],
             "scripts": [
 
