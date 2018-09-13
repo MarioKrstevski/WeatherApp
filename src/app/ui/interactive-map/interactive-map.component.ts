@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AgmMap, LatLngBounds, LatLng } from '@agm/core'
 
-import * as i from "../../interaces/weatherdata";
 import { WeatherDataService } from "../services/weather-data.service";
+import { google, LatLngLiteral, LatLngBoundsLiteral } from '@agm/core/services/google-maps-types';
+import { ISingeCity } from '../../interaces/weatherdata';
+import * as i from '../../interaces/weatherdata';
 
 @Component({
   selector: 'app-interactive-map',
@@ -10,46 +13,80 @@ import { WeatherDataService } from "../services/weather-data.service";
 })
 export class InteractiveMapComponent implements OnInit {
   // googleMapsAPIKey = 'AIzaSyC-UOu23S6rRvG4vbsbT9ps0U5tHsSgccA';
-  lat = 51.678418;
-  lng = 7.809007;
-  locationChosen = false;
-  cities: i.ISingeCity[] ;
+  lat = 49.305080095;
+  lng = 11.106342880;
+  mapZoom = 5;
+  cities: ISingeCity[] ;
 
+  //************ 34
+  //*            *
+  //*            *
+  //12 ***********
+  // 12,32,15,37
+  SW : i.ICoord = {
+    lat: 37, //1
+    lon: -7.7 //2
+  }
+
+  // 12  = SW south west DOLE LEVO
+  NE : i.ICoord = {
+    lat: 53, //3
+    lon: 33 //4
+  }
+  mapBounds : LatLngBoundsLiteral = {
+    east: this.NE.lon,
+    north: this.NE.lat,
+    south: this.SW.lat,
+    west: this.SW.lon,
+  };
+
+  SWcurrent = {
+    lat: 0,
+    lon: 0
+  }
+  NEcurrent = {
+    lat: 0,
+    lon: 0
+  }
+  // 34 = NE north east GORE DESNO
+
+  // @ViewChild('AgmMap') agmMap: AgmMap;
   constructor(private weather: WeatherDataService) {}
 
   ngOnInit() {
-    this.weather.getCitiesInRange(-10,39.5,32,57.6).subscribe(citiesData => {
+    this.weather.getCitiesInRange(this.SW.lon,this.SW.lat,this.NE.lon,this.NE.lat).subscribe(citiesData => {
       this.cities = citiesData.list;
     });
-  }
 
-  onChoseLocation(eve) {
-    event.preventDefault();
-    event.stopPropagation();
-
-    console.log(eve);
-
-    this.lat = eve.coords.lat;
-    this.lng = eve.coords.lng;
-    this.locationChosen = true;
-  }
-
-  toggleMoreInfo(event, moreInfoElement){
-
-    event.stopPropagation();
-    // let eleme = document.getElementsByClassName("moreInfo");
-    // eleme.forEach((element) => {
-      //   element.style.color = 'red';
-      // });
-      // console.log(eleme);
-      let b:any = document.getElementById('goToTop');
-      let a: any = document.getElementsByClassName('moreInfo')[0];
-      moreInfoElement.style.color = 'red';
-
+    console.log(this.mapBounds);
 
   }
-  log(){
-    console.log('kliknat sum');
+
+  // ngAfterViewInit() {
+  //   console.log('mapata',this.agmMap);
+  // }
+  logZoom(zoom){
+    console.log('Ova e zoomot current',zoom);
+  }
+
+  mapBoundsChanged(bounds: LatLngBounds) {
+    // console.log(bounds);
+    let northEast: LatLng = bounds.getNorthEast();
+    let southWest: LatLng = bounds.getSouthWest();
+    let center: LatLng = bounds.getCenter();
+
+    this.NEcurrent.lon = northEast.lng();
+    this.NEcurrent.lat = northEast.lat();
+
+    this.SWcurrent.lon = southWest.lng();
+    this.SWcurrent.lat = southWest.lat();
+
+
+    console.log("NORTH EAST", northEast.lat(), northEast.lng());
+    console.log("SOUTH WEST", southWest.lat(), southWest.lng());
+    // console.log("NE", northEast, "SW", southWest, "CENTER", center);
+    console.log("center coords", center.lat() , center.lng());
 
   }
+
 }

@@ -2,44 +2,46 @@
 .marker{
   padding: 0 5px;
   position: relative;
-   top: -80px;
-   left: -35px;
-   background-color: rgba(108, 112, 96, 0.5);
-
-   max-width: 240px;
-   /* overflow: hidden; */
-   height: 80px !important;
-   max-height: 80px !important;
-   transition: 1s ease all;
+  top: -85px;
+  left: -37px;
+  background-color: rgba(108, 112, 96, 0.5);
+  overflow: hidden;
+  width: 90px;
+  height: 85px;
 }
 .marker img{
   display: block;
-  margin:0 auto;
+  margin: 0 auto;
+  width: 60px;
+  height: 60px;
 }
 .marker h1{
   text-align: center;
   color:white;
-  font-size: 2em;
+  font-size: 1.8em;
   text-shadow: -2px 0 black, 0 1px black, 1px 0 black, 0 -2px black;
   border-bottom: 2px solid black;
 }
-.marker div{
+.basicInfo{
   display: inline-block;
-  height: 79px;
-
+  padding: 0;
 }
-.bigmarker{
-  width: 270px;
-}
-
 .markerInfo{
   width: 80px;
+  height: 85px;
+  overflow: hidden;
   display: inline-block;
 }
-.moreInfo{
-  padding-top: 5px;
-  display: inline-block;
-  width: 130px;
-  transition: width 1s ease;
+.bigmarker{
+  width: 250px;
+}
+.red{
+  background-color: red;
+}
+.blue{
+  background-color:blue;
+}
+.yellow{
+  background-color: yellow;
 }
 

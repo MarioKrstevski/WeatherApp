@@ -23,8 +23,10 @@ export class WeatherDataService {
      catchError(this.errorHandler));
   }
 
-  getCitiesInRange(lonLeft: number, LatBottom: number, LonRight: number, LatTop: number){
-    return this.http.get(`http://api.openweathermap.org/data/2.5/box/city?bbox=${lonLeft},${LatBottom},${LonRight},${LatTop},6&cluster=yes&APPID=${this.APIKey}`)
+  getCitiesInRange(SWlon: number, SWlat: number, NElon: number, NElat: number){
+    console.log(`http://api.openweathermap.org/data/2.5/box/city?bbox=${SWlon},${SWlat},${NElon},${NElat},6&cluster=yes&APPID=${this.APIKey}`);
+
+    return this.http.get(`http://api.openweathermap.org/data/2.5/box/city?bbox=${SWlon},${SWlat},${NElon},${NElat},6&cluster=yes&APPID=${this.APIKey}`)
     .pipe(map(resp => resp.json()));
   }
   getAirPolution(cityCoords: i.ICoord, datetime: string){
