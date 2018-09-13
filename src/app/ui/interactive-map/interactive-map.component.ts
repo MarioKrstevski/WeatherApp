@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { AgmMap, LatLngBounds, LatLng } from '@agm/core'
+import { Component, OnInit } from '@angular/core';
+import {LatLngBounds, LatLng } from '@agm/core'
 
 import { WeatherDataService } from "../services/weather-data.service";
-import { google, LatLngLiteral, LatLngBoundsLiteral } from '@agm/core/services/google-maps-types';
+import { LatLngBoundsLiteral } from '@agm/core/services/google-maps-types';
 import { ISingeCity } from '../../interaces/weatherdata';
+
 import * as i from '../../interaces/weatherdata';
 
 @Component({
@@ -15,13 +16,15 @@ export class InteractiveMapComponent implements OnInit {
   // googleMapsAPIKey = 'AIzaSyC-UOu23S6rRvG4vbsbT9ps0U5tHsSgccA';
   lat = 49.305080095;
   lng = 11.106342880;
-  mapZoom = 5;
+  mapZoom = 6;
+  MapCenter: LatLng;
   cities: ISingeCity[] ;
 
   //************ 34
   //*            *
   //*            *
   //12 ***********
+
   // 12,32,15,37
   SW : i.ICoord = {
     lat: 37, //1
@@ -33,59 +36,55 @@ export class InteractiveMapComponent implements OnInit {
     lat: 53, //3
     lon: 33 //4
   }
-  mapBounds : LatLngBoundsLiteral = {
+  mapBounds: LatLngBoundsLiteral = {
     east: this.NE.lon,
     north: this.NE.lat,
     south: this.SW.lat,
     west: this.SW.lon,
   };
+  prevMapBounds = this.mapBounds;
 
-  SWcurrent = {
-    lat: 0,
-    lon: 0
-  }
-  NEcurrent = {
-    lat: 0,
-    lon: 0
-  }
-  // 34 = NE north east GORE DESNO
-
-  // @ViewChild('AgmMap') agmMap: AgmMap;
   constructor(private weather: WeatherDataService) {}
 
   ngOnInit() {
-    this.weather.getCitiesInRange(this.SW.lon,this.SW.lat,this.NE.lon,this.NE.lat).subscribe(citiesData => {
-      this.cities = citiesData.list;
-    });
-
-    console.log(this.mapBounds);
-
   }
 
-  // ngAfterViewInit() {
-  //   console.log('mapata',this.agmMap);
-  // }
-  logZoom(zoom){
-    console.log('Ova e zoomot current',zoom);
+  updateMapZoom(newZoom){
+    console.log(newZoom);
+
+    this.mapZoom = newZoom;
   }
 
   mapBoundsChanged(bounds: LatLngBounds) {
-    // console.log(bounds);
+
     let northEast: LatLng = bounds.getNorthEast();
     let southWest: LatLng = bounds.getSouthWest();
     let center: LatLng = bounds.getCenter();
+    this.MapCenter = center;
 
-    this.NEcurrent.lon = northEast.lng();
-    this.NEcurrent.lat = northEast.lat();
+    let newMapBounds: LatLngBoundsLiteral = {
+      east: northEast.lng(),
+      north: northEast.lat(),
+      west : southWest.lng(),
+      south : southWest.lat()
+    };
 
-    this.SWcurrent.lon = southWest.lng();
-    this.SWcurrent.lat = southWest.lat();
+    if(
+     Math.abs(this.prevMapBounds.east - newMapBounds.east)>3 ||
+     Math.abs(this.prevMapBounds.west - newMapBounds.west)>3 ||
+     Math.abs(this.prevMapBounds.north - newMapBounds.north)>2 ||
+     Math.abs(this.prevMapBounds.south - newMapBounds.south)>2  ){
+      this.weather.getCitiesInRange(newMapBounds.west,newMapBounds.south,newMapBounds.east,newMapBounds.north,this.mapZoom).subscribe(citiesData => {
+        this.cities = citiesData.list;
+        console.log(this.cities);
+      });
 
+      this.prevMapBounds = newMapBounds;
+    }
 
-    console.log("NORTH EAST", northEast.lat(), northEast.lng());
-    console.log("SOUTH WEST", southWest.lat(), southWest.lng());
-    // console.log("NE", northEast, "SW", southWest, "CENTER", center);
-    console.log("center coords", center.lat() , center.lng());
+    // console.log("NORTH EAST", northEast.lat(), northEast.lng());
+    // console.log("SOUTH WEST", southWest.lat(), southWest.lng());
+    // console.log("center coords", center.lat() , center.lng());
 
   }
 

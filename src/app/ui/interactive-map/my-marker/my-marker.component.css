@@ -34,6 +34,8 @@
 }
 .bigmarker{
   width: 250px;
+  z-index: 20;
+  background-color: rgba(60, 61, 57, 0.9);
 }
 .red{
   background-color: red;

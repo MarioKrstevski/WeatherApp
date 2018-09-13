@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 import * as i from "../../interaces/weatherdata";
+import { LatLngBoundsLiteral } from '@agm/core';
 
 @Injectable({
   providedIn: 'root'

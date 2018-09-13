@@ -3,9 +3,9 @@
 
   <agm-map [fitBounds]="mapBounds"
   (boundsChange)="mapBoundsChanged($event)"
-  (zoomChange)="logZoom($event)">
+  (zoomChange)="updateMapZoom($event)">
 
-  <agm-marker [longitude]="SW.lon" [latitude]="SW.lat">
+  <!-- <agm-marker [longitude]="SW.lon" [latitude]="SW.lat">
     <agm-info-window>
       <p>SW</p>
     </agm-info-window>
@@ -15,22 +15,8 @@
       <agm-info-window>
           <p>NE</p>
         </agm-info-window>
-  </agm-marker>
-
-
-  <agm-marker [longitude]="SWcurrent.lon" [latitude]="SWcurrent.lat" [iconUrl]="'https://www.clker.com/cliparts/g/N/b/T/A/k/google-maps-icon-green-md.png'">
-      <agm-info-window>
-        <p>SW Current</p>
-      </agm-info-window>
-    </agm-marker>
-
-    <agm-marker [longitude]="NEcurrent.lon" [latitude]="NEcurrent.lat" [iconUrl]="'https://www.clker.com/cliparts/g/N/b/T/A/k/google-maps-icon-green-md.png'">
-        <agm-info-window>
-            <p>NE Current</p>
-          </agm-info-window>
-    </agm-marker>
-
-    <agm-marker-cluster [zoomOnClick]="false" imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
+  </agm-marker> -->
+    <agm-marker-cluster  imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
 
       <!-- OverLay is the marker -->
       <agm-overlay
