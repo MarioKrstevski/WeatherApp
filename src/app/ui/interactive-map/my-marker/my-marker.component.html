@@ -1,7 +1,7 @@
 
 
 
- <div class="marker" (click)="isClickedToggle()" [ngClass]="{bigmarker: isClicked}">
+ <div class="marker" (click)="isClickedToggle()" [ngClass]="{bigmarker: isClicked}" >
   <div class="markerInfo " >
       <img src="http://openweathermap.org/img/w/{{displayInfo?.weather[0].icon}}.png" alt="Weather Icon">
       <h1> {{displayInfo?.main.temp | number:'1.0-0' }} &#0176;C</h1>

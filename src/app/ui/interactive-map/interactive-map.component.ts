@@ -70,10 +70,10 @@ export class InteractiveMapComponent implements OnInit {
     };
 
     if(
-     Math.abs(this.prevMapBounds.east - newMapBounds.east)>3 ||
-     Math.abs(this.prevMapBounds.west - newMapBounds.west)>3 ||
-     Math.abs(this.prevMapBounds.north - newMapBounds.north)>2 ||
-     Math.abs(this.prevMapBounds.south - newMapBounds.south)>2  ){
+     Math.abs(this.prevMapBounds.east - newMapBounds.east) > 3 ||
+     Math.abs(this.prevMapBounds.west - newMapBounds.west) > 3 ||
+     Math.abs(this.prevMapBounds.north - newMapBounds.north) > 2 ||
+     Math.abs(this.prevMapBounds.south - newMapBounds.south) > 2  ){
       this.weather.getCitiesInRange(newMapBounds.west,newMapBounds.south,newMapBounds.east,newMapBounds.north,this.mapZoom).subscribe(citiesData => {
         this.cities = citiesData.list;
         console.log(this.cities);

@@ -5,20 +5,9 @@
   (boundsChange)="mapBoundsChanged($event)"
   (zoomChange)="updateMapZoom($event)">
 
-  <!-- <agm-marker [longitude]="SW.lon" [latitude]="SW.lat">
-    <agm-info-window>
-      <p>SW</p>
-    </agm-info-window>
-  </agm-marker>
+    <agm-marker-cluster [zoomOnClick]="false" imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
 
-  <agm-marker [longitude]="NE.lon" [latitude]="NE.lat">
-      <agm-info-window>
-          <p>NE</p>
-        </agm-info-window>
-  </agm-marker> -->
-    <agm-marker-cluster  imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
-
-      <!-- OverLay is the marker -->
+      <!-- Overlay acts as a marker -->
       <agm-overlay
         *ngFor="let city of cities; index as i"
         [latitude]="city?.coord?.Lat+0.01"
