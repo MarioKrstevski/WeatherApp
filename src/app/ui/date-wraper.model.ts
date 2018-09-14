@@ -1,4 +1,4 @@
-export class DateModel{
+export class DateWrapper{
 
     constructor(
         public day: number = 0 ,

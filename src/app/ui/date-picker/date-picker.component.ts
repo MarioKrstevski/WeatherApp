@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DateModel } from '../dateModel';
+import { DateModel } from '../date-wraper.model';
 
 import { DataSharingService } from '../services/data-sharing.service';
 
