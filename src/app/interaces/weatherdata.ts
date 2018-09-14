@@ -1,4 +1,11 @@
+// TODO: Do not use ONE class for ALL the interfaces
+// Rather, make multiple classes and files which host these "models"
+// Instead of interfaces, you can just make them a class since they are your data models
+// example: export class WeatherData { } in the file names weather-data.model.ts
+// You can use them the same way as you did
+// Try to minimize interface usage for your app's domain model
 
+// TODO: Format code, add tabulation etc.
 export interface IWeatherData{
     city: ICity;
     ctn: number;

@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  // TODO: Remove constructor and ngOnInit if you do not use them.
+  // TODO: Remove commented things that are not needed here
+  // TODO: Remove unused methods
+  // TODO: Format code, add tabulation etc.
 
   constructor() { }
 

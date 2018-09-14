@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
-})
+})  // TODO: Format code, add non-programmer readable variable names
 export class PagerService {
 
   constructor() { }

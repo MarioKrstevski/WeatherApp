@@ -7,6 +7,9 @@ import * as i from "../../../interaces/weatherdata";
   styleUrls: ['./my-marker.component.css']
 })
 export class MyMarkerComponent implements OnInit {
+  // TODO: Remove constructor and ngOnInit if you do not use them.
+  // TODO: Remove commented things that are not needed here
+  // TODO: Format code, add tabulation etc.
 
   constructor() { }
 

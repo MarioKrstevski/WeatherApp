@@ -12,6 +12,9 @@ import * as i from "../../interaces/weatherdata";
   providers: []
 })
 export class CityWeatherInfoComponent implements OnInit {
+  // TODO: Remove commented things that are not needed here
+  // TODO: Remove unused methods
+  // TODO: Format code, add tabulation etc.
   currentTime = new Date();
   currentSelectedCity = '';
 

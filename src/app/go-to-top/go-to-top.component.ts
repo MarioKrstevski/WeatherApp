@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./go-to-top.component.css']
 })
 export class GoToTopComponent implements OnInit {
-
+  // TODO: Remove constructor and ngOnInit if you do not use them.
+  // TODO: Remove unused methods
 
   constructor() { }
 
