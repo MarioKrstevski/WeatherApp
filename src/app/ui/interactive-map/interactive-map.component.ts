@@ -13,6 +13,9 @@ import * as i from '../../interaces/weatherdata';
   styleUrls: ['./interactive-map.component.css']
 })
 export class InteractiveMapComponent implements OnInit {
+  // TODO: Remove commented things that are not needed here
+  // TODO: Format code, add tabulation etc.
+
   // googleMapsAPIKey = 'AIzaSyC-UOu23S6rRvG4vbsbT9ps0U5tHsSgccA';
   lat = 49.305080095;
   lng = 11.106342880;

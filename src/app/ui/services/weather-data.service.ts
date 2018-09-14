@@ -14,6 +14,7 @@ export class WeatherDataService {
 
   constructor(private http: Http) {}
 
+  // TODO: Format code, add spaces, tabulation etc...
   getWeather(city: string): Observable<i.IWeatherData> {
     if (!city.trim()){
       return (new Observable<i.IWeatherData>());
@@ -23,16 +24,17 @@ export class WeatherDataService {
      catchError(this.errorHandler));
   }
 
+  // TODO: Format code, add non-programmer readable variable names
   getCitiesInRange(SWlon: number, SWlat: number, NElon: number, NElat: number, mapZoom: number = 6){
     // console.log(`http://api.openweathermap.org/data/2.5/box/city?bbox=${SWlon},${SWlat},${NElon},${NElat},${mapZoom}&cluster=yes&APPID=${this.APIKey}`);
 
     return this.http.get(`http://api.openweathermap.org/data/2.5/box/city?bbox=${SWlon},${SWlat},${NElon},${NElat},${mapZoom}&cluster=yes&APPID=${this.APIKey}`)
     .pipe(map(resp => resp.json()));
-  }
+  }  // TODO: Format code
   getAirPolution(cityCoords: i.ICoord, datetime: string){
     return this.http.get(`http://api.openweathermap.org/pollution/v1/co/${cityCoords.lat.toFixed(6).slice(0,-5)},${cityCoords.lon.toFixed(6).slice(0,-5)}/${datetime}.json?appid=${this.APIKey}`)
     .pipe(map(resp => resp.json()));
-  }
+  }  // TODO: Format code
   errorHandler(error: HttpErrorResponse){
     return throwError(error.message || "The city with the name xyz does not exist!");
   }

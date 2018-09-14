@@ -12,6 +12,14 @@ import * as i from "../../interaces/weatherdata";
   styleUrls: ['./air-polution.component.css']
 })
 export class AirPolutionComponent implements OnInit {
+  // TODO: Remove commented things that are not needed here
+  // TODO: Remove unused methods
+  // TODO: Format code, add tabulation etc.
+
+
+  // TODO: Do not use "magic numbers", rather make some constant values that have some meaning
+  // Example: export const newYorkCoordinates = { lat: -74.2, lon: 40.7 } (above the @Component declaration)
+  // cityCoords = newYorkCoordinates;
 
   cityCoords: i.ICoord = {lat: -74.2,lon: 40.7}; //Coords for New York, the default city
 

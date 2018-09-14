@@ -7,7 +7,7 @@ import { LatLngBoundsLiteral } from '@agm/core';
 @Injectable({
   providedIn: 'root'
 })
-
+// TODO: Format code, add non-programmer readable variable names
 export class DataSharingService {
 
   private defaultCity = new BehaviorSubject<string>('New York');

@@ -12,6 +12,9 @@ import * as i from "../../interaces/weatherdata";
   styleUrls: ["./browse-cities.component.css"]
 })
 export class BrowseCitiesComponent implements OnInit {
+  // TODO: Remove commented things that are not needed here
+  // TODO: Remove unused methods
+  // TODO: Format code, add tabulation etc.
   dummyUrl = "./assets/dummy-data.json";
   urlForEurope = "http://api.openweathermap.org/dfata/2.5/box/city?bbox=12,32,15,37,10";
   private cities: i.IWeatherInfo[];

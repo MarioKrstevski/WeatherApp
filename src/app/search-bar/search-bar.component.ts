@@ -12,6 +12,9 @@ import * as i from "../interaces/weatherdata";
   styleUrls: ['./search-bar.component.css']
 })
 export class SearchBarComponent implements OnInit {
+  // TODO: Remove commented things that are not needed here
+  // TODO: Remove unused methods
+  // TODO: Format code, add tabulation etc.
 
   @Output() public weatherData = new EventEmitter();
 

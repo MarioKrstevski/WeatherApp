@@ -1,3 +1,4 @@
+// TODO, even though the class is camel case, the file should be dash case - If class is DateWrapper then file name should be date-wrapper.model.ts
 export class DateModel{
 
     constructor(

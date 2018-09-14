@@ -9,7 +9,9 @@ import { DataSharingService } from '../services/data-sharing.service';
   styleUrls: ['./date-picker.component.css']
 })
 export class DatePickerComponent implements OnInit {
-
+  // TODO: Remove commented things that are not needed here
+  // TODO: Remove unused methods
+  // TODO: Format code, add tabulation etc.
   currentDate: DateModel = new DateModel();
 
   constructor(private dataSharingService : DataSharingService) { }

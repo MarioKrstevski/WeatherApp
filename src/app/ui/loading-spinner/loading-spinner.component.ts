@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./loading-spinner.component.css']
 })
 export class LoadingSpinnerComponent implements OnInit {
+  // TODO: Remove constructor and ngOnInit if you do not use them.
 
   constructor() { }
 
