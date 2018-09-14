@@ -1,3 +1,5 @@
+import { ICity, IWeatherInfo } from "./weatherdata";
+
 export class WeatherData {
   city: ICity;
   ctn: number;

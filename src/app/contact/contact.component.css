@@ -1,7 +1,6 @@
 #contact{
     margin-top:100px;
     color:#616161;
-    border: 1px solid red;
     /* Height problem for smaller content */
     min-height: fit-content - 100px;
     height: 79vh;
@@ -14,7 +13,6 @@
 form {
     height: 100%;
     position: relative;
-    border: 1px solid black;
 }
 .userInfo,.imageUpload{
     min-height: 455px;
@@ -112,7 +110,7 @@ textarea{
     overflow: hidden;
     position: relative;
     margin:0;
-    margin-bottom:30px;
+    margin-bottom:25px;
 }
 .uploadImage input[type="file"] {
     cursor: inherit;
@@ -131,6 +129,7 @@ textarea{
 img{
     display: block;
     top:0;
+    margin-bottom: 5px;
     height: 166px;
     width: 100%;
 }
@@ -147,10 +146,11 @@ img{
     cursor:pointer;
     padding: 0;
     margin: 0;
+    margin-bottom: 5px;
     outline: none;
 }
 .imageUpload button:last-child{
-    margin-bottom:30px;
+    margin-bottom:25px;
 }
 .innerElements{
    width:100%;

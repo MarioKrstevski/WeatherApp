@@ -38,7 +38,7 @@ export class ContactComponent implements OnInit {
       this.settingTheFile(file);
     };
     this.uploader.onCompleteItem = (items:any , response: any, status:any, headers:any ) => {
-      // console.log('ImageUpload:uploaded', items, status, response, headers);
+      console.log('ImageUpload:uploaded', items, status, response, headers);
       this.attachmentList.push(JSON.parse(response));
     };
   }
