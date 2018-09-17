@@ -1,4 +1,4 @@
-export class PollutionData{
+export class PollutionData {
     precision: number;
     pressure: number;
     value: number;

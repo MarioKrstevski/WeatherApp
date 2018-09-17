@@ -1,22 +1,19 @@
 <div id="browse" class="browseCities dataContainer">
     <h3 class="smallHeading">Browse City</h3>
 
-    <app-loading-spinner  *ngIf="showSpinner"></app-loading-spinner>
+    <app-square-loading-spinner *ngIf="showSpinner"></app-square-loading-spinner>
 
     <div class="cities" *ngIf="!showSpinner">
 
         <div class="container blackborder2 ">
-            <div class="row justify-content-center" >
-              <div
-              class="cityInfo col-5 col-md-2"
-              *ngFor="let city of pagedCities"
-              (click)="newCity(city?.name)">
+            <div class="row justify-content-center">
+                <div class="cityInfo col-5 col-md-2" *ngFor="let city of pagedCities" (click)="newCity(city?.name)">
 
-                <img class="wi" *ngIf="city?.name" src="http://openweathermap.org/img/w/{{city?.weather[0].icon}}.png" alt="weather icon">
-                <p class="cityTitle" *ngIf="city?.name">{{city?.name}}</p>
-                <p class="cityDetails" *ngIf="city?.name"> {{city?.main.temp}} &#0176;C</p>
-                <p class="cityDetails" *ngIf="city?.name">{{city?.main.humidity}}% humidity</p>
-                <p class="cityDetails" *ngIf="city?.name">{{city?.wind.speed}} km/h wind</p>
+                    <img class="wi" *ngIf="city?.name" src="http://openweathermap.org/img/w/{{city?.weather[0].icon}}.png" alt="weather icon">
+                    <p class="cityTitle" *ngIf="city?.name">{{city?.name}}</p>
+                    <p class="cityDetails" *ngIf="city?.name"> {{city?.main.temp}} &#0176;C</p>
+                    <p class="cityDetails" *ngIf="city?.name">{{city?.main.humidity}}% humidity</p>
+                    <p class="cityDetails" *ngIf="city?.name">{{city?.wind.speed}} km/h wind</p>
                 </div>
             </div>
         </div>
@@ -27,23 +24,14 @@
             <nav class="paggination" aria-label="Page navigation example">
                 <ul class="pagination" *ngIf="pager.pages && pager.pages.length">
                     <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
-                        <a  (click)="setPage(1)" class="page-link"> &#171; </a>
+                        <a (click)="setPage(1)" class="page-link"> &#171; </a>
                     </li>
-                    <!-- <li class="page-item"><a class="page-link" href="#"> 1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li> -->
-                    <li
-                    *ngFor="let page of pager.pages"
-                    [ngClass]="{active:pager.currentPage === page}"
-                    class="page-item" >
-                            <a (click)="setPage(page)" class="page-link">{{page}}</a>
+                    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item">
+                        <a (click)="setPage(page)" class="page-link">{{page}}</a>
                     </li>
-                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}"
-                    class="page-item">
-                            <a (click)="setPage(pager.totalPages)" class="page-link"> &#187;</a>
+                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
+                        <a (click)="setPage(pager.totalPages)" class="page-link"> &#187;</a>
                     </li>
-                    <!-- <li class="page-item"><a class="page-link" href="#"> &#187; Last </a></li> -->
                 </ul>
             </nav>
         </div>

@@ -16,25 +16,25 @@ import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { FileSelectDirective } from 'ng2-file-upload';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    GoToTopComponent,
-    ContactComponent,
-    FileSelectDirective
-  ],
-  imports: [
-    BrowserModule,
-    UiModule,
-    AppRoutingModule,
-    NgxPageScrollModule,
-    HttpClientModule,
-    FormsModule
-  ],
-  providers: [
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        FooterComponent,
+        GoToTopComponent,
+        ContactComponent,
+        FileSelectDirective
+    ],
+    imports: [
+        BrowserModule,
+        UiModule,
+        AppRoutingModule,
+        NgxPageScrollModule,
+        HttpClientModule,
+        FormsModule
+    ],
+    providers: [
 
-  ],
-  bootstrap: [AppComponent]
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

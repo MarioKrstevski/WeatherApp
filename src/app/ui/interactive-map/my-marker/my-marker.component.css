@@ -1,41 +1,41 @@
 
 .marker{
-  padding: 0 5px;
-  position: relative;
-  top: -85px;
-  left: -37px;
-  background-color: rgba(108, 112, 96, 0.5);
-  overflow: hidden;
-  width: 90px;
-  height: 85px;
+    padding: 0 5px;
+    position: relative;
+    top: -85px;
+    left: -37px;
+    background-color: rgba(108, 112, 96, 0.5);
+    overflow: hidden;
+    width: 90px;
+    height: 85px;
 }
 .marker img{
-  display: block;
-  margin: 0 auto;
-  width: 60px;
-  height: 60px;
+    display: block;
+    margin: 0 auto;
+    width: 60px;
+    height: 60px;
 }
 .marker h1{
-  text-align: center;
-  color:white;
-  font-size: 1.8em;
-  text-shadow: -2px 0 black, 0 1px black, 1px 0 black, 0 -2px black;
-  border-bottom: 2px solid black;
+    text-align: center;
+    color:white;
+    font-size: 1.8em;
+    text-shadow: -2px 0 black, 0 1px black, 1px 0 black, 0 -2px black;
+    border-bottom: 2px solid black;
 }
 .basicInfo{
-  display: inline-block;
-  padding: 0;
+    display: inline-block;
+    padding: 0;
 }
 .markerInfo{
-  width: 80px;
-  height: 85px;
-  overflow: hidden;
-  display: inline-block;
+    width: 80px;
+    height: 85px;
+    overflow: hidden;
+    display: inline-block;
 }
 .bigmarker{
-  width: 250px;
-  z-index: 20;
-  background-color: rgba(60, 61, 57, 0.9);
+    width: 250px;
+    z-index: 20;
+    background-color: rgba(60, 61, 57, 0.9);
 }
 
 

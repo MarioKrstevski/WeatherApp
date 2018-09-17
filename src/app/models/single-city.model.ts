@@ -1,7 +1,7 @@
 import { CityCoordinates } from "./city-coordinates.model";
 import { Main } from "./main.model";
 
-export class SingeCity{
+export class SingleCity {
     clouds: Object;
     coord: CityCoordinates;
     dt: number;
@@ -12,4 +12,4 @@ export class SingeCity{
     snow: Object;
     weather: Array<Object>;
     wind: Object;
-  }
+}

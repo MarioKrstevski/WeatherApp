@@ -1,0 +1,12 @@
+{
+    "files.autoSave": "onFocusChange",
+    "files.autoSaveDelay": 750,
+    "editor.formatOnPaste": true,
+    "editor.minimap.renderCharacters": false,
+    "editor.detectIndentation": false,
+    "editor.formatOnSave": true,
+    "editor.wordWrapColumn": 140,
+    "html.format.wrapLineLength": 140,
+    "prettier.proseWrap": "never",
+    "editor.wrappingIndent": "indent"
+}

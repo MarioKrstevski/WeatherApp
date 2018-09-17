@@ -1,4 +1,4 @@
-/* 
+/*
 .datePick input{
     cursor: inherit;
     display: block;
@@ -14,11 +14,11 @@
 }
 */
 
- button {
+button {
     margin: 0 auto;
     color:white;
     border: 0.7px solid white;
-} 
+}
 .form-group {
     margin:0 auto;
 }

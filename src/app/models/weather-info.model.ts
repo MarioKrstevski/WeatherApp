@@ -1,6 +1,7 @@
 import { Main } from "./main.model";
 
- export class WeatherInfo {
+export class WeatherInfo {
+    name: string;
     clouds: Object;
     dt: number;
     dt_txt: string;

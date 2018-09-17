@@ -1,4 +1,4 @@
-export class CityCoordinates{
+export class CityCoordinates {
     Lat: number;
     Lon: number;
 }

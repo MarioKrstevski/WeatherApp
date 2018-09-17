@@ -1,17 +1,14 @@
-
-
-
- <div class="marker" (click)="isClickedToggle()" [ngClass]="{bigmarker: isClicked}" >
-  <div class="markerInfo " >
-      <img src="http://openweathermap.org/img/w/{{displayInfo?.weather[0].icon}}.png" alt="Weather Icon">
-      <h1> {{displayInfo?.main.temp | number:'1.0-0' }} &#0176;C</h1>
-  </div>
-  <div class="markerInfo"  *ngIf="isClicked" >
-      <img src="https://bit.ly/2NLeAMZ" alt="Weather Icon">
-      <h1> {{displayInfo?.main.humidity}}%</h1>
-  </div>
-  <div class="markerInfo"  *ngIf="isClicked">
-      <img src="https://image.flaticon.com/icons/svg/56/56086.svg" alt="Weather Icon">
-      <h1> {{displayInfo?.wind.speed | number:'1.0-0'}} km/h</h1>
-  </div>
+<div class="marker" (click)="isClickedToggle()" [ngClass]="{bigmarker: isClicked}">
+    <div class="markerInfo ">
+        <img src="http://openweathermap.org/img/w/{{displayInfo?.weather[0].icon}}.png" alt="Weather Icon">
+        <h1> {{displayInfo?.main.temp | number:'1.0-0' }} &#0176;C</h1>
+    </div>
+    <div class="markerInfo" *ngIf="isClicked">
+        <img src="../../../../assets//Icons/humidity_icon.png" alt="Weather Icon">
+        <h1> {{displayInfo?.main.humidity}}%</h1>
+    </div>
+    <div class="markerInfo" *ngIf="isClicked">
+        <img src="https://image.flaticon.com/icons/svg/56/56086.svg" alt="Weather Icon">
+        <h1> {{displayInfo?.wind.speed | number:'1.0-0'}} km/h</h1>
+    </div>
 </div>

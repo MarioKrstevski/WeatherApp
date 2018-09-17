@@ -1,4 +1,4 @@
-export class Coordinates{
-  lat: number;
-  lon: number;
+export class Coordinates {
+    lat: number;
+    lon: number;
 }

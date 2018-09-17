@@ -1,23 +1,18 @@
 <div id="map" class="interactiveMap dataContainer">
-  <h3 class="smallHeading">Map</h3>
+    <h3 class="smallHeading">Map</h3>
 
-  <agm-map [fitBounds]="mapBounds"
-  (boundsChange)="mapBoundsChanged($event)"
-  (zoomChange)="updateMapZoom($event)">
+    <agm-map [fitBounds]="mapBounds" (boundsChange)="mapBoundsChanged($event)" (zoomChange)="updateMapZoom($event)">
 
-    <agm-marker-cluster [zoomOnClick]="false" imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
+        <agm-marker-cluster [zoomOnClick]="false" imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
 
-      <!-- Overlay acts as a marker -->
-      <agm-overlay
-        *ngFor="let city of cities; index as i"
-        [latitude]="city?.coord?.Lat+0.01"
-        [longitude]="city?.coord?.Lon">
+            <!-- Overlay acts as a marker -->
+            <agm-overlay *ngFor="let city of cities; index as i" [latitude]="city?.coord?.Lat+0.01" [longitude]="city?.coord?.Lon">
 
-        <!-- Popup window design -->
-        <app-my-marker [displayInfo]="city"></app-my-marker>
+                <!-- Popup window design -->
+                <app-my-marker [displayInfo]="city"></app-my-marker>
 
-      </agm-overlay>
-    </agm-marker-cluster>
-  </agm-map>
+            </agm-overlay>
+        </agm-marker-cluster>
+    </agm-map>
 
 </div>

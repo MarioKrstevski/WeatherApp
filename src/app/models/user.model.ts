@@ -7,5 +7,5 @@ export class User {
         public message: string,
         public imageUploaded: boolean,
         public imageFile: any
-    ){}
+    ) { }
 }

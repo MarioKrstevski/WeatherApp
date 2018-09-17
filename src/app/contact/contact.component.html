@@ -1,76 +1,62 @@
 <div id="contact" class="dataContainer">
-  <p class="smallHeading"> Contact </p>
-  <form #contactForm="ngForm" novalidate (ngSubmit)="uploadData()" >
-   <div class="conatainer-fluid">
-     <div class="row">
-      <div class="userInfo col-12 col-md-6  ">
-          <div class="errorInput">
-            <small class="errorMsg" *ngIf="name.invalid && name.touched"> You must enter your name </small>
-            <div class="input-container"  [class.invalid]="name.invalid && name.touched" >
-                <i class="fa fa-user icon"> </i>
-                <input
-                #name="ngModel"
-                class="input-field" type="text" placeholder="Name" [(ngModel)]="userModel.name" name="name" required>
+    <p class="smallHeading"> Contact </p>
+    <form #contactForm="ngForm" novalidate (ngSubmit)="uploadData()">
+        <div class="conatainer-fluid">
+            <div class="row">
+                <div class="userInfo col-12 col-md-6  ">
+                    <div class="errorInput">
+                        <small class="errorMsg" *ngIf="name.invalid && name.touched"> You must enter your name </small>
+                        <div class="input-container" [class.invalid]="name.invalid && name.touched">
+                            <i class="fa fa-user icon"> </i>
+                            <input #name="ngModel" class="input-field" type="text" placeholder="Name" [(ngModel)]="userModel.name" name="name"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="errorInput">
+                        <small class="errorMsg" *ngIf="email.touched && userModel.email === ''"> You must enter your email </small>
+                        <small class="errorMsg" *ngIf="email.invalid && email.touched && userModel.email != ''"> Make sure it's an email
+                            format </small>
+                        <div class="input-container" [class.invalid]="email.invalid && email.touched">
+                            <i class="fa fa-envelope icon "> </i>
+                            <input #email="ngModel" class="input-field" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+                                type="email" placeholder="E-mail" [(ngModel)]="userModel.email" name="email" required>
+                        </div>
+                    </div>
+
+                    <div class="errorInput">
+                        <small class="errorMsg" *ngIf="message.invalid && message.touched"> You must a message </small>
+                        <div class="input-container">
+                            <textarea #message="ngModel" [(ngModel)]="userModel.message" [class.invalid]="message.invalid && message.touched"
+                                class="input-field" placeholder="Message" name="message" cols="30" rows="10" required></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="imageUpload col-12 col-md-6  ">
+                    <div class="innerElements  align-self-end ">
+
+                        <!-- Upload Works, but if you select 2 times, and upload, 2 items will be uploaded -->
+                        <img [src]="imageUrl" *ngIf="imageUrl">
+
+                        <label class="uploadImage">
+                            <button> Upload </button>
+                            <input required (change)="showImagePreview($event.target.files)" single ng2FileSelect [uploader]="uploader"
+                                type="file" name="photo" #image>
+                        </label>
+
+                        <div class="progress">
+                            <div class="progress-bar" [ngStyle]="{width: uploader.progress+'%'}">
+                            </div>
+                            <span *ngIf="uploader.progress!=100" class="progressIndicator "> {{uploader.progress}}% </span>
+                            <!-- <span *ngIf="uploader.progress===100" class="progressIndicator"> Success</span>  -->
+                            <span *ngIf="uploader.progress===100" class="successIndicator"> Your image was succesfuly uploaded </span>
+                            <div class="progress-bar"></div>
+                        </div>
+                        <button [disabled]="!(contactForm.form.valid && userModel.imageUploaded )" class="sendButton" type="submit"
+                            disabled="disabled"> SEND </button>
+                    </div>
+                </div>
             </div>
-          </div>
-
-          <div class="errorInput">
-            <small class="errorMsg" *ngIf="email.touched && userModel.email === ''"> You must enter your email </small>
-            <small class="errorMsg" *ngIf="email.invalid && email.touched && userModel.email != ''"> Make sure it's an email format </small>
-            <div class="input-container" [class.invalid]="email.invalid && email.touched">
-              <i class="fa fa-envelope icon "> </i>
-              <input
-              #email="ngModel"
-              class="input-field"
-              pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
-              type="email" placeholder="E-mail" [(ngModel)]="userModel.email" name="email" required>
-            </div>
-          </div>
-
-          <div class="errorInput">
-            <small class="errorMsg" *ngIf="message.invalid && message.touched"> You must a message </small>
-            <div class="input-container">
-                <textarea
-                #message="ngModel"
-                [(ngModel)]="userModel.message"
-                [class.invalid]="message.invalid && message.touched"
-                class="input-field" placeholder="Message" name="message" cols="30" rows="10" required></textarea>
-            </div>
-          </div>
-      </div>
-      <div class="imageUpload col-12 col-md-6  ">
-
-      <div class="innerElements  align-self-end "  >
-
-         <!-- Upload Works, but if you select 2 times, and upload, 2 items will be uploaded -->
-        <img [src]="imageUrl" *ngIf="imageUrl" >
-
-        <label class="uploadImage" >
-          <button> Upload </button>
-            <input
-            required
-            (change)="showImagePreview($event.target.files)"
-            single ng2FileSelect [uploader]="uploader"
-            type="file" name="photo" #image>
-          </label>
-
-          <div class="progress">
-            <div class="progress-bar"
-            [ngStyle]="{width: uploader.progress+'%'}"></div>
-            <span *ngIf="uploader.progress!=100" class="progressIndicator "> {{uploader.progress}}% </span>
-             <!-- <span *ngIf="uploader.progress===100" class="progressIndicator"> Success</span>  -->
-             <span *ngIf="uploader.progress===100" class="successIndicator"> Your image was succesfuly uploaded </span>
-
-            <div class="progress-bar"></div>
-          </div>
-
-          <button
-          [disabled]="!(contactForm.form.valid && userModel.imageUploaded )"
-          class="sendButton" type="submit" disabled="disabled"> SEND </button>
-      </div>
-
-      </div>
-     </div>
-   </div>
-  </form>
+        </div>
+    </form>
 </div>

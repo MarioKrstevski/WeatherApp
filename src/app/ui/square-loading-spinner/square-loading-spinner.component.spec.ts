@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InteractiveMapComponent } from './interactive-map.component';
+import { SquareLoadingSpinnerComponent } from './square-loading-spinner.component';
 
-describe('InteractiveMapComponent', () => {
-    let component: InteractiveMapComponent;
-    let fixture: ComponentFixture<InteractiveMapComponent>;
+describe('LoadingSpinnerComponent', () => {
+    let component: SquareLoadingSpinnerComponent;
+    let fixture: ComponentFixture<SquareLoadingSpinnerComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [InteractiveMapComponent]
+            declarations: [SquareLoadingSpinnerComponent]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(InteractiveMapComponent);
+        fixture = TestBed.createComponent(SquareLoadingSpinnerComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

@@ -1,4 +1,4 @@
-export  class Main{
+export class Main {
     grnd_level: number;
     humidity: number;
     pressure: number;

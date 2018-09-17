@@ -1,37 +1,30 @@
 <header class="dataContainer">
 
-        <a href="#home"  id="brandLogo">Forecast</a>
+    <a href="#home" id="brandLogo">Forecast</a>
 
-        <nav class="navbarStandard">
-         <!-- If home is active route, show all links, if its not, only show Home -->
-          <span class="menuLinks">
-            <a
-               href="#home"
-               pageScroll [pageScrollOffset]="100" [pageScrollDuration]="600"
-               routerLink="/" routerLinkActive [routerLinkActiveOptions]="{exact:true}"
-               #rla="routerLinkActive"> Home </a>
+    <nav class="navbarStandard">
+        <!-- If home is active route, show all links, if its not, only show Home -->
+        <span class="menuLinks">
+            <a href="#home" pageScroll [pageScrollOffset]="100" [pageScrollDuration]="600" routerLink="/" routerLinkActive
+                [routerLinkActiveOptions]="{exact:true}" #rla="routerLinkActive"> Home </a>
             <a href="#search" *ngIf="rla.isActive" pageScroll [pageScrollOffset]="100" [pageScrollDuration]="600"> Search </a>
             <a href="#browse" *ngIf="rla.isActive" pageScroll [pageScrollOffset]="100" [pageScrollDuration]="600"> Browse</a>
             <a href="#map" *ngIf="rla.isActive" pageScroll [pageScrollOffset]="100" [pageScrollDuration]="600"> Map</a>
-            <a id="contactLink" *ngIf="rla.isActive"
-               routerLink="/contact"> Contact</a>
-          </span>
+            <a id="contactLink" *ngIf="rla.isActive" routerLink="/contact"> Contact</a>
+        </span>
 
-          <span class="icon hamburger" (click)="toggleSideMenu(sideMenu)">
-             <i class="fa fa-bars"></i>
-          </span>
-        </nav >
+        <span class="icon hamburger" (click)="toggleSideMenu(sideMenu)">
+            <i class="fa fa-bars"></i>
+        </span>
+    </nav>
 </header>
 
 <nav (click)="closeSideMenu(sideMenu)" class="navbarHamburger " #sideMenu>
-  <a
-     href="#home" pageScroll [pageScrollOffset]="100" [pageScrollDuration]="600"
-     routerLink="/" routerLinkActive [routerLinkActiveOptions]="{exact:true}"
-     #rla="routerLinkActive"> Home </a>
-  <a href="#search" *ngIf="rla.isActive" pageScroll [pageScrollOffset]="100" [pageScrollDuration]="600"> Search </a>
-  <a href="#browse" *ngIf="rla.isActive" pageScroll [pageScrollOffset]="100" [pageScrollDuration]="600"> Browse</a>
-  <a href="#map" *ngIf="rla.isActive" pageScroll [pageScrollOffset]="100" [pageScrollDuration]="600"> Map</a>
-  <a id="contactLink" *ngIf="rla.isActive"
-     routerLink="/contact" > Contact</a>
+    <a href="#home" pageScroll [pageScrollOffset]="100" [pageScrollDuration]="600" routerLink="/" routerLinkActive
+        [routerLinkActiveOptions]="{exact:true}" #rla="routerLinkActive"> Home </a>
+    <a href="#search" *ngIf="rla.isActive" pageScroll [pageScrollOffset]="100" [pageScrollDuration]="600"> Search </a>
+    <a href="#browse" *ngIf="rla.isActive" pageScroll [pageScrollOffset]="100" [pageScrollDuration]="600"> Browse</a>
+    <a href="#map" *ngIf="rla.isActive" pageScroll [pageScrollOffset]="100" [pageScrollDuration]="600"> Map</a>
+    <a id="contactLink" *ngIf="rla.isActive" routerLink="/contact"> Contact</a>
 
-</nav >
+</nav>

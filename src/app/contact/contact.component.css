@@ -1,44 +1,45 @@
-#contact{
+#contact {
     margin-top: 100px;
-    color:#616161;
+    color: #616161;
     /* Height problem for smaller content */
     min-height: fit-content - 100px;
     height: 79vh;
 }
-.smallHeading{
+.smallHeading {
     text-align: center;
-    padding:20px ;
+    padding: 20px;
     font-size: 2.2em;
 }
 form {
     height: 100%;
     position: relative;
 }
-.userInfo,.imageUpload{
+.userInfo,
+.imageUpload {
     min-height: 455px;
     padding: 0 5px;
     height: 100%;
 }
-.blackBorder{
+.blackBorder {
     border: 1px solid black;
 }
-.input-container{
-    display:flex;
+.input-container {
+    display: flex;
     height: 55px;
-    width:100%;
-    margin-bottom:30px;
+    width: 100%;
+    margin-bottom: 30px;
 }
-.input-container > *{
+.input-container > * {
     height: 53px;
 }
-.input-container i{
+.input-container i {
     min-width: 53px;
     text-align: center;
-    background-color: rgb(212,212,212);
+    background-color: rgb(212, 212, 212);
     padding-top: 8px;
     font-size: 2em;
 }
-.input-field{
+.input-field {
     width: 100%;
     padding: 20px;
     outline: none;
@@ -46,64 +47,66 @@ form {
 @-webkit-keyframes autofill {
     to {
         color: 616161;
-        background:rgb(222, 222, 222);
+        background: rgb(222, 222, 222);
     }
 }
-input:-webkit-autofill{
+input:-webkit-autofill {
     -webkit-animation-name: autofill;
     background-clip: content-box;
     -webkit-animation-fill-mode: both;
 }
-textarea, input{
+textarea,
+input {
     background: rgb(222, 222, 222);
     border: none;
     outline: none;
 }
-textarea{
+textarea {
     position: relative;
     min-height: 260px;
     height: 100%;
     /* height: 260px !important; */
 }
-.errorInput{
+.errorInput {
     position: relative;
 }
-.errorMsg{
-    color:red;
+.errorMsg {
+    color: red;
     position: absolute;
     top: -20px;
 }
-.invalid{
+.invalid {
     border: 1px solid rgb(238, 58, 58) !important;
 }
-.progress{
+.progress {
     border-radius: 0;
     margin-bottom: 73px;
 }
-.progressIndicator, .progressSuccess{
-   position: absolute;
-   bottom: 170px;
-   left: 48%;
-   color:white;
+.progressIndicator,
+.progressSuccess {
+    position: absolute;
+    bottom: 170px;
+    left: 48%;
+    color: white;
 }
-.successIndicator{
+.successIndicator {
     background-color: rgb(145, 216, 38);
     position: absolute;
     height: 50px;
     line-height: 50px;
-    color:black;
+    color: black;
     font-size: 18px;
     width: 100%;
-   text-align: center;
+    text-align: center;
 }
-.progressSuccess{
+.progressSuccess {
     margin-left: -10px;
 }
-.progress{
+.progress {
     height: 50px;
     background-color: rgb(177, 175, 175);
 }
-.progress-bar{
+.progress-bar {
     background-color: rgb(78, 168, 212);
 }
 .uploadImage {
@@ -126,56 +129,56 @@ textarea{
     cursor: pointer;
 }
 /* Example stylistic flourishes */
-img{
+img {
     display: block;
     top: 0;
     margin-bottom: 5px;
     height: 166px;
     width: 100%;
 }
-.imageUpload{
+.imageUpload {
     position: relative;
     width: 100%;
     padding-bottom: 30px;
 }
-.imageUpload button{
+.imageUpload button {
     width: 100px !important;
     height: 50px !important;
-    color:white;
-    background-color: rgb(78, 168, 212) ;
+    color: white;
+    background-color: rgb(78, 168, 212);
     cursor: pointer;
     padding: 0;
     margin: 0;
     margin-bottom: 5px;
     outline: none;
 }
-.imageUpload button:last-child{
+.imageUpload button:last-child {
     margin-bottom: 25px;
 }
-.innerElements{
-   width: 100%;
-   margin-right: 30px;
-   position: absolute;
-   bottom: 0;
+.innerElements {
+    width: 100%;
+    margin-right: 30px;
+    position: absolute;
+    bottom: 0;
 }
-.uploadList{
+.uploadList {
     padding-left: 20px;
 }
-.uploadList span, button{
+.uploadList span,
+button {
     display: inline;
 }
-.uploadList > *{
+.uploadList > * {
     height: 30px !important;
 }
-.disabled{
+.disabled {
     background-color: gray !important;
 }
-.imageUpload button:disabled{
+.imageUpload button:disabled {
     background-color: gray;
 }
-@media only screen and (max-width: 767px){
-    .innerElements{
+@media only screen and (max-width: 767px) {
+    .innerElements {
         position: relative;
     }
 }
-
