@@ -1,5 +1,5 @@
 #contact{
-    margin-top:100px;
+    margin-top: 100px;
     color:#616161;
     /* Height problem for smaller content */
     min-height: fit-content - 100px;
@@ -16,11 +16,11 @@ form {
 }
 .userInfo,.imageUpload{
     min-height: 455px;
-    padding:0 5px;
+    padding: 0 5px;
     height: 100%;
 }
 .blackBorder{
-    border:1px solid black;
+    border: 1px solid black;
 }
 .input-container{
     display:flex;
@@ -32,11 +32,11 @@ form {
     height: 53px;
 }
 .input-container i{
-    min-width:53px;
+    min-width: 53px;
     text-align: center;
     background-color: rgb(212,212,212);
     padding-top: 8px;
-    font-size:2em;
+    font-size: 2em;
 }
 .input-field{
     width: 100%;
@@ -56,7 +56,7 @@ input:-webkit-autofill{
 }
 textarea, input{
     background: rgb(222, 222, 222);
-    border:none;
+    border: none;
     outline: none;
 }
 textarea{
@@ -71,10 +71,10 @@ textarea{
 .errorMsg{
     color:red;
     position: absolute;
-    top:-20px;
+    top: -20px;
 }
 .invalid{
-    border:1px solid rgb(238, 58, 58) !important;
+    border: 1px solid rgb(238, 58, 58) !important;
 }
 .progress{
     border-radius: 0;
@@ -82,22 +82,22 @@ textarea{
 }
 .progressIndicator, .progressSuccess{
    position: absolute;
-   bottom:170px;
-   left:48%;
+   bottom: 170px;
+   left: 48%;
    color:white;
 }
 .successIndicator{
     background-color: rgb(145, 216, 38);
     position: absolute;
-    height:50px;
+    height: 50px;
     line-height: 50px;
     color:black;
     font-size: 18px;
-    width:100%;
+    width: 100%;
    text-align: center;
 }
 .progressSuccess{
-    margin-left:-10px;
+    margin-left: -10px;
 }
 .progress{
     height: 50px;
@@ -109,8 +109,8 @@ textarea{
 .uploadImage {
     overflow: hidden;
     position: relative;
-    margin:0;
-    margin-bottom:25px;
+    margin: 0;
+    margin-bottom: 25px;
 }
 .uploadImage input[type="file"] {
     cursor: inherit;
@@ -128,7 +128,7 @@ textarea{
 /* Example stylistic flourishes */
 img{
     display: block;
-    top:0;
+    top: 0;
     margin-bottom: 5px;
     height: 166px;
     width: 100%;
@@ -143,20 +143,20 @@ img{
     height: 50px !important;
     color:white;
     background-color: rgb(78, 168, 212) ;
-    cursor:pointer;
+    cursor: pointer;
     padding: 0;
     margin: 0;
     margin-bottom: 5px;
     outline: none;
 }
 .imageUpload button:last-child{
-    margin-bottom:25px;
+    margin-bottom: 25px;
 }
 .innerElements{
-   width:100%;
+   width: 100%;
    margin-right: 30px;
    position: absolute;
-   bottom:0;
+   bottom: 0;
 }
 .uploadList{
     padding-left: 20px;
@@ -167,9 +167,6 @@ img{
 .uploadList > *{
     height: 30px !important;
 }
-
-
-
 .disabled{
     background-color: gray !important;
 }

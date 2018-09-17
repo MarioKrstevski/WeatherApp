@@ -5,6 +5,8 @@ import { WeatherDataService } from "../services/weather-data.service";
 import { DataSharingService } from "../services/data-sharing.service";
 
 import * as i from "../../interaces/weatherdata";
+import { WeatherInfo } from "../../models/weather-info.model";
+import { WeatherData } from "../../models/weather-data.model";
 
 @Component({
   selector: "app-browse-cities",
@@ -12,30 +14,25 @@ import * as i from "../../interaces/weatherdata";
   styleUrls: ["./browse-cities.component.css"]
 })
 export class BrowseCitiesComponent implements OnInit {
-  // TODO: Remove commented things that are not needed here
-  // TODO: Remove unused methods
-  // TODO: Format code, add tabulation etc.
-  dummyUrl = "./assets/dummy-data.json";
-  urlForEurope = "http://api.openweathermap.org/dfata/2.5/box/city?bbox=12,32,15,37,10";
-  private cities: i.IWeatherInfo[];
+
+  urlForEurope: string = "http://api.openweathermap.org/dfata/2.5/box/city?bbox=12,32,15,37,10";
+
+  private cities: WeatherInfo[];
 
   // pager object
   pager: any = {};
+  pagedCities: WeatherInfo[];
 
-  pagedCities: any[];
-
-  showSpinner = true;
-  fakeInfo: i.IWeatherInfo;
+  showSpinner: boolean = true;
+  fakeInfo: WeatherInfo;
   currentCity: string = "";
 
-  constructor(
-    private dataSharingService: DataSharingService,
-    private pagerService: PagerService,
-    private weather: WeatherDataService
-  ) {}
+  constructor(private dataSharingService: DataSharingService, private pagerService: PagerService, private weather: WeatherDataService) {}
 
   ngOnInit() {
-    this.weather.getCitiesInRange(-10,39.5,32,57.6).subscribe(citiesData => {
+
+    //The range is for a square on the map that contains Europe
+    this.weather.getCitiesInRange(-10,39.5,32,57.6).subscribe((citiesData: WeatherData) => {
       this.showSpinner = false;
       this.cities = citiesData.list;
 
@@ -52,20 +49,7 @@ export class BrowseCitiesComponent implements OnInit {
       this.setPage(1);
     });
 
-    // Code if you want to work with locak json file instaed of API
-
-    // this.http.get(this.dummyUrl)
-    // .pipe(map((response: Response) => response.json()))
-    // .subscribe(data => {
-    //     // set items to json response
-    //     this.cities = data;
-    //     // initialize to page 1
-    //     // console.log(this.setPage(1));
-    //     this.setPage(1);h
-
-    // });
-
-    this.dataSharingService.newCity.subscribe(newCity => (this.currentCity = newCity));
+    this.dataSharingService.newCity.subscribe((newCity: string) => (this.currentCity = newCity));
   }
 
   newCity(city: string) {
@@ -74,14 +58,14 @@ export class BrowseCitiesComponent implements OnInit {
       this.dataSharingService.turnOnSpinner();
       this.currentCity = city;
     } else {
-      // Else, the same city is clicked and nothing will happen, to optimize performance
+      // Else, the same city is clicked and nothing will happen, to optimize for performance
     }
   }
   setPage(page: number) {
     // get pager object from service
     this.pager = this.pagerService.getPager(this.cities.length, page);
 
-    // get current page of items
+    // get current page of cities
     this.pagedCities = this.cities.slice(
       this.pager.startIndex,
       this.pager.endIndex + 1

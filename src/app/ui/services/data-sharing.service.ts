@@ -13,11 +13,11 @@ export class DataSharingService {
   private defaultCity = new BehaviorSubject<string>('New York');
   newCity = this.defaultCity.asObservable();
 
-  private defaultCoords = new BehaviorSubject({
+  private defaultCoordinates = new BehaviorSubject({
     lat: -74.2121,
     lon: 40.7306
   });
-  newCoords = this.defaultCoords.asObservable();
+  newCoordinates = this.defaultCoordinates.asObservable();
 
   private defaultDateTime = new BehaviorSubject<string>(new Date().toLocaleDateString());
   newDateTime = this.defaultDateTime.asObservable();
@@ -46,8 +46,8 @@ export class DataSharingService {
   changeCity(city: string) {
     this.defaultCity.next(city);
   }
-  changeCoords(coords: i.ICoord){
-    this.defaultCoords.next(coords);
+  changeCoordinates(coordinates: i.ICoord){
+    this.defaultCoordinates.next(coordinates);
   }
   changeDateTime(dateTime: string){
     this.defaultDateTime.next(dateTime);

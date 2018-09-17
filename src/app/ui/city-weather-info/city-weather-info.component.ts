@@ -4,6 +4,8 @@ import { WeatherDataService } from '../services/weather-data.service';
 import { DataSharingService } from '../services/data-sharing.service';
 
 import * as i from "../../interaces/weatherdata";
+import { WeatherData } from '../../models/weather-data.model';
+import { WeatherInfo } from '../../models/weather-info.model';
 
 @Component({
   selector: 'app-city-weather-info',
@@ -12,20 +14,18 @@ import * as i from "../../interaces/weatherdata";
   providers: []
 })
 export class CityWeatherInfoComponent implements OnInit {
-  // TODO: Remove commented things that are not needed here
-  // TODO: Remove unused methods
-  // TODO: Format code, add tabulation etc.
-  currentTime = new Date();
+
+  currentTime: Date = new Date(); // used for the clock
   currentSelectedCity = '';
 
   currentDate = this.currentTime.toLocaleDateString("en-GB").replace(/\//g, ".");
-  weatherData: i.IWeatherData;
+  weatherData: WeatherData;
   cityLonLat = {
     "lon": 0,
     "lat": 0
   };
-  preview = new Array<i.IWeatherInfo>();
-  myData: Array<Array<i.IWeatherInfo>>;
+  preview = new Array<WeatherInfo>();
+  myData: Array<Array<WeatherInfo>>;
 
   showSpinner = true;
 
@@ -35,29 +35,29 @@ export class CityWeatherInfoComponent implements OnInit {
     this.dataSharingService.turnOnSpinner();
     this.updateCurrentTime();
 
-    this.dataSharingService.newCity.subscribe((newCity) => {
+    this.dataSharingService.newCity.subscribe((newCity: string) => {
       if(newCity !== this.currentSelectedCity){
         this.getWeatherForCity(newCity);
         this.currentSelectedCity = newCity;
       }
     })
-    this.dataSharingService.newSpinnerToggle.subscribe( (newValue: boolean) =>{
+    this.dataSharingService.newSpinnerToggle.subscribe((newValue: boolean) =>{
       this.showSpinner = newValue;
     })
   }
-  getWeatherForCity(city){
+  getWeatherForCity(city: string){
     this.weather.getWeather(city).subscribe(weatherInfo => {
       this.currentSelectedCity = weatherInfo.city.name;
       this.dataSharingService.turnOffSpinner()
       this.setData(weatherInfo);
     });
   }
-  setData(weatherInfo) {
+  setData(weatherInfo: WeatherData) {
     this.weatherData = weatherInfo;
     this.cityLonLat.lat = this.weatherData.city.coord.lon;
     this.cityLonLat.lon = this.weatherData.city.coord.lat;
 
-    this.dataSharingService.changeCoords(this.cityLonLat);
+    this.dataSharingService.changeCoordinates(this.cityLonLat);
     this.myData = this.createDaysArray(weatherInfo);
     this.preview = this.createPreview(this.myData);
   }
@@ -65,20 +65,20 @@ export class CityWeatherInfoComponent implements OnInit {
   // and this method is called to update the information
   // this is called in HTML when search bar component passed data
   // to parent (this component)
-  updateWeatherData(newWeatherData: i.IWeatherData) {
+  updateWeatherData(newWeatherData: WeatherData) {
     this.dataSharingService.turnOffSpinner();
     this.weatherData = newWeatherData;
 
     this.cityLonLat.lat = this.weatherData.city.coord.lon;
     this.cityLonLat.lon = this.weatherData.city.coord.lat;
 
-    this.dataSharingService.changeCoords(this.cityLonLat);
+    this.dataSharingService.changeCoordinates(this.cityLonLat);
     this.myData = this.createDaysArray(newWeatherData);
     this.preview = this.createPreview(this.myData);
 
     return newWeatherData;
   }
-  createPreview(allWeek: Array<Array<i.IWeatherInfo>>, index: number = 0) {
+  createPreview(allWeek: Array<Array<WeatherInfo>>, index: number = 0) {
     let previewResult = allWeek[index];
     return previewResult;
   }
@@ -88,9 +88,9 @@ export class CityWeatherInfoComponent implements OnInit {
     return null;
   }
   // Changes the structure of the WeatherData sorted by days
-  createDaysArray(data: i.IWeatherData) {
-    let endResult = new Array<Array<i.IWeatherInfo>>();
-    let oneDay = new Array<i.IWeatherInfo>();
+  createDaysArray(data: WeatherData) {
+    let endResult = new Array<Array<WeatherInfo>>();
+    let oneDay = new Array<WeatherInfo>();
     let currentDay = new Date();
 
     for (let period of data.list) {
@@ -109,7 +109,7 @@ export class CityWeatherInfoComponent implements OnInit {
     return endResult;
   }
 
-  isSelected(day: Array<i.IWeatherInfo>) {
+  isSelected(day: Array<WeatherInfo>) {
     if (day[0].dt_txt === this.preview[0].dt_txt) {
       return true;
     } else {
@@ -118,7 +118,7 @@ export class CityWeatherInfoComponent implements OnInit {
   }
 
   // Function to find maxTemp for the day
-  findMaxTemp(day = this.preview) {
+  findMaxTemp(day: Array<WeatherInfo> = this.preview) {
     let maxTemp: number = 0;
     day.forEach((timeStamp) => {
       if (timeStamp.main.temp_max > maxTemp) {
@@ -128,7 +128,7 @@ export class CityWeatherInfoComponent implements OnInit {
     return maxTemp;
   }
   // Compares if two dates are for the same day
-  sameDay(d1, d2) {
+  sameDay(d1: Date, d2: Date) {
     return d1.getFullYear() === d2.getFullYear() &&
     d1.getMonth() === d2.getMonth() &&
     d1.getDate() === d2.getDate();
@@ -140,7 +140,7 @@ export class CityWeatherInfoComponent implements OnInit {
     }, 1000);
   }
 
-  isTodaysDate(objectDate) {
+  isTodaysDate(objectDate: string) {
     let dt = new Date();
     let date = dt.getFullYear() + '/' + (((dt.getMonth() + 1) < 10) ? '0' : '') + (dt.getMonth() + 1) + '/' + ((dt.getDate() < 10) ? '0' : '') + dt.getDate();
     let dateFormated = date.replace(/\//g, "-");
@@ -152,44 +152,4 @@ export class CityWeatherInfoComponent implements OnInit {
       return false;
     }
   }
-  //Find the max temp for each day
-
-  // changeMaxTemp(weatherData: i.IWeatherData) {
-  //   let novaNiza = new Array<i.IWeatherInfo>();
-  //   let todaysDate = new Date(weatherData.list[0].dt_txt)
-  //   for (let info of weatherData.list) {
-  //     let tempDate = new Date(info.dt_txt);
-
-  //     if (this.sameDay(tempDate, todaysDate)) {
-  //       novaNiza.push(info);
-  //     }
-  //   }
-  //   console.dir(novaNiza);
-
-  //   let todaysMaxTemp = 0;
-  //   for (let i of novaNiza) {
-  //     if (i.main.temp_max > todaysMaxTemp) {
-  //       todaysMaxTemp = i.main.temp_max;
-  //     }
-  //   }
-  //   console.log(todaysMaxTemp);
-  //   return todaysMaxTemp;
-  // }
-
-
-  // For displaying NOW instead of time in the right window
-  // But changed with ngIf to always use the first elemnt with NOW
-
-  // checkRange(msecA: number) {
-  //   let time: number = parseInt(this.currentTime.getTime().toString().substring(0, 10)) + 10800;
-  //   // console.log(time);
-  //   // let time:number = 1534971600;
-  //   let msecB: number = time + 10800;
-
-  //   if ((msecA <= time) && (time < msecB)) {
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // }
 }

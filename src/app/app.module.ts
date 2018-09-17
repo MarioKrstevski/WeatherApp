@@ -6,14 +6,13 @@ import { FormsModule } from '@angular/forms';
 
 import { UiModule } from './ui/ui.module';
 
-
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { GoToTopComponent } from './go-to-top/go-to-top.component';
 import { ContactComponent } from './contact/contact.component';
 
-import {NgxPageScrollModule} from 'ngx-page-scroll';
+import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { FileSelectDirective } from 'ng2-file-upload';
 
 @NgModule({

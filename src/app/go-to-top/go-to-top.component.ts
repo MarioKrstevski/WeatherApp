@@ -1,39 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-go-to-top',
   templateUrl: './go-to-top.component.html',
   styleUrls: ['./go-to-top.component.css']
 })
-export class GoToTopComponent implements OnInit {
-  // TODO: Remove constructor and ngOnInit if you do not use them.
-  // TODO: Remove unused methods
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-}
-
-  // The code below is vanilla, it is replaced with a directory from angular 'PageScroll'
-
-  // $(window).scroll(function(){
-	// 	if ($(this).scrollTop() > 300) { // 300px from top
-  //   }
-
-  /* This function was replaced with ngx-page-scroll */
-
-  // goToTop(){
-  //   const scrollToTop = () => {
-  //     const c = document.documentElement.scrollTop || document.body.scrollTop;
-  //     if (c > 0) {
-  //       window.requestAnimationFrame(scrollToTop);
-  //       window.scrollTo(0, c - c / 10);
-  //     }
-  //   };
-
-  //   scrollToTop();
-  //   console.log('Scrolled to top');
-  //   }
-
-
+export class GoToTopComponent {}

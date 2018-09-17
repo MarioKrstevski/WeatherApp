@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import { FileUploader, FileItem } from 'ng2-file-upload/ng2-file-upload';
 import { User } from '../user';
 
 // const CLOUDINARY_URL='cloudinary://295464739934565:E3nd8figX26VtvW1b4PTx6ToAUw@dprdrh0oz';
@@ -34,21 +34,23 @@ export class ContactComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.uploader.onAfterAddingFile = (file) => {
+    this.uploader.onAfterAddingFile = (file: FileItem) => {
       this.settingTheFile(file);
     };
-    this.uploader.onCompleteItem = (items:any , response: any, status:any, headers:any ) => {
+    this.uploader.onCompleteItem = (items: any , response: any, status: any, headers: any ) => {
       console.log('ImageUpload:uploaded', items, status, response, headers);
       this.attachmentList.push(JSON.parse(response));
     };
   }
-  settingTheFile(newFile){
+
+  settingTheFile(newFile: FileItem){
     this.userModel.imageUploaded = true;
     this.userModel.imageFile = newFile.file;
     newFile.withCredentials = false;
   }
 
-  handleFileInput(file: FileList){
+  //Displays the image in an image tag above the button
+  showImagePreview(file: FileList){
     this.fileToUpload = file.item(0);
     let reader = new FileReader();
     reader.onload = (event:any) => {
@@ -61,52 +63,13 @@ export class ContactComponent implements OnInit {
       let temp = this.uploader.queue[this.uploader.queue.length-1];
       this.uploader.queue = [];
       this.uploader.queue.push(temp);
-
-      this.uploader.queue[this.uploader.queue.length-1].upload();
+      this.uploader.queue[this.uploader.queue.length-1].upload(); //Upload only the last item
       this.sendUserData(this.userModel);
   }
-  validateImage(){
-    if ( this.userModel.imageUploaded = false)
-      return false;
-    else if( this.userModel.imageFile = null)
-      return false
-      else
-      return true;
-  }
+
+  //Sends the form filled data as a User object
   sendUserData(user: User){
-    return this.http.post<any>(URL1, user).subscribe(data => console.log(data));
+    return this.http.post<User>(URL1, user).subscribe(data => console.log(data));
   }
 
 }
-//Code below is for uploading the image without using angular directive 'ng2FileSelect'
-
-//
-// onFileSelected(event){
-//     console.log(event);
-//     this.selectedFile = <File> event.target.files[0];
-//     console.log('Ova e fajlot',this.selectedFile);
-
-//   }
-
-//   onUpload(){
-//   const fd= new FormData();
-
-//   fd.append('image',this.selectedFile, this.selectedFile.name)
-// console.log('format data: ', fd);
-// console.log('format selFIle ', this.selectedFile);
-// console.log('format SelFIleName: ',  this.selectedFile.name);
-
-//     this.http.post(URL,this.selectedFile,{
-//       reportProgress:true,
-//       observe:'events'
-//     })
-//     .subscribe( event => {
-//       if (event.type === HttpEventType.UploadProgress ){
-//         console.log('Upload progress: ' + Math.round(event.loaded/event.total * 100 )+ '%');
-//       } else if (event.type === HttpEventType.Response){
-//         console.log(event);
-//       }
-
-//     })
-//   }
-

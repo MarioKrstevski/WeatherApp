@@ -4,7 +4,7 @@ import { EventEmitter } from '@angular/core';
 import { WeatherDataService } from '../ui/services/weather-data.service';
 import { DataSharingService } from '../ui/services/data-sharing.service';
 
-import * as i from "../interaces/weatherdata";
+import { WeatherData } from '../models/weather-data.model';
 
 @Component({
   selector: 'app-search-bar',
@@ -12,23 +12,19 @@ import * as i from "../interaces/weatherdata";
   styleUrls: ['./search-bar.component.css']
 })
 export class SearchBarComponent implements OnInit {
-  // TODO: Remove commented things that are not needed here
-  // TODO: Remove unused methods
-  // TODO: Format code, add tabulation etc.
 
   @Output() public weatherData = new EventEmitter();
 
-  weatherDataForCity: i.IWeatherData;
-  errorMsg = "" ;
-  selectedCity = "New York";
+  weatherDataForCity: WeatherData;
+  errorMsg: string = "" ;
+  currentlyDisplayedCity: string = "New York";
 
   constructor(private weather: WeatherDataService, private dataSharingService: DataSharingService) { }
 
   ngOnInit() {
-    this.dataSharingService.newCity.subscribe((newCity) => {
-      if(this.selectedCity !== newCity){
-      this.selectedCity = newCity;
-      // console.log('Smenet e selectedCity vo SearchBarComponent vo  ',this.selectedCity);
+    this.dataSharingService.newCity.subscribe((newCity: string) => {
+      if(this.currentlyDisplayedCity !== newCity){
+      this.currentlyDisplayedCity = newCity;
       }
     });
   }
@@ -37,18 +33,18 @@ export class SearchBarComponent implements OnInit {
     if (newCity.trim() === ""){
       return;
     }
-    if(this.selectedCity!==newCity){
+    if(this.currentlyDisplayedCity!==newCity){
       this.dataSharingService.turnOnSpinner();
-      this.weather.getWeather(newCity).subscribe((newCityWeather: i.IWeatherData) => {
+      this.weather.getWeather(newCity).subscribe((newCityWeather: WeatherData) => {
         this.weatherDataForCity = newCityWeather;
         this.weatherData.emit(this.weatherDataForCity);
         this.errorMsg = "";
       },
       error => {
-        this.errorMsg = error.replace('xyz',newCity);
+        this.errorMsg = error.replace('xyz', newCity);
         this.dataSharingService.turnOffSpinner();
       });
-      this.selectedCity = newCity;
+      this.currentlyDisplayedCity = newCity;
     }
   }
 }

@@ -4,7 +4,13 @@ import { Subscription } from 'rxjs';
 import { WeatherDataService } from '../services/weather-data.service';
 import { DataSharingService } from '../services/data-sharing.service';
 
-import * as i from "../../interaces/weatherdata";
+import { Coordinates } from '../../models/coordinates.model';
+import { Pollution } from '../../models/pollution.model';
+
+const newYorkCoordinates = {
+   lat: -74.2,
+   lon: 40.7 
+  }
 
 @Component({
   selector: 'app-air-polution',
@@ -12,40 +18,31 @@ import * as i from "../../interaces/weatherdata";
   styleUrls: ['./air-polution.component.css']
 })
 export class AirPolutionComponent implements OnInit {
-  // TODO: Remove commented things that are not needed here
-  // TODO: Remove unused methods
-  // TODO: Format code, add tabulation etc.
 
-
-  // TODO: Do not use "magic numbers", rather make some constant values that have some meaning
-  // Example: export const newYorkCoordinates = { lat: -74.2, lon: 40.7 } (above the @Component declaration)
-  // cityCoords = newYorkCoordinates;
-
-  cityCoords: i.ICoord = {lat: -74.2,lon: 40.7}; //Coords for New York, the default city
-
+  currentlyShownCityCoordinates: Coordinates = newYorkCoordinates;
   airPolutionSubscription: Subscription;
   errorMsg: string = '';
-  airPollutionInfo: i.IPollution;
-  currentDateTime = new Date().toISOString().substring(0,10)+'Z';
+  airPollutionInfo: Pollution;
+  currentDateTime: string = new Date().toISOString().substring(0,10)+'Z';
 
-  showSpinner = false;
+  showSpinner: boolean = false;
 
   constructor(private airPolution: WeatherDataService, private dataSharingService : DataSharingService ){ }
 
   ngOnInit() {
     this.dataSharingService.turnOnSpinnerForAirPollution();
-    this.requestNewPollutionData(this.cityCoords,this.currentDateTime);
+    this.requestNewPollutionData(this.currentlyShownCityCoordinates,this.currentDateTime);
 
     //Called when the are new coordinates/city selected
-    this.dataSharingService.newCoords.subscribe((newCoords : i.ICoord) => {
-      this.cityCoords = newCoords;
+    this.dataSharingService.newCoordinates.subscribe((newCoordinates : Coordinates) => {
+      this.currentlyShownCityCoordinates = newCoordinates;
       this.unsubscribe(this.airPolutionSubscription);
-      this.requestNewPollutionData(newCoords,this.currentDateTime);
+      this.requestNewPollutionData(newCoordinates,this.currentDateTime);
     });
-    //Called when the date is changed for the measurements
+    //Called when requested info for the same city but different date/period
     this.dataSharingService.newDateTime.subscribe((newDateTime : string) => {
       this.unsubscribe(this.airPolutionSubscription);
-      this.requestNewPollutionData(this.cityCoords, newDateTime);
+      this.requestNewPollutionData(this.currentlyShownCityCoordinates, newDateTime);
     });
     //Controlling the loading spinner based on the data recieved
     this.dataSharingService.newSpinnerToggle.subscribe((newValue: boolean) =>{
