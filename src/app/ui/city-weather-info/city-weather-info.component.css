@@ -185,8 +185,7 @@
     padding-right: 15px;
     float: right;
 }
-app-loading-spinner{
-
+app-square-loading-spinner{
     display: flex;
     align-items: center;
     justify-content: center;

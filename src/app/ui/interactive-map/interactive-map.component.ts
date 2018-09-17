@@ -48,9 +48,19 @@ export class InteractiveMapComponent implements OnInit {
         this.mapZoom = newZoom;
     }
 
+    getWeatherForNewMapFrame(frameChanged: void) {
+        this.weather.getCitiesInRange(this.prevMapBounds.west, this.prevMapBounds.south, this.prevMapBounds.east, this.prevMapBounds.north, this.mapZoom)
+            .subscribe(citiesData => {
+                this.cities = citiesData.list;
+                console.log(this.cities);
+            });
+    }
+
     mapBoundsChanged(bounds: LatLngBounds) {
+
         let northEast: LatLng = bounds.getNorthEast();
         let southWest: LatLng = bounds.getSouthWest();
+
         let center: LatLng = bounds.getCenter();
         this.MapCenter = center;
 
@@ -66,12 +76,8 @@ export class InteractiveMapComponent implements OnInit {
             Math.abs(this.prevMapBounds.west - newMapBounds.west) > 3 ||
             Math.abs(this.prevMapBounds.north - newMapBounds.north) > 2 ||
             Math.abs(this.prevMapBounds.south - newMapBounds.south) > 2) {
-            this.weather.getCitiesInRange(newMapBounds.west, newMapBounds.south, newMapBounds.east, newMapBounds.north, this.mapZoom)
-                .subscribe(citiesData => {
-                    this.cities = citiesData.list;
-                    console.log(this.cities);
-                });
 
+            console.log('Se smenija koordinatite');
             this.prevMapBounds = newMapBounds;
         }
     }

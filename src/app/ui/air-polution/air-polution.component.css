@@ -33,6 +33,7 @@ small{
     width: 100% !important;
 }
 .errorMsg{
+    width: 400px;
     font-size: 1.6em;
     color:rgb(218, 98, 98);
 }

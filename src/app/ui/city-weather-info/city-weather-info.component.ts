@@ -50,18 +50,8 @@ export class CityWeatherInfoComponent implements OnInit {
         this.weather.getWeather(city).subscribe(weatherInfo => {
             this.currentSelectedCity = weatherInfo.city.name;
             this.dataSharingService.turnOffSpinner()
-            this.setData(weatherInfo);
+            this.updateWeatherData(weatherInfo);
         });
-    }
-
-    setData(weatherInfo: WeatherData) {
-        this.weatherData = weatherInfo;
-        this.cityLonLat.lat = this.weatherData.city.coord.lon;
-        this.cityLonLat.lon = this.weatherData.city.coord.lat;
-
-        this.dataSharingService.changeCoordinates(this.cityLonLat);
-        this.myData = this.createDaysArray(weatherInfo);
-        this.preview = this.createPreview(this.myData);
     }
 
     // When we search for another city we get another Data,
@@ -70,6 +60,7 @@ export class CityWeatherInfoComponent implements OnInit {
     // to parent (this component)
     updateWeatherData(newWeatherData: WeatherData) {
         this.dataSharingService.turnOffSpinner();
+
         this.weatherData = newWeatherData;
 
         this.cityLonLat.lat = this.weatherData.city.coord.lon;

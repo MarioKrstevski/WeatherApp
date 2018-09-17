@@ -1,7 +1,7 @@
 <div id="map" class="interactiveMap dataContainer">
     <h3 class="smallHeading">Map</h3>
 
-    <agm-map [fitBounds]="mapBounds" (boundsChange)="mapBoundsChanged($event)" (zoomChange)="updateMapZoom($event)">
+    <agm-map [fitBounds]="mapBounds" (idle)="getWeatherForNewMapFrame($event)" (zoomChange)="updateMapZoom($event)" (boundsChange)=mapBoundsChanged($event)>
 
         <agm-marker-cluster [zoomOnClick]="false" imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
 

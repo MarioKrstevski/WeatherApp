@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { skip } from 'rxjs/operators';
 
 import { WeatherDataService } from '../services/weather-data.service';
 import { DataSharingService } from '../services/data-sharing.service';
@@ -31,16 +32,18 @@ export class AirPolutionComponent implements OnInit {
 
     ngOnInit() {
         this.dataSharingService.turnOnSpinnerForAirPollution();
-        this.requestNewPollutionData(this.currentlyShownCityCoordinates, this.currentDateTime);
 
         //Called when the are new coordinates/city selected
-        this.dataSharingService.newCoordinates.subscribe((newCoordinates: Coordinates) => {
+        this.dataSharingService.newCoordinates.pipe(skip(1)).subscribe((newCoordinates: Coordinates) => {
+            console.log('smenet grad');
             this.currentlyShownCityCoordinates = newCoordinates;
             this.unsubscribe(this.airPolutionSubscription);
             this.requestNewPollutionData(newCoordinates, this.currentDateTime);
         });
         //Called when requested info for the same city but different date/period
-        this.dataSharingService.newDateTime.subscribe((newDateTime: string) => {
+        this.dataSharingService.newDateTime.pipe(skip(1)).subscribe((newDateTime: string) => {
+            console.log('smeneto vreme');
+
             this.unsubscribe(this.airPolutionSubscription);
             this.requestNewPollutionData(this.currentlyShownCityCoordinates, newDateTime);
         });
@@ -55,6 +58,7 @@ export class AirPolutionComponent implements OnInit {
 
     requestNewPollutionData(coords: Coordinates, dateTime: string = 'current') {
         this.airPolution.getAirPolution(coords, dateTime).subscribe(airPollutionData => {
+            // console.log('pollutionData', airPollutionData);
             this.errorMsg = "";
             this.airPollutionInfo = airPollutionData;
             this.dataSharingService.turnOffSpinnerForAirPollution();
