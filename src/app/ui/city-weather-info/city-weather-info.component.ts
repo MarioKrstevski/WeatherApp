@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { WeatherDataService } from '../services/weather-data.service';
 import { DataSharingService } from '../services/data-sharing.service';
 
-import * as i from "../../interaces/weatherdata";
 import { WeatherData } from '../../models/weather-data.model';
 import { WeatherInfo } from '../../models/weather-info.model';
 
@@ -27,7 +26,7 @@ export class CityWeatherInfoComponent implements OnInit {
   preview = new Array<WeatherInfo>();
   myData: Array<Array<WeatherInfo>>;
 
-  showSpinner = true;
+  showSpinner: boolean = true;
 
   constructor(private dataSharingService: DataSharingService, private weather: WeatherDataService) { }
 
@@ -39,12 +38,13 @@ export class CityWeatherInfoComponent implements OnInit {
       if(newCity !== this.currentSelectedCity){
         this.getWeatherForCity(newCity);
         this.currentSelectedCity = newCity;
-      }
-    })
+      }})
+      
     this.dataSharingService.newSpinnerToggle.subscribe((newValue: boolean) =>{
       this.showSpinner = newValue;
     })
   }
+
   getWeatherForCity(city: string){
     this.weather.getWeather(city).subscribe(weatherInfo => {
       this.currentSelectedCity = weatherInfo.city.name;
@@ -52,6 +52,7 @@ export class CityWeatherInfoComponent implements OnInit {
       this.setData(weatherInfo);
     });
   }
+
   setData(weatherInfo: WeatherData) {
     this.weatherData = weatherInfo;
     this.cityLonLat.lat = this.weatherData.city.coord.lon;
@@ -61,6 +62,7 @@ export class CityWeatherInfoComponent implements OnInit {
     this.myData = this.createDaysArray(weatherInfo);
     this.preview = this.createPreview(this.myData);
   }
+
   // When we search for another city we get another Data,
   // and this method is called to update the information
   // this is called in HTML when search bar component passed data
@@ -78,15 +80,18 @@ export class CityWeatherInfoComponent implements OnInit {
 
     return newWeatherData;
   }
+
   createPreview(allWeek: Array<Array<WeatherInfo>>, index: number = 0) {
     let previewResult = allWeek[index];
     return previewResult;
   }
+
   // Preview is the middle and right screen, and this decides what is shown
   changePreview(index: number) {
     this.preview = this.createPreview(this.myData, index)
     return null;
   }
+
   // Changes the structure of the WeatherData sorted by days
   createDaysArray(data: WeatherData) {
     let endResult = new Array<Array<WeatherInfo>>();
@@ -97,13 +102,13 @@ export class CityWeatherInfoComponent implements OnInit {
       let pDate = new Date(period.dt_txt);
       if (this.sameDay(pDate, currentDay)) {
         oneDay.push(period);
-      }
-      else {
+      } else {
         endResult.push(oneDay);
         oneDay = new Array<i.IWeatherInfo>();
         oneDay.push(period);
         currentDay.setDate(currentDay.getDate() + 1);
       }
+
     }
     endResult.push(oneDay);
     return endResult;
@@ -115,6 +120,7 @@ export class CityWeatherInfoComponent implements OnInit {
     } else {
       return false;
     }
+
   }
 
   // Function to find maxTemp for the day
@@ -124,15 +130,18 @@ export class CityWeatherInfoComponent implements OnInit {
       if (timeStamp.main.temp_max > maxTemp) {
         maxTemp = timeStamp.main.temp_max;
       }
+
     })
     return maxTemp;
   }
+
   // Compares if two dates are for the same day
   sameDay(d1: Date, d2: Date) {
     return d1.getFullYear() === d2.getFullYear() &&
     d1.getMonth() === d2.getMonth() &&
     d1.getDate() === d2.getDate();
   }
+
   // Timer to update clock real time
   updateCurrentTime() {
     setInterval(() => {
@@ -151,5 +160,6 @@ export class CityWeatherInfoComponent implements OnInit {
     } else {
       return false;
     }
+
   }
 }
