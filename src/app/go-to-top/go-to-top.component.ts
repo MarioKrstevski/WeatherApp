@@ -1,4 +1,6 @@
-import { Component, AfterViewInit, ViewChild, Renderer2 } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, Renderer2, Inject } from '@angular/core';
+
+import { WINDOW } from '../ui/services/window.service';
 
 @Component({
     selector: 'app-go-to-top',
@@ -9,18 +11,15 @@ export class GoToTopComponent implements AfterViewInit {
 
     @ViewChild('goToTop') goToTop;
 
-    constructor(private renderer: Renderer2) { }
+    constructor(private renderer: Renderer2, @Inject(WINDOW) private window: Window) { }
 
     ngAfterViewInit() {
 
-
-        window.onscroll = () => {
+        this.window.onscroll = () => {
             if (window.scrollY > 700) {
                 this.renderer.removeClass(this.goToTop.nativeElement, 'hide');
-                // this.goToTop.nativeElement.classList.remove('hide');
             } else {
                 this.renderer.addClass(this.goToTop.nativeElement, 'hide');
-                // this.goToTop.nativeElement.classList.add('hide');
             }
         }
     }

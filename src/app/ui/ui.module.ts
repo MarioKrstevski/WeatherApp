@@ -25,6 +25,7 @@ import { PagerService } from './services/pager.service';
 import { WeatherDataService } from './services/weather-data.service';
 import { DataSharingService } from './services/data-sharing.service';
 import { MyMarkerComponent } from './interactive-map/my-marker/my-marker.component';
+import { WINDOW_PROVIDERS } from './services/window.service';
 
 @NgModule({
     imports: [
@@ -56,7 +57,8 @@ import { MyMarkerComponent } from './interactive-map/my-marker/my-marker.compone
     providers: [
         PagerService,
         WeatherDataService,
-        DataSharingService
+        DataSharingService,
+        WINDOW_PROVIDERS
     ],
     exports: [
         SearchBarComponent,
