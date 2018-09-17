@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { skip } from 'rxjs/operators';
 
@@ -18,10 +18,11 @@ const newYorkCoordinates = {
     templateUrl: './air-polution.component.html',
     styleUrls: ['./air-polution.component.css']
 })
-export class AirPolutionComponent implements OnInit {
+export class AirPolutionComponent implements OnInit, OnDestroy {
 
     currentlyShownCityCoordinates: Coordinates = newYorkCoordinates;
-    airPolutionSubscription: Subscription;
+    cityForTheCoordinates = ''
+    airPolutionSubscription: Subscription;//delete subscription
     errorMsg: string = '';
     airPollutionInfo: Pollution;
     currentDateTime: string = new Date().toISOString().substring(0, 10) + 'Z';
@@ -35,16 +36,11 @@ export class AirPolutionComponent implements OnInit {
 
         //Called when the are new coordinates/city selected
         this.dataSharingService.newCoordinates.pipe(skip(1)).subscribe((newCoordinates: Coordinates) => {
-            console.log('smenet grad');
             this.currentlyShownCityCoordinates = newCoordinates;
-            this.unsubscribe(this.airPolutionSubscription);
             this.requestNewPollutionData(newCoordinates, this.currentDateTime);
         });
         //Called when requested info for the same city but different date/period
         this.dataSharingService.newDateTime.pipe(skip(1)).subscribe((newDateTime: string) => {
-            console.log('smeneto vreme');
-
-            this.unsubscribe(this.airPolutionSubscription);
             this.requestNewPollutionData(this.currentlyShownCityCoordinates, newDateTime);
         });
         //Controlling the loading spinner based on the data recieved
@@ -58,14 +54,17 @@ export class AirPolutionComponent implements OnInit {
 
     requestNewPollutionData(coords: Coordinates, dateTime: string = 'current') {
         this.airPolution.getAirPolution(coords, dateTime).subscribe(airPollutionData => {
-            // console.log('pollutionData', airPollutionData);
+            console.log('pollutionData', airPollutionData);
             this.errorMsg = "";
             this.airPollutionInfo = airPollutionData;
             this.dataSharingService.turnOffSpinnerForAirPollution();
         }, (error: Error) => {
-            this.errorMsg = "There is no information for current city";
+            this.dataSharingService.newCity.subscribe((cityNewName: string) => {
+                let newDate = new Date(dateTime).toLocaleDateString();
+                this.errorMsg = `There is no information for ${cityNewName} on ${newDate}`;
+                this.dataSharingService.turnOffSpinnerForAirPollution();
+            });
             this.airPollutionInfo = null;
-            this.dataSharingService.turnOffSpinnerForAirPollution();
         }
         );
     }
@@ -75,4 +74,10 @@ export class AirPolutionComponent implements OnInit {
             subscription.unsubscribe();
         }
     }
+
+    ngOnDestroy() {
+
+    }
+
+
 }

@@ -60,9 +60,9 @@ export class CityWeatherInfoComponent implements OnInit {
     // to parent (this component)
     updateWeatherData(newWeatherData: WeatherData) {
         this.dataSharingService.turnOffSpinner();
+        this.dataSharingService.changeCity(newWeatherData.city.name);
 
         this.weatherData = newWeatherData;
-
         this.cityLonLat.lat = this.weatherData.city.coord.lon;
         this.cityLonLat.lon = this.weatherData.city.coord.lat;
 
