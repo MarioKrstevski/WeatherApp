@@ -9,6 +9,7 @@ import { Coordinates } from '../../models/coordinates.model';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
+
 @Component({
     selector: 'app-interactive-map',
     templateUrl: './interactive-map.component.html',

@@ -62,3 +62,6 @@
        min-height: 700px;
     }
 }
+ .container-fluid /deep/ .pagination-next {
+    background: red;
+  }

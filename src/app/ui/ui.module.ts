@@ -6,8 +6,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser'
 import { AgmCoreModule } from '@agm/core';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { AgmOverlays } from "agm-overlays";
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+
 
 import { LayoutComponent } from './layout/layout.component';
 import { CityWeatherInfoComponent } from './city-weather-info/city-weather-info.component';
@@ -39,7 +41,8 @@ import { WINDOW_PROVIDERS } from './services/window.service';
         AgmSnazzyInfoWindowModule,
         BrowserModule,
         AgmOverlays,
-        AgmJsMarkerClustererModule
+        AgmJsMarkerClustererModule,
+        NgxPaginationModule
     ],
     declarations: [
         LayoutComponent,

@@ -18,9 +18,11 @@ export class BrowseCitiesComponent implements OnInit, OnDestroy {
 
     urlForEurope: string = "http://api.openweathermap.org/dfata/2.5/box/city?bbox=12,32,15,37,10";
 
-    private cities: WeatherInfo[];
+    cities: WeatherInfo[];
     private unsubscribe: Subject<void> = new Subject;
 
+    p: number = 1;
+    paginationApi;
     // pager object
     pager: any = {};
     pagedCities: WeatherInfo[];
@@ -72,6 +74,12 @@ export class BrowseCitiesComponent implements OnInit, OnDestroy {
             this.pager.startIndex,
             this.pager.endIndex + 1
         );
+    }
+
+    pageChange(event) {
+        this.paginationApi = event;
+        console.log('page change', event);
+
     }
     ngOnDestroy() {
         this.unsubscribe.next();
