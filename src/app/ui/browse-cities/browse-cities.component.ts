@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 
 import { PagerService } from "../services/pager.service";
 import { WeatherDataService } from "../services/weather-data.service";
@@ -6,17 +6,20 @@ import { DataSharingService } from "../services/data-sharing.service";
 
 import { WeatherInfo } from "../../models/weather-info.model";
 import { WeatherData } from "../../models/weather-data.model";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 @Component({
     selector: "app-browse-cities",
     templateUrl: "./browse-cities.component.html",
     styleUrls: ["./browse-cities.component.css"]
 })
-export class BrowseCitiesComponent implements OnInit {
+export class BrowseCitiesComponent implements OnInit, OnDestroy {
 
     urlForEurope: string = "http://api.openweathermap.org/dfata/2.5/box/city?bbox=12,32,15,37,10";
 
     private cities: WeatherInfo[];
+    private unsubscribe: Subject<void> = new Subject;
 
     // pager object
     pager: any = {};
@@ -31,7 +34,7 @@ export class BrowseCitiesComponent implements OnInit {
     ngOnInit() {
 
         //The range is for a square on the map that contains Europe
-        this.weather.getCitiesInRange(-10, 39.5, 32, 57.6).subscribe((citiesData: WeatherData) => {
+        this.weather.getCitiesInRange(-10, 39.5, 32, 57.6).pipe(takeUntil(this.unsubscribe)).subscribe((citiesData: WeatherData) => {
             this.showSpinner = false;
             this.cities = citiesData.list;
 
@@ -48,7 +51,7 @@ export class BrowseCitiesComponent implements OnInit {
             this.setPage(1);
         });
 
-        this.dataSharingService.newCity.subscribe((newCity: string) => (this.currentCity = newCity));
+        this.dataSharingService.newCity.pipe(takeUntil(this.unsubscribe)).subscribe((newCity: string) => (this.currentCity = newCity));
     }
 
     newCity(city: string) {
@@ -69,5 +72,9 @@ export class BrowseCitiesComponent implements OnInit {
             this.pager.startIndex,
             this.pager.endIndex + 1
         );
+    }
+    ngOnDestroy() {
+        this.unsubscribe.next();
+        this.unsubscribe.complete();
     }
 }

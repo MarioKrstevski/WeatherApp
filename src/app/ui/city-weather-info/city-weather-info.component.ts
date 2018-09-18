@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { WeatherDataService } from '../services/weather-data.service';
 import { DataSharingService } from '../services/data-sharing.service';
 
 import { WeatherData } from '../../models/weather-data.model';
 import { WeatherInfo } from '../../models/weather-info.model';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-city-weather-info',
@@ -12,7 +14,9 @@ import { WeatherInfo } from '../../models/weather-info.model';
     styleUrls: ['./city-weather-info.component.css'],
     providers: []
 })
-export class CityWeatherInfoComponent implements OnInit {
+export class CityWeatherInfoComponent implements OnInit, OnDestroy {
+
+    private unsubscribe: Subject<void> = new Subject;
 
     currentTime: Date = new Date(); // used for the clock
     currentSelectedCity = '';
@@ -34,20 +38,20 @@ export class CityWeatherInfoComponent implements OnInit {
         this.dataSharingService.turnOnSpinner();
         this.updateCurrentTime();
 
-        this.dataSharingService.newCity.subscribe((newCity: string) => {
+        this.dataSharingService.newCity.pipe(takeUntil(this.unsubscribe)).subscribe((newCity: string) => {
             if (newCity !== this.currentSelectedCity) {
                 this.getWeatherForCity(newCity);
                 this.currentSelectedCity = newCity;
             }
         })
 
-        this.dataSharingService.newSpinnerToggle.subscribe((newValue: boolean) => {
+        this.dataSharingService.newSpinnerToggle.pipe(takeUntil(this.unsubscribe)).subscribe((newValue: boolean) => {
             this.showSpinner = newValue;
         })
     }
 
     getWeatherForCity(city: string) {
-        this.weather.getWeather(city).subscribe(weatherInfo => {
+        this.weather.getWeather(city).pipe(takeUntil(this.unsubscribe)).subscribe(weatherInfo => {
             this.currentSelectedCity = weatherInfo.city.name;
             this.dataSharingService.turnOffSpinner()
             this.updateWeatherData(weatherInfo);
@@ -153,5 +157,10 @@ export class CityWeatherInfoComponent implements OnInit {
             return false;
         }
 
+    }
+
+    ngOnDestroy() {
+        this.unsubscribe.next();
+        this.unsubscribe.complete();
     }
 }
