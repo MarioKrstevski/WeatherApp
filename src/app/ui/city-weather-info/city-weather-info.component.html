@@ -1,7 +1,7 @@
 <div id="search" class="weatherInfo dataContainer">
     <h3 class="smallHeading">Search City</h3>
 
-    <app-search-bar (weatherData)="updateWeatherData($event)"> </app-search-bar>
+    <app-search-bar (weatherData)="updateWeatherData($event)"></app-search-bar>
 
     <div class="infoDisplay">
 
@@ -9,14 +9,14 @@
 
         <div class="container-fluid" *ngIf="!showSpinner">
             <div class="row backgroundContainer">
-                <div class="col-3 mystyle weeklyPeak">
+                <div class="col-3 mystyle weeklyPeak" *ngIf="myData">
                     <div class="row perDay" *ngFor="let day of myData; index as i" (click)="changePreview(i)" [class.selectedDay]="isSelected(day)">
                         <div class="col-6">
-                            <div class="row weatherStatus"> {{day[0].weather[0].main}} </div>
-                            <div class="row weatherTemp"> {{findMaxTemp(day) | number:'1.0-0'}}&#0176;C </div>
+                            <div class="row weatherStatus"> {{day[0]?.weather[0]?.main}}</div>
+                            <div class="row weatherTemp"> {{findMaxTemp(day) | number:'1.0-0'}}&#0176;C</div>
                         </div>
                         <div class="col-6  weatherDate">
-                            {{day[0].dt_txt | date:"dd.MM.yyyy" }}
+                            {{day[0]?.dt_txt | date:"dd.MM.yyyy" }}
                         </div>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                             {{currentTime | date:"HH:mm:ss"}}
                         </p>
                         <p class="theDate" *ngIf="preview">
-                            {{preview[0]?.dt_txt }}
+                            {{preview[0]?.dt_txt | date:"dd.MM.yyyy" }}
                         </p>
                     </div>
                     <div class=" statsForTheDay" *ngIf="preview">
@@ -47,14 +47,15 @@
                         <img src="http://openweathermap.org/img/w/{{preview[0]?.weather[0].icon}}.png" alt="weather icon">
                         <p>{{preview[0]?.weather[0].main}}</p>
                     </div>
-                    <div class="timesPerDay">
-                        <div class="timeStatus" *ngFor="let threeHourInterval of preview; let f = first">
+                    <div [@listRotatingAnimation]="stateStatus" (@listRotatingAnimation.start)="animationStart($event)"
+                        (@listRotatingAnimation.done)="animationFinish($event)" *ngIf="preview" class="timesPerDay">
+                        <div class="timeStatus" *ngFor="let threeHourInterval of preview; let f = first; let j = index">
                             <p class="alignText">
-                                <span class="alignLeft" *ngIf="f"> NOW </span>
-                                <span class="alignLeft" *ngIf="!f"> {{threeHourInterval.dt_txt | date:"HH:mm"}}</span>
+                                &nbsp; {{j}}
+                                <!--<span class="alignLeft" *ngIf="f"> NOW </span>-->
+                                <span class="alignLeft"> {{threeHourInterval.dt_txt | date:"HH:mm"}} </span>
                                 <span class="alignRight"> {{threeHourInterval.main.temp_max | number:'1.0-0'}} &#0176;C</span>
                             </p>
-
                         </div>
 
                     </div>

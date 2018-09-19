@@ -9,7 +9,7 @@ import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AgmOverlays } from "agm-overlays";
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 import { LayoutComponent } from './layout/layout.component';
 import { CityWeatherInfoComponent } from './city-weather-info/city-weather-info.component';
@@ -40,7 +40,8 @@ import { WINDOW_PROVIDERS } from './services/window.service';
         BrowserModule,
         AgmOverlays,
         AgmJsMarkerClustererModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+        BrowserAnimationsModule
     ],
     declarations: [
         LayoutComponent,

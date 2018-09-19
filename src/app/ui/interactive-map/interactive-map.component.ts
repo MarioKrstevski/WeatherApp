@@ -49,7 +49,6 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
     }
 
     updateMapZoom(newZoom) {
-        console.log(newZoom);
         this.mapZoom = newZoom;
     }
 
@@ -58,7 +57,6 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.unsubscribe))
             .subscribe(citiesData => {
                 this.cities = citiesData.list;
-                console.log(this.cities);
             });
     }
 
@@ -83,7 +81,6 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
             Math.abs(this.prevMapBounds.north - newMapBounds.north) > 2 ||
             Math.abs(this.prevMapBounds.south - newMapBounds.south) > 2) {
 
-            console.log('Se smenija koordinatite');
             this.prevMapBounds = newMapBounds;
         }
     }

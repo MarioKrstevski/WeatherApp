@@ -14,6 +14,5 @@ export class MyMarkerComponent {
     isClickedToggle() {
         event.stopPropagation();
         this.isClicked = !this.isClicked;
-        console.log('click changed', this.isClicked);
     }
 }

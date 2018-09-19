@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { WeatherDataService } from '../services/weather-data.service';
 import { DataSharingService } from '../services/data-sharing.service';
@@ -8,18 +8,55 @@ import { WeatherInfo } from '../../models/weather-info.model';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
+import { animate, keyframes, query, stagger, style, transition, trigger, state } from "@angular/animations";
+
+
 @Component({
     selector: 'app-city-weather-info',
     templateUrl: './city-weather-info.component.html',
     styleUrls: ['./city-weather-info.component.css'],
-    providers: []
+    providers: [],
+    animations: [
+        trigger('listRotatingAnimation', [
+            state('insert', style({
+                opacity: 1
+            })),
+            state('delete', style({
+                opacity: 0
+            })),
+            transition('delete => insert', animate('500ms ease-out')),
+            transition('insert => delete', animate('700ms ease-in'))
+        ])
+    ]
 })
+
+// transition('delete => insert', [
+//     query(':enter', style({
+//         opacity: 0
+//     }), { optional: true }),
+//     query(':enter',
+//         animate('600ms ease-in', keyframes([
+//             style({ opacity: 0, transform: 'translateY(-10px)', offset: 0 }),
+//             style({ opacity: .5, transform: 'translateY(-5px)', offset: 0.5 }),
+//             style({ opacity: 1, transform: 'translateY(0px)', offset: 1 }),
+//         ])), { optional: true }),
+
+//     query(':leave',
+//         animate('600ms  ease-out', keyframes([
+//             style({ opacity: 1, transform: 'translateY(0px)', offset: 0 }),
+//             style({ opacity: .5, transform: 'translateY(-5px)', offset: 0.5 }),
+//             style({ opacity: 0, transform: 'translateY(-10px)', offset: 1 }),
+//         ])), { optional: true })
+// ]),
 export class CityWeatherInfoComponent implements OnInit, OnDestroy {
 
     private unsubscribe: Subject<void> = new Subject;
 
     currentTime: Date = new Date(); // used for the clock
     currentSelectedCity = '';
+
+    state: boolean = true;
+    lastItem;
 
     currentDate = this.currentTime.toLocaleDateString("en-GB").replace(/\//g, ".");
     weatherData: WeatherData;
@@ -32,23 +69,62 @@ export class CityWeatherInfoComponent implements OnInit, OnDestroy {
 
     showSpinner: boolean = true;
 
-    constructor(private dataSharingService: DataSharingService, private weather: WeatherDataService) { }
+    constructor(private dataSharingService: DataSharingService, private weather: WeatherDataService) {
+    }
 
     ngOnInit() {
         this.dataSharingService.turnOnSpinner();
         this.updateCurrentTime();
+
 
         this.dataSharingService.newCity.pipe(takeUntil(this.unsubscribe)).subscribe((newCity: string) => {
             if (newCity !== this.currentSelectedCity) {
                 this.getWeatherForCity(newCity);
                 this.currentSelectedCity = newCity;
             }
-        })
+        });
 
         this.dataSharingService.newSpinnerToggle.pipe(takeUntil(this.unsubscribe)).subscribe((newValue: boolean) => {
             this.showSpinner = newValue;
-        })
+        });
+
     }
+
+    get stateStatus() {
+        return this.state ? 'insert' : 'delete';
+    }
+
+    toggleState() {
+        this.state = !this.state;
+    }
+
+    animationStart(event) {
+        console.log(`${this.stateStatus}: Event started`);
+        if (this.stateStatus === 'insert') {
+            if (this.lastItem !== null) {
+                this.preview.unshift(this.lastItem);
+                console.log('Added last item');
+            }
+        } else if (this.stateStatus === 'delete') {
+            this.lastItem = this.preview.pop();
+            console.log('Removed last item');
+        }
+    }
+    animationFinish(event) {
+        console.log(`${this.stateStatus}: Event finished`);
+
+        if (this.stateStatus === 'insert') {
+            setTimeout(() => {
+                this.toggleState();
+            }, 2000)
+        } else if (this.stateStatus === 'delete') {
+            setTimeout(() => {
+                this.toggleState();
+            }, 2000)
+        }
+    }
+
+
 
     getWeatherForCity(city: string) {
         this.weather.getWeather(city).pipe(takeUntil(this.unsubscribe)).subscribe(weatherInfo => {
@@ -72,7 +148,11 @@ export class CityWeatherInfoComponent implements OnInit, OnDestroy {
 
         this.dataSharingService.changeCoordinates(this.cityLonLat);
         this.myData = this.createDaysArray(newWeatherData);
+        console.log(this.myData, 'This is my data');
         this.preview = this.createPreview(this.myData);
+        console.log(this.preview, 'This is preview');
+
+        this.toggleState();
 
         return newWeatherData;
     }
@@ -116,14 +196,13 @@ export class CityWeatherInfoComponent implements OnInit, OnDestroy {
         } else {
             return false;
         }
-
     }
 
     // Function to find maxTemp for the day
     findMaxTemp(day: Array<WeatherInfo> = this.preview) {
         let maxTemp: number = 0;
         day.forEach((timeStamp) => {
-            if (timeStamp.main.temp_max > maxTemp) {
+            if (timeStamp && timeStamp.main.temp_max > maxTemp) {
                 maxTemp = timeStamp.main.temp_max;
             }
 

@@ -27,6 +27,7 @@ button {
 }
 
 .lastSample{
+    outline-color:#616A72;
     background-color:transparent;
     cursor: pointer;
     border-radius: 3px;
