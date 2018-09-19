@@ -22,8 +22,6 @@ import { DatePickerComponent } from './date-picker/date-picker.component';
 import { SquareLoadingSpinnerComponent } from './square-loading-spinner/square-loading-spinner.component';
 import { PulsatingDotLoadingSpinnerComponent } from './pulsating-dot-loading-spinner/pulsating-dot-loading-spinner.component';
 
-
-import { PagerService } from './services/pager.service';
 import { WeatherDataService } from './services/weather-data.service';
 import { DataSharingService } from './services/data-sharing.service';
 import { MyMarkerComponent } from './interactive-map/my-marker/my-marker.component';
@@ -58,7 +56,6 @@ import { WINDOW_PROVIDERS } from './services/window.service';
         MyMarkerComponent,
     ],
     providers: [
-        PagerService,
         WeatherDataService,
         DataSharingService,
         WINDOW_PROVIDERS

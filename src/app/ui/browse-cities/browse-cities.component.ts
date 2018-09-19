@@ -1,6 +1,5 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 
-import { PagerService } from "../services/pager.service";
 import { WeatherDataService } from "../services/weather-data.service";
 import { DataSharingService } from "../services/data-sharing.service";
 
@@ -23,15 +22,13 @@ export class BrowseCitiesComponent implements OnInit, OnDestroy {
 
     p: number = 1;
     paginationApi;
-    // pager object
-    pager: any = {};
-    pagedCities: WeatherInfo[];
 
     showSpinner: boolean = true;
     fakeInfo: WeatherInfo;
     currentCity: string = "";
 
-    constructor(private dataSharingService: DataSharingService, private pagerService: PagerService, private weather: WeatherDataService) { }
+    constructor(private dataSharingService: DataSharingService, private weather: WeatherDataService) {
+    }
 
     ngOnInit() {
 
@@ -48,9 +45,6 @@ export class BrowseCitiesComponent implements OnInit, OnDestroy {
                     extra--;
                 }
             }
-
-            //Sets first page of pagination
-            this.setPage(1);
         });
 
         this.dataSharingService.newCity.pipe(takeUntil(this.unsubscribe)).subscribe((newCity: string) => (this.currentCity = newCity));
@@ -65,22 +59,11 @@ export class BrowseCitiesComponent implements OnInit, OnDestroy {
             // Else, the same city is clicked and nothing will happen, to optimize for performance
         }
     }
-    setPage(page: number) {
-        // get pager object from service
-        this.pager = this.pagerService.getPager(this.cities.length, page);
-
-        // get current page of cities
-        this.pagedCities = this.cities.slice(
-            this.pager.startIndex,
-            this.pager.endIndex + 1
-        );
-    }
 
     pageChange(event) {
         this.paginationApi = event;
-        console.log('page change', event);
-
     }
+
     ngOnDestroy() {
         this.unsubscribe.next();
         this.unsubscribe.complete();
