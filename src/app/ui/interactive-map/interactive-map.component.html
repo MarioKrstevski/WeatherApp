@@ -3,7 +3,7 @@
 
     <agm-map [fitBounds]="mapBounds" (idle)="getWeatherForNewMapFrame($event)" (zoomChange)="updateMapZoom($event)" (boundsChange)=mapBoundsChanged($event)>
 
-        <agm-marker-cluster [zoomOnClick]="false" imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
+        <agm-marker-cluster [zoomOnClick]="true" imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
 
             <!-- Overlay acts as a marker -->
             <agm-overlay *ngFor="let city of cities; index as i" [latitude]="city?.coord?.Lat+0.01" [longitude]="city?.coord?.Lon">

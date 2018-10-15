@@ -25,7 +25,7 @@
                     </div>
 
                     <div class="errorInput">
-                        <small class="errorMsg" *ngIf="message.invalid && message.touched"> You must a message </small>
+                        <small class="errorMsg" *ngIf="message.invalid && message.touched"> You must enter a message </small>
                         <div class="input-container">
                             <textarea #message="ngModel" [(ngModel)]="userModel.message" [class.invalid]="message.invalid && message.touched"
                                 class="input-field" placeholder="Message" name="message" cols="30" rows="10" required></textarea>

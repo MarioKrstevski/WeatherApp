@@ -49,6 +49,7 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
     }
 
     updateMapZoom(newZoom) {
+
         this.mapZoom = newZoom;
     }
 

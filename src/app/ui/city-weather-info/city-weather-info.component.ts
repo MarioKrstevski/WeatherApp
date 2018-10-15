@@ -8,7 +8,7 @@ import { WeatherInfo } from '../../models/weather-info.model';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { animate, keyframes, query, stagger, style, transition, trigger, state } from "@angular/animations";
+import { animate, state, style, transition, trigger } from "@angular/animations";
 
 
 @Component({
@@ -98,20 +98,24 @@ export class CityWeatherInfoComponent implements OnInit, OnDestroy {
         this.state = !this.state;
     }
 
+    f
+
     animationStart(event) {
-        console.log(`${this.stateStatus}: Event started`);
+
+        // console.log(`${this.stateStatus}: Event started`);
         if (this.stateStatus === 'insert') {
             if (this.lastItem !== null) {
                 this.preview.unshift(this.lastItem);
-                console.log('Added last item');
+                // console.log('Added last item');
             }
         } else if (this.stateStatus === 'delete') {
             this.lastItem = this.preview.pop();
-            console.log('Removed last item');
+            // console.log('Removed last item');
         }
     }
+
     animationFinish(event) {
-        console.log(`${this.stateStatus}: Event finished`);
+        // console.log(`${this.stateStatus}: Event finished`);
 
         if (this.stateStatus === 'insert') {
             setTimeout(() => {
@@ -123,7 +127,6 @@ export class CityWeatherInfoComponent implements OnInit, OnDestroy {
             }, 2000)
         }
     }
-
 
 
     getWeatherForCity(city: string) {
@@ -151,6 +154,7 @@ export class CityWeatherInfoComponent implements OnInit, OnDestroy {
         console.log(this.myData, 'This is my data');
         this.preview = this.createPreview(this.myData);
         console.log(this.preview, 'This is preview');
+
 
         this.toggleState();
 
